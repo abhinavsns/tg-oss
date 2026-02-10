@@ -22000,6 +22000,13 @@ document.addEventListener("mouseup", () => {
   isDragging = false;
 });
 let tippys = [];
+function isInAllowedContainer(element2) {
+  if (window.onlyAllowTooltipsInVeEditor) {
+    return element2.closest(".veEditor") !== null;
+  }
+  return true;
+}
+__name(isInAllowedContainer, "isInAllowedContainer");
 let recentlyHidden = false;
 let clearMe;
 (function() {
@@ -22007,6 +22014,9 @@ let clearMe;
   document.addEventListener("mouseover", function(event) {
     var _a2, _b2;
     const element2 = event.target;
+    if (!isInAllowedContainer(element2)) {
+      return;
+    }
     if (element2 instanceof Element && element2 !== lastMouseOverElement) {
       let clearOldTippys = /* @__PURE__ */ __name(function(maybeInst) {
         tippys = tippys.filter((t2) => {
@@ -111092,7 +111102,7 @@ function VersionSwitcher({
   reactExports.useEffect(() => {
     (/* @__PURE__ */ __name(function fetchData() {
       return __async(this, null, function* () {
-        const res = yield __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../bio-parsers/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-Cf_-gDi1.js"), true ? [] : void 0, import.meta.url), "../../bio-parsers/package.json"), "../../file-utils/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-08dWTk1g.js"), true ? [] : void 0, import.meta.url), "../../file-utils/package.json"), "../../ove/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-BzHeXzBE.js"), true ? [] : void 0, import.meta.url), "../../ove/package.json"), "../../range-utils/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-1cRi1FH2.js"), true ? [] : void 0, import.meta.url), "../../range-utils/package.json"), "../../sequence-utils/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-D6fPAr3T.js"), true ? [] : void 0, import.meta.url), "../../sequence-utils/package.json"), "../package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-D8eyE4je.js"), true ? [] : void 0, import.meta.url), "../package.json"), "../../ui/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-D1bU2Ayk.js"), true ? [] : void 0, import.meta.url), "../../ui/package.json") }), `../../${packageName}/package.json`, 4);
+        const res = yield __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../bio-parsers/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-CXOK-ltK.js"), true ? [] : void 0, import.meta.url), "../../bio-parsers/package.json"), "../../file-utils/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-08dWTk1g.js"), true ? [] : void 0, import.meta.url), "../../file-utils/package.json"), "../../ove/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-DtkyrMeC.js"), true ? [] : void 0, import.meta.url), "../../ove/package.json"), "../../range-utils/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-1cRi1FH2.js"), true ? [] : void 0, import.meta.url), "../../range-utils/package.json"), "../../sequence-utils/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-D6fPAr3T.js"), true ? [] : void 0, import.meta.url), "../../sequence-utils/package.json"), "../package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-D8eyE4je.js"), true ? [] : void 0, import.meta.url), "../package.json"), "../../ui/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-BxbC5z4A.js"), true ? [] : void 0, import.meta.url), "../../ui/package.json") }), `../../${packageName}/package.json`, 4);
         setVersion(res.version);
         try {
           if (window.Cypress) return;

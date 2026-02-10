@@ -1,5 +1,5 @@
 const name = "@teselagen/ove";
-const version = "0.8.30";
+const version = "0.8.34";
 const main = "./src/index.js";
 const type = "module";
 const repository = "https://github.com/TeselaGen/tg-oss";
