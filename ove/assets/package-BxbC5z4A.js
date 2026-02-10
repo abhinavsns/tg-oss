@@ -1,5 +1,5 @@
 const name = "@teselagen/ui";
-const version = "0.10.18";
+const version = "0.10.19";
 const main = "./src/index.js";
 const type = "module";
 const repository = "https://github.com/TeselaGen/tg-oss";

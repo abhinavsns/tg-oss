@@ -11306,6 +11306,12 @@ path.partWithSelectedTag {
   height: 100% !important;
   overflow: hidden;
 }
+.veAlignmentMismatch {
+  opacity: 0.9;
+}
+.veRowItem:has(.rowViewTextContainer) .veAlignmentMismatch {
+  opacity: 0.5;
+}
 .alignmentView .veAlignmentSelectionLayer.veRowViewSelectionLayer {
   background: gray;
 }
@@ -11658,15 +11664,6 @@ path.partWithSelectedTag {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-h5 {
-  margin: 0;
-  font-size: 15px;
-  font-weight: bold;
-  text-align: center;
-  padding: 5px 0;
-  border-bottom: 1px solid #f1f1f1;
 }
 .ta_link {
   cursor: pointer;
