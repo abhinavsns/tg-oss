@@ -45296,6 +45296,23 @@ function applyWhereClause(records, where) {
               if (!isString$1(value) || !new RegExp(conditionValue.replace(/%/g, ".*")).test(value))
                 return false;
               break;
+            case "_in":
+              if (!some2(conditionValue, (item) => isEqual(value, item)))
+                return false;
+              break;
+            case "_nin":
+              if (some2(conditionValue, (item) => isEqual(value, item)))
+                return false;
+              break;
+            case "_regex": {
+              try {
+                if (!isString$1(value) || !new RegExp(conditionValue).test(value))
+                  return false;
+              } catch (e) {
+                return false;
+              }
+              break;
+            }
             default:
               if (operator.startsWith("_")) {
                 console.warn(`Unsupported operator: ${operator}`);
@@ -79018,7 +79035,7 @@ const FilterAndSortMenu = /* @__PURE__ */ __name(({
       filterValToUse = false;
     } else if (ccSelectedFilter2 === "inList" || ccSelectedFilter2 === "notInList") {
       if (dataType === "number") {
-        filterValToUse = filterValue && filterValue.map((val) => parseFloat(val.replaceAll(",", "")));
+        filterValToUse = filterValue && filterValue.map((val) => parseFloat(`${val}`.replaceAll(",", "")));
       }
     }
     if (isInvalidFilterValue(filterValToUse)) {
@@ -79124,7 +79141,7 @@ const FilterInput = /* @__PURE__ */ __name(({
           multi: true,
           creatable: true,
           value: (filterValue || []).map((val) => ({
-            label: val,
+            label: `${val}`,
             value: val
           })),
           onChange: /* @__PURE__ */ __name((selectedOptions) => {
@@ -95524,10 +95541,7 @@ const warnBeforeLeave = /* @__PURE__ */ __name((e) => {
   (e || window.event).returnValue = defaultMessagge;
   return defaultMessagge;
 }, "warnBeforeLeave");
-function PromptUnsavedChanges({
-  message = defaultMessagge,
-  when = false
-}) {
+function PromptUnsavedChanges({ message = defaultMessagge, when = false }) {
   reactExports.useEffect(() => {
     if (when) {
       window.addEventListener("beforeunload", warnBeforeLeave);
@@ -111102,7 +111116,7 @@ function VersionSwitcher({
   reactExports.useEffect(() => {
     (/* @__PURE__ */ __name(function fetchData() {
       return __async(this, null, function* () {
-        const res = yield __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../bio-parsers/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-CXOK-ltK.js"), true ? [] : void 0, import.meta.url), "../../bio-parsers/package.json"), "../../file-utils/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-08dWTk1g.js"), true ? [] : void 0, import.meta.url), "../../file-utils/package.json"), "../../ove/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-DtkyrMeC.js"), true ? [] : void 0, import.meta.url), "../../ove/package.json"), "../../range-utils/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-1cRi1FH2.js"), true ? [] : void 0, import.meta.url), "../../range-utils/package.json"), "../../sequence-utils/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-D6fPAr3T.js"), true ? [] : void 0, import.meta.url), "../../sequence-utils/package.json"), "../package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-D8eyE4je.js"), true ? [] : void 0, import.meta.url), "../package.json"), "../../ui/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-BxbC5z4A.js"), true ? [] : void 0, import.meta.url), "../../ui/package.json") }), `../../${packageName}/package.json`, 4);
+        const res = yield __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../bio-parsers/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-B-kisy6l.js"), true ? [] : void 0, import.meta.url), "../../bio-parsers/package.json"), "../../file-utils/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-08dWTk1g.js"), true ? [] : void 0, import.meta.url), "../../file-utils/package.json"), "../../ove/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-Gd0Y96Ki.js"), true ? [] : void 0, import.meta.url), "../../ove/package.json"), "../../range-utils/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-1cRi1FH2.js"), true ? [] : void 0, import.meta.url), "../../range-utils/package.json"), "../../sequence-utils/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-D6fPAr3T.js"), true ? [] : void 0, import.meta.url), "../../sequence-utils/package.json"), "../package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-D8eyE4je.js"), true ? [] : void 0, import.meta.url), "../package.json"), "../../ui/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-Bl_kGu9h.js"), true ? [] : void 0, import.meta.url), "../../ui/package.json") }), `../../${packageName}/package.json`, 4);
         setVersion(res.version);
         try {
           if (window.Cypress) return;
