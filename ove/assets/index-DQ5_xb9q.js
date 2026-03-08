@@ -7731,8 +7731,8 @@ function createSelectorHook(context2 = ReactReduxContext) {
 }
 __name(createSelectorHook, "createSelectorHook");
 const useSelector = /* @__PURE__ */ createSelectorHook();
-function _extends$j() {
-  _extends$j = Object.assign ? Object.assign.bind() : function(target) {
+function _extends$k() {
+  _extends$k = Object.assign ? Object.assign.bind() : function(target) {
     for (var i2 = 1; i2 < arguments.length; i2++) {
       var source = arguments[i2];
       for (var key in source) {
@@ -7743,9 +7743,9 @@ function _extends$j() {
     }
     return target;
   };
-  return _extends$j.apply(this, arguments);
+  return _extends$k.apply(this, arguments);
 }
-__name(_extends$j, "_extends$j");
+__name(_extends$k, "_extends$k");
 function _objectWithoutPropertiesLoose$5(source, excluded) {
   if (source == null) return {};
   var target = {};
@@ -8237,7 +8237,7 @@ function mapStateToPropsFactory(mapStateToProps2) {
 }
 __name(mapStateToPropsFactory, "mapStateToPropsFactory");
 function defaultMergeProps(stateProps, dispatchProps, ownProps) {
-  return _extends$j({}, ownProps, stateProps, dispatchProps);
+  return _extends$k({}, ownProps, stateProps, dispatchProps);
 }
 __name(defaultMergeProps, "defaultMergeProps");
 function wrapMergePropsFunc(mergeProps) {
@@ -8561,7 +8561,7 @@ function connect(mapStateToProps2, mapDispatchToProps2, mergeProps, {
         if (didStoreComeFromProps) {
           return contextValue;
         }
-        return _extends$j({}, contextValue, {
+        return _extends$k({}, contextValue, {
           subscription
         });
       }, [didStoreComeFromProps, contextValue, subscription]);
@@ -8639,7 +8639,7 @@ ${latestSubscriptionCallbackError.current.stack}
       const renderedWrappedComponent = reactExports.useMemo(() => {
         return (
           // @ts-ignore
-          /* @__PURE__ */ reactExports.createElement(WrappedComponent, _extends$j({}, actualChildProps, {
+          /* @__PURE__ */ reactExports.createElement(WrappedComponent, _extends$k({}, actualChildProps, {
             ref: reactReduxForwardedRef
           }))
         );
@@ -8661,7 +8661,7 @@ ${latestSubscriptionCallbackError.current.stack}
     Connect.displayName = ConnectFunction.displayName = displayName;
     if (forwardRef2) {
       const _forwarded = reactExports.forwardRef(/* @__PURE__ */ __name(function forwardConnectRef(props, ref2) {
-        return /* @__PURE__ */ reactExports.createElement(Connect, _extends$j({}, props, {
+        return /* @__PURE__ */ reactExports.createElement(Connect, _extends$k({}, props, {
           reactReduxForwardedRef: ref2
         }));
       }, "forwardConnectRef"));
@@ -12012,7 +12012,7 @@ var defineProperty$2 = /* @__PURE__ */ __name(function(obj, key, value) {
   }
   return obj;
 }, "defineProperty$2");
-var _extends$i = Object.assign || function(target) {
+var _extends$j = Object.assign || function(target) {
   for (var i2 = 1; i2 < arguments.length; i2++) {
     var source = arguments[i2];
     for (var key in source) {
@@ -12024,7 +12024,7 @@ var _extends$i = Object.assign || function(target) {
   return target;
 };
 function getClientRect$1(offsets) {
-  return _extends$i({}, offsets, {
+  return _extends$j({}, offsets, {
     right: offsets.left + offsets.width,
     bottom: offsets.top + offsets.height
   });
@@ -12216,7 +12216,7 @@ function computeAutoPlacement$1(placement, refRect, popper2, reference2, boundar
     }
   };
   var sortedAreas = Object.keys(rects).map(function(key) {
-    return _extends$i({
+    return _extends$j({
       key
     }, rects[key], {
       area: getArea(rects[key])
@@ -12548,9 +12548,9 @@ function computeStyle(data, options) {
   var attributes = {
     "x-placement": data.placement
   };
-  data.attributes = _extends$i({}, attributes, data.attributes);
-  data.styles = _extends$i({}, styles2, data.styles);
-  data.arrowStyles = _extends$i({}, data.offsets.arrow, data.arrowStyles);
+  data.attributes = _extends$j({}, attributes, data.attributes);
+  data.styles = _extends$j({}, styles2, data.styles);
+  data.arrowStyles = _extends$j({}, data.offsets.arrow, data.arrowStyles);
   return data;
 }
 __name(computeStyle, "computeStyle");
@@ -12690,7 +12690,7 @@ function flip$3(data, options) {
         variation = getOppositeVariation(variation);
       }
       data.placement = placement + (variation ? "-" + variation : "");
-      data.offsets.popper = _extends$i({}, data.offsets.popper, getPopperOffsets(data.instance.popper, data.offsets.reference, data.placement));
+      data.offsets.popper = _extends$j({}, data.offsets.popper, getPopperOffsets(data.instance.popper, data.offsets.reference, data.placement));
       data = runModifiers(data.instance.modifiers, data, "flip");
     }
   });
@@ -12854,7 +12854,7 @@ function preventOverflow$2(data, options) {
   };
   order2.forEach(function(placement) {
     var side = ["left", "top"].indexOf(placement) !== -1 ? "primary" : "secondary";
-    popper2 = _extends$i({}, popper2, check2[side](placement));
+    popper2 = _extends$j({}, popper2, check2[side](placement));
   });
   data.offsets.popper = popper2;
   return data;
@@ -12873,7 +12873,7 @@ function shift$1(data) {
       start: defineProperty$2({}, side, reference2[side]),
       end: defineProperty$2({}, side, reference2[side] + reference2[measurement] - popper2[measurement])
     };
-    data.offsets.popper = _extends$i({}, popper2, shiftOffsets[shiftvariation]);
+    data.offsets.popper = _extends$j({}, popper2, shiftOffsets[shiftvariation]);
   }
   return data;
 }
@@ -13279,7 +13279,7 @@ var Popper$1 = function() {
       return requestAnimationFrame(_this.update);
     };
     this.update = debounce$3(this.update.bind(this));
-    this.options = _extends$i({}, Popper2.Defaults, options);
+    this.options = _extends$j({}, Popper2.Defaults, options);
     this.state = {
       isDestroyed: false,
       isCreated: false,
@@ -13288,11 +13288,11 @@ var Popper$1 = function() {
     this.reference = reference2 && reference2.jquery ? reference2[0] : reference2;
     this.popper = popper2 && popper2.jquery ? popper2[0] : popper2;
     this.options.modifiers = {};
-    Object.keys(_extends$i({}, Popper2.Defaults.modifiers, options.modifiers)).forEach(function(name2) {
-      _this.options.modifiers[name2] = _extends$i({}, Popper2.Defaults.modifiers[name2] || {}, options.modifiers ? options.modifiers[name2] : {});
+    Object.keys(_extends$j({}, Popper2.Defaults.modifiers, options.modifiers)).forEach(function(name2) {
+      _this.options.modifiers[name2] = _extends$j({}, Popper2.Defaults.modifiers[name2] || {}, options.modifiers ? options.modifiers[name2] : {});
     });
     this.modifiers = Object.keys(this.options.modifiers).map(function(name2) {
-      return _extends$i({
+      return _extends$j({
         name: name2
       }, _this.options.modifiers[name2]);
     }).sort(function(a2, b3) {
@@ -13759,8 +13759,8 @@ var InnerPopper = /* @__PURE__ */ function(_React$Component) {
         placement: _this.props.placement,
         eventsEnabled: _this.props.eventsEnabled,
         positionFixed: _this.props.positionFixed,
-        modifiers: _extends$j({}, _this.props.modifiers, {
-          arrow: _extends$j({}, _this.props.modifiers && _this.props.modifiers.arrow, {
+        modifiers: _extends$k({}, _this.props.modifiers, {
+          arrow: _extends$k({}, _this.props.modifiers && _this.props.modifiers.arrow, {
             enabled: !!_this.arrowNode,
             element: _this.arrowNode
           }),
@@ -13772,7 +13772,7 @@ var InnerPopper = /* @__PURE__ */ function(_React$Component) {
       };
     });
     _defineProperty$9(_assertThisInitialized$1(_assertThisInitialized$1(_this)), "getPopperStyle", function() {
-      return !_this.popperNode || !_this.state.data ? initialStyle : _extends$j({
+      return !_this.popperNode || !_this.state.data ? initialStyle : _extends$k({
         position: _this.state.data.offsets.popper.position
       }, _this.state.data.styles);
     });
@@ -13847,7 +13847,7 @@ Popper$1.placements;
 function Popper(_ref) {
   var referenceElement = _ref.referenceElement, props = _objectWithoutPropertiesLoose$5(_ref, ["referenceElement"]);
   return reactExports.createElement(ManagerReferenceNodeContext.Consumer, null, function(referenceNode) {
-    return reactExports.createElement(InnerPopper, _extends$j({
+    return reactExports.createElement(InnerPopper, _extends$k({
       referenceElement: referenceElement !== void 0 ? referenceElement : referenceNode
     }, props));
   });
@@ -13884,7 +13884,7 @@ var InnerReference = /* @__PURE__ */ function(_React$Component) {
 }(reactExports.Component);
 function Reference(props) {
   return reactExports.createElement(ManagerReferenceNodeSetterContext.Consumer, null, function(setReferenceNode) {
-    return reactExports.createElement(InnerReference, _extends$j({
+    return reactExports.createElement(InnerReference, _extends$k({
       setReferenceNode
     }, props));
   });
@@ -26571,7 +26571,7 @@ var initialize$1 = /* @__PURE__ */ __name(function initialize(form2, values3, ke
   }
   return {
     type: INITIALIZE,
-    meta: _extends$j({
+    meta: _extends$k({
       form: form2,
       keepDirty
     }, otherMeta),
@@ -26791,7 +26791,7 @@ var ReduxFormContext = reactExports.createContext(null);
 var renderChildren = /* @__PURE__ */ __name(function renderChildren2(Component, _ref) {
   var forwardedRef = _ref.forwardedRef, rest = _objectWithoutPropertiesLoose$5(_ref, ["forwardedRef"]);
   return function(_reduxForm) {
-    return reactExports.createElement(Component, _extends$j({}, rest, {
+    return reactExports.createElement(Component, _extends$k({}, rest, {
       _reduxForm,
       ref: forwardedRef
     }));
@@ -26813,7 +26813,7 @@ var withReduxForm = /* @__PURE__ */ __name(function withReduxForm2(Component) {
     return Hoc2;
   }(reactExports.Component);
   var ref2 = reactExports.forwardRef(function(props, ref3) {
-    return reactExports.createElement(Hoc, _extends$j({}, props, {
+    return reactExports.createElement(Hoc, _extends$k({}, props, {
       forwardedRef: ref3
     }));
   });
@@ -27020,23 +27020,23 @@ const invariant$2 = /* @__PURE__ */ getDefaultExportFromCjs(browserExports);
 var processProps = /* @__PURE__ */ __name(function processProps2(type2, props, _value, deepEqual3) {
   var value = props.value;
   if (type2 === "checkbox") {
-    return _extends$j({}, props, {
+    return _extends$k({}, props, {
       checked: !!value
     });
   }
   if (type2 === "radio") {
-    return _extends$j({}, props, {
+    return _extends$k({}, props, {
       checked: deepEqual3(value, _value),
       value: _value
     });
   }
   if (type2 === "select-multiple") {
-    return _extends$j({}, props, {
+    return _extends$k({}, props, {
       value: value || []
     });
   }
   if (type2 === "file") {
-    return _extends$j({}, props, {
+    return _extends$k({}, props, {
       value: value || void 0
     });
   }
@@ -27071,7 +27071,7 @@ function createFieldProps(_ref, name2, _ref2) {
       onFocus,
       value: formattedFieldValue
     }, _value, deepEqual3),
-    meta: _extends$j({}, toJS3(state2), {
+    meta: _extends$k({}, toJS3(state2), {
       active: !!(state2 && getIn3(state2, "active")),
       asyncValidating,
       autofilled: !!(state2 && getIn3(state2, "autofilled")),
@@ -27089,7 +27089,7 @@ function createFieldProps(_ref, name2, _ref2) {
       valid: !error,
       visited: !!(state2 && getIn3(state2, "visited"))
     }),
-    custom: _extends$j({}, custom, {}, props)
+    custom: _extends$k({}, custom, {}, props)
   };
 }
 __name(createFieldProps, "createFieldProps");
@@ -28082,7 +28082,7 @@ var setInWithPath = /* @__PURE__ */ __name(function setInWithPath2(state2, value
     copy[parseInt(first, 10)] = next;
     return copy;
   }
-  return _extends$j({}, state2, (_extends2 = {}, _extends2[first] = next, _extends2));
+  return _extends$k({}, state2, (_extends2 = {}, _extends2[first] = next, _extends2));
 }, "setInWithPath");
 var setIn = /* @__PURE__ */ __name(function setIn2(state2, field, value) {
   return setInWithPath(state2, value, _toPath(field), 0);
@@ -29112,7 +29112,7 @@ function deleteInWithPath(state2, first) {
     if (first in state2) {
       var _extends2;
       var _result = deleteInWithPath.apply(void 0, [state2 && state2[first]].concat(rest));
-      return state2[first] === _result ? state2 : _extends$j({}, state2, (_extends2 = {}, _extends2[first] = _result, _extends2));
+      return state2[first] === _result ? state2 : _extends$k({}, state2, (_extends2 = {}, _extends2[first] = _result, _extends2));
     }
     return state2;
   }
@@ -29129,7 +29129,7 @@ function deleteInWithPath(state2, first) {
     return state2;
   }
   if (first in state2) {
-    var _copy2 = _extends$j({}, state2);
+    var _copy2 = _extends$k({}, state2);
     delete _copy2[first];
     return _copy2;
   }
@@ -29244,7 +29244,7 @@ function createConnectedField(structure$1) {
         var defaultPrevented = false;
         if (onChange) {
           if (!isReactNative && isEvent(event)) {
-            onChange(_extends$j({}, event, {
+            onChange(_extends$k({}, event, {
               preventDefault: /* @__PURE__ */ __name(function preventDefault2() {
                 defaultPrevented = true;
                 return eventPreventDefault(event);
@@ -29269,7 +29269,7 @@ function createConnectedField(structure$1) {
         var defaultPrevented = false;
         if (onFocus) {
           if (!isReactNative) {
-            onFocus(_extends$j({}, event, {
+            onFocus(_extends$k({}, event, {
               preventDefault: /* @__PURE__ */ __name(function preventDefault2() {
                 defaultPrevented = true;
                 return eventPreventDefault(event);
@@ -29296,7 +29296,7 @@ function createConnectedField(structure$1) {
         var defaultPrevented = false;
         if (onBlur) {
           if (!isReactNative) {
-            onBlur(_extends$j({}, event, {
+            onBlur(_extends$k({}, event, {
               preventDefault: /* @__PURE__ */ __name(function preventDefault2() {
                 defaultPrevented = true;
                 return eventPreventDefault(event);
@@ -29325,7 +29325,7 @@ function createConnectedField(structure$1) {
         var newValue = eventDataTransferGetData(event, dataKey);
         var defaultPrevented = false;
         if (onDrop) {
-          onDrop(_extends$j({}, event, {
+          onDrop(_extends$k({}, event, {
             preventDefault: /* @__PURE__ */ __name(function preventDefault2() {
               defaultPrevented = true;
               return eventPreventDefault(event);
@@ -29365,7 +29365,7 @@ function createConnectedField(structure$1) {
       _this$props6.onDrop;
       _this$props6.immutableProps;
       var rest = _objectWithoutPropertiesLoose$5(_this$props6, ["component", "forwardRef", "name", "_reduxForm", "normalize", "onBlur", "onChange", "onFocus", "onDragStart", "onDrop", "immutableProps"]);
-      var _createFieldProps = createFieldProps(structure$1, name2, _extends$j({}, rest, {
+      var _createFieldProps = createFieldProps(structure$1, name2, _extends$k({}, rest, {
         form: _reduxForm.form,
         onBlur: this.handleBlur,
         onChange: this.handleChange,
@@ -29379,9 +29379,9 @@ function createConnectedField(structure$1) {
       if (typeof component === "string") {
         var input = props.input;
         props.meta;
-        return reactExports.createElement(component, _extends$j({}, input, {}, custom));
+        return reactExports.createElement(component, _extends$k({}, input, {}, custom));
       } else {
-        return reactExports.createElement(component, _extends$j({}, props, {}, custom));
+        return reactExports.createElement(component, _extends$k({}, props, {}, custom));
       }
     }, "render");
     return ConnectedField2;
@@ -29491,7 +29491,7 @@ function createField(structure$1) {
       return this.ref.current ? this.ref.current.getRenderedComponent() : void 0;
     }, "getRenderedComponent");
     _proto.render = /* @__PURE__ */ __name(function render3() {
-      return reactExports.createElement(ConnectedField, _extends$j({}, this.props, {
+      return reactExports.createElement(ConnectedField, _extends$k({}, this.props, {
         name: this.name,
         normalize: this.normalize,
         ref: this.ref
@@ -30002,7 +30002,7 @@ function createFieldArrayProps(_ref, name2, form2, sectionPrefix, getValue3, _re
   var error = syncError || asyncError || submitError;
   var warning2 = syncWarning;
   var fieldName = sectionPrefix ? name2.replace(sectionPrefix + ".", "") : name2;
-  var finalProps = _extends$j({
+  var finalProps = _extends$k({
     fields: {
       _isFieldArray: true,
       forEach: /* @__PURE__ */ __name(function forEach4(callback2) {
@@ -30244,7 +30244,7 @@ function createFieldArray(structure2) {
       return this.ref && this.ref.current.getRenderedComponent();
     }, "getRenderedComponent");
     _proto.render = /* @__PURE__ */ __name(function render3() {
-      return reactExports.createElement(ConnectedFieldArray, _extends$j({}, this.props, {
+      return reactExports.createElement(ConnectedFieldArray, _extends$k({}, this.props, {
         name: this.name,
         ref: this.ref
       }));
@@ -31062,7 +31062,7 @@ function generateValidator(validators, _ref) {
 __name(generateValidator, "generateValidator");
 var mergeErrors = /* @__PURE__ */ __name(function mergeErrors2(_ref) {
   var asyncErrors = _ref.asyncErrors, syncErrors = _ref.syncErrors;
-  return asyncErrors && typeof asyncErrors.merge === "function" ? asyncErrors.merge(syncErrors).toJS() : _extends$j({}, asyncErrors, {}, syncErrors);
+  return asyncErrors && typeof asyncErrors.merge === "function" ? asyncErrors.merge(syncErrors).toJS() : _extends$k({}, asyncErrors, {}, syncErrors);
 }, "mergeErrors");
 var executeSubmit = /* @__PURE__ */ __name(function executeSubmit2(submit3, fields, props) {
   var dispatch = props.dispatch, submitAsSideEffect = props.submitAsSideEffect, onSubmitFail = props.onSubmitFail, onSubmitSuccess = props.onSubmitSuccess, startSubmit3 = props.startSubmit, stopSubmit3 = props.stopSubmit, setSubmitFailed3 = props.setSubmitFailed, setSubmitSucceeded3 = props.setSubmitSucceeded, values3 = props.values;
@@ -31185,7 +31185,7 @@ function createReduxForm(structure$1) {
   var deepEqual3 = structure$1.deepEqual, empty2 = structure$1.empty, getIn3 = structure$1.getIn, setIn3 = structure$1.setIn, keys3 = structure$1.keys, fromJS2 = structure$1.fromJS, toJS3 = structure$1.toJS;
   var isValid3 = createIsValid(structure$1);
   return function(initialConfig) {
-    var config = _extends$j({
+    var config = _extends$k({
       touchOnBlur: true,
       touchOnChange: false,
       persistentSubmitErrors: false,
@@ -31474,7 +31474,7 @@ function createReduxForm(structure$1) {
                 } else {
                   return _this.listenToSubmit(handleSubmit(
                     checkSubmit(onSubmit),
-                    _extends$j({}, _this.props, {}, bindActionCreators({
+                    _extends$k({}, _this.props, {}, bindActionCreators({
                       blur: blur3,
                       change: change3
                     }, dispatch)),
@@ -31492,7 +31492,7 @@ function createReduxForm(structure$1) {
               return silenceEvents(function() {
                 return !_this.submitPromise && _this.listenToSubmit(handleSubmit(
                   checkSubmit(submitOrEvent),
-                  _extends$j({}, _this.props, {}, bindActionCreators({
+                  _extends$k({}, _this.props, {}, bindActionCreators({
                     blur: blur3,
                     change: change3
                   }, dispatch)),
@@ -31613,7 +31613,7 @@ function createReduxForm(structure$1) {
           _this$props12.validExceptSubmit;
           _this$props12.values;
           var warning2 = _this$props12.warning, rest = _objectWithoutPropertiesLoose$5(_this$props12, ["anyTouched", "array", "arrayInsert", "arrayMove", "arrayPop", "arrayPush", "arrayRemove", "arrayRemoveAll", "arrayShift", "arraySplice", "arraySwap", "arrayUnshift", "asyncErrors", "asyncValidate", "asyncValidating", "blur", "change", "clearSubmit", "destroy", "destroyOnUnmount", "forceUnregisterOnUnmount", "dirty", "dispatch", "enableReinitialize", "error", "focus", "form", "getFormState", "immutableProps", "initialize", "initialized", "initialValues", "invalid", "keepDirtyOnReinitialize", "keepValues", "updateUnregisteredFields", "pristine", "propNamespace", "registeredFields", "registerField", "reset", "resetSection", "setSubmitFailed", "setSubmitSucceeded", "shouldAsyncValidate", "shouldValidate", "shouldError", "shouldWarn", "startAsyncValidation", "startSubmit", "stopAsyncValidation", "stopSubmit", "submitAsSideEffect", "submitting", "submitFailed", "submitSucceeded", "touch", "touchOnBlur", "touchOnChange", "persistentSubmitErrors", "syncErrors", "syncWarnings", "unregisterField", "untouch", "updateSyncErrors", "updateSyncWarnings", "valid", "validExceptSubmit", "values", "warning"]);
-          var reduxFormProps = _extends$j({
+          var reduxFormProps = _extends$k({
             array: array2,
             anyTouched,
             asyncValidate: this.asyncValidate,
@@ -31645,11 +31645,11 @@ function createReduxForm(structure$1) {
             valid: valid2,
             warning: warning2
           });
-          var propsToPass = _extends$j({}, propNamespace ? (_ref = {}, _ref[propNamespace] = reduxFormProps, _ref) : reduxFormProps, {}, rest);
+          var propsToPass = _extends$k({}, propNamespace ? (_ref = {}, _ref[propNamespace] = reduxFormProps, _ref) : reduxFormProps, {}, rest);
           if (isClassComponent(WrappedComponent)) {
             propsToPass.ref = this.wrapped;
           }
-          var _reduxForm = _extends$j({}, this.props, {
+          var _reduxForm = _extends$k({}, this.props, {
             getFormState: /* @__PURE__ */ __name(function getFormState(state2) {
               return getIn3(_this3.props.getFormState(state2), _this3.props.form);
             }, "getFormState"),
@@ -31765,7 +31765,7 @@ function createReduxForm(structure$1) {
           swap: bindActionCreators(boundArrayACs.arraySwap, dispatch),
           unshift: bindActionCreators(boundArrayACs.arrayUnshift, dispatch)
         };
-        return _extends$j({}, connectedFormACs, {}, boundArrayACs, {
+        return _extends$k({}, connectedFormACs, {}, boundArrayACs, {
           blur: boundBlur,
           change: boundChange,
           array: connectedArrayACs,
@@ -31800,7 +31800,7 @@ function createReduxForm(structure$1) {
         }, "reset");
         _proto2.render = /* @__PURE__ */ __name(function render3() {
           var _this$props13 = this.props, initialValues2 = _this$props13.initialValues, rest = _objectWithoutPropertiesLoose$5(_this$props13, ["initialValues"]);
-          return reactExports.createElement(ConnectedForm, _extends$j({}, rest, {
+          return reactExports.createElement(ConnectedForm, _extends$k({}, rest, {
             ref: this.ref,
             // convert initialValues if need to
             initialValues: fromJS2(initialValues2)
@@ -36113,7 +36113,7 @@ var mapProps = /* @__PURE__ */ __name(function mapProps2(propsMapper) {
 }, "mapProps2");
 var withProps = /* @__PURE__ */ __name(function withProps2(input) {
   var hoc = mapProps(function(props) {
-    return _extends$j({}, props, typeof input === "function" ? input(props) : input);
+    return _extends$k({}, props, typeof input === "function" ? input(props) : input);
   });
   return hoc;
 }, "withProps2");
@@ -36186,7 +36186,7 @@ var withHandlers = /* @__PURE__ */ __name(function withHandlers2(handlers2) {
       __name(WithHandlers2, "WithHandlers2");
       var _proto = WithHandlers2.prototype;
       _proto.render = /* @__PURE__ */ __name(function render3() {
-        return factory(_extends$j({}, this.props, this.handlers));
+        return factory(_extends$k({}, this.props, this.handlers));
       }, "render");
       return WithHandlers2;
     }(reactExports.Component);
@@ -36261,7 +36261,7 @@ var lifecycle = /* @__PURE__ */ __name(function lifecycle2(spec) {
       __name(Lifecycle22, "Lifecycle2");
       var _proto = Lifecycle22.prototype;
       _proto.render = /* @__PURE__ */ __name(function render3() {
-        return factory(_extends$j({}, this.props, this.state));
+        return factory(_extends$k({}, this.props, this.state));
       }, "render");
       return Lifecycle22;
     }(reactExports.Component);
@@ -41562,7 +41562,7 @@ function requireReactList() {
 __name(requireReactList, "requireReactList");
 var reactListExports = requireReactList();
 const ReactList = /* @__PURE__ */ getDefaultExportFromCjs(reactListExports);
-var _extends$h = Object.assign || function(target) {
+var _extends$i = Object.assign || function(target) {
   for (var i2 = 1; i2 < arguments.length; i2++) {
     var source = arguments[i2];
     for (var key in source) {
@@ -41712,7 +41712,7 @@ function makeTemplateComponent(compClass, displayName) {
     var children = _ref.children, className = _ref.className, rest = _objectWithoutProperties$3(_ref, ["children", "className"]);
     return React$1.createElement(
       "div",
-      _extends$h({ className: classNames$1(compClass, className) }, rest),
+      _extends$i({ className: classNames$1(compClass, className) }, rest),
       children
     );
   }, "cmp");
@@ -41944,7 +41944,7 @@ var _slicedToArray$3 = /* @__PURE__ */ function() {
     }
   };
 }();
-var _extends$g = Object.assign || function(target) {
+var _extends$h = Object.assign || function(target) {
   for (var i2 = 1; i2 < arguments.length; i2++) {
     var source = arguments[i2];
     for (var key in source) {
@@ -42024,7 +42024,7 @@ const Methods = /* @__PURE__ */ __name(function(Base) {
     _createClass$b(_class, [{
       key: "getResolvedState",
       value: /* @__PURE__ */ __name(function getResolvedState(props, state2) {
-        var resolvedState = _extends$g({}, _$1.compactObject(this.state), _$1.compactObject(this.props), _$1.compactObject(state2), _$1.compactObject(props));
+        var resolvedState = _extends$h({}, _$1.compactObject(this.state), _$1.compactObject(this.props), _$1.compactObject(state2), _$1.compactObject(props));
         return resolvedState;
       }, "getResolvedState")
     }, {
@@ -42056,9 +42056,9 @@ const Methods = /* @__PURE__ */ __name(function(Base) {
         var makeDecoratedColumn = /* @__PURE__ */ __name(function makeDecoratedColumn2(column, parentColumn) {
           var dcol = void 0;
           if (column.expander) {
-            dcol = _extends$g({}, _this2.props.column, _this2.props.expanderDefaults, column);
+            dcol = _extends$h({}, _this2.props.column, _this2.props.expanderDefaults, column);
           } else {
-            dcol = _extends$g({}, _this2.props.column, column);
+            dcol = _extends$h({}, _this2.props.column, column);
           }
           if (dcol.maxWidth < dcol.minWidth) {
             dcol.minWidth = dcol.maxWidth;
@@ -42093,7 +42093,7 @@ const Methods = /* @__PURE__ */ __name(function(Base) {
         }, "decorateAndAddToAll");
         var decoratedColumns = columnsWithExpander.map(function(column) {
           if (column.columns) {
-            return _extends$g({}, column, {
+            return _extends$h({}, column, {
               columns: column.columns.map(function(d2) {
                 return decorateAndAddToAll(d2, column);
               })
@@ -42108,7 +42108,7 @@ const Methods = /* @__PURE__ */ __name(function(Base) {
             var visibleSubColumns = column.columns.filter(function(d2) {
               return pivotBy.indexOf(d2.id) > -1 ? false : _$1.getFirstDefined(d2.show, true);
             });
-            return _extends$g({}, column, {
+            return _extends$h({}, column, {
               columns: visibleSubColumns
             });
           }
@@ -42144,14 +42144,14 @@ const Methods = /* @__PURE__ */ __name(function(Base) {
           var pivotColumnGroup = {
             Header: PivotGroupHeader,
             columns: pivotColumns.map(function(col) {
-              return _extends$g({}, _this2.props.pivotDefaults, col, {
+              return _extends$h({}, _this2.props.pivotDefaults, col, {
                 pivoted: true
               });
             })
             // Place the pivotColumns back into the visibleColumns
           };
           if (pivotIndex >= 0) {
-            pivotColumnGroup = _extends$g({}, visibleColumns[pivotIndex], pivotColumnGroup);
+            pivotColumnGroup = _extends$h({}, visibleColumns[pivotIndex], pivotColumnGroup);
             visibleColumns.splice(pivotIndex, 1, pivotColumnGroup);
           } else {
             visibleColumns.unshift(pivotColumnGroup);
@@ -42160,7 +42160,7 @@ const Methods = /* @__PURE__ */ __name(function(Base) {
         var headerGroups = [];
         var currentSpan = [];
         var addHeader = /* @__PURE__ */ __name(function addHeader2(columns2, column) {
-          headerGroups.push(_extends$g({}, _this2.props.column, column, {
+          headerGroups.push(_extends$h({}, _this2.props.column, column, {
             columns: columns2
           }));
           currentSpan = [];
@@ -42225,13 +42225,13 @@ const Methods = /* @__PURE__ */ __name(function(Base) {
             groupedRows = groupedRows.map(function(rowGroup) {
               var _extends2;
               var subRows = groupRecursively2(rowGroup[subRowsKey], keys3, i2 + 1);
-              return _extends$g({}, rowGroup, (_extends2 = {}, _defineProperty$4(_extends2, subRowsKey, subRows), _defineProperty$4(_extends2, aggregatedKey, true), _extends2), aggregate(subRows));
+              return _extends$h({}, rowGroup, (_extends2 = {}, _defineProperty$4(_extends2, subRowsKey, subRows), _defineProperty$4(_extends2, aggregatedKey, true), _extends2), aggregate(subRows));
             });
             return groupedRows;
           }, "groupRecursively");
           resolvedData = groupRecursively(resolvedData, pivotBy);
         }
-        return _extends$g({}, newState, {
+        return _extends$h({}, newState, {
           resolvedData,
           allVisibleColumns,
           headerGroups,
@@ -42293,7 +42293,7 @@ const Methods = /* @__PURE__ */ __name(function(Base) {
             if (!row[_this3.props.subRowsKey]) {
               return row;
             }
-            return _extends$g({}, row, _defineProperty$4({}, _this3.props.subRowsKey, _this3.filterData(row[_this3.props.subRowsKey], filtered, defaultFilterMethod2, allVisibleColumns)));
+            return _extends$h({}, row, _defineProperty$4({}, _this3.props.subRowsKey, _this3.filterData(row[_this3.props.subRowsKey], filtered, defaultFilterMethod2, allVisibleColumns)));
           }).filter(function(row) {
             if (!row[_this3.props.subRowsKey]) {
               return true;
@@ -42573,7 +42573,7 @@ var _createClass$a = /* @__PURE__ */ function() {
     return Constructor;
   };
 }();
-var _extends$f = Object.assign || function(target) {
+var _extends$g = Object.assign || function(target) {
   for (var i2 = 1; i2 < arguments.length; i2++) {
     var source = arguments[i2];
     for (var key in source) {
@@ -42608,7 +42608,7 @@ __name(_inherits$9, "_inherits$9");
 var defaultButton = /* @__PURE__ */ __name(function defaultButton2(props) {
   return React$1.createElement(
     "button",
-    _extends$f({ type: "button" }, props, { className: "-btn" }),
+    _extends$g({ type: "button" }, props, { className: "-btn" }),
     props.children
   );
 }, "defaultButton");
@@ -42808,7 +42808,7 @@ ReactTablePagination.defaultProps = {
     );
   }, "renderPageSizeOptions")
 };
-var _extends$e = Object.assign || function(target) {
+var _extends$f = Object.assign || function(target) {
   for (var i2 = 1; i2 < arguments.length; i2++) {
     var source = arguments[i2];
     for (var key in source) {
@@ -42999,7 +42999,7 @@ const defaultProps$1 = {
     var children = _ref.children, className = _ref.className, rest = _objectWithoutProperties$2(_ref, ["children", "className"]);
     return React$1.createElement(
       "div",
-      _extends$e({
+      _extends$f({
         className: classNames$1("rt-table", className),
         role: "grid"
         // tabIndex='0'
@@ -43013,7 +43013,7 @@ const defaultProps$1 = {
     var children = _ref2.children, className = _ref2.className, rest = _objectWithoutProperties$2(_ref2, ["children", "className"]);
     return React$1.createElement(
       "div",
-      _extends$e({ className: classNames$1("rt-tr-group", className), role: "rowgroup" }, rest),
+      _extends$f({ className: classNames$1("rt-tr-group", className), role: "rowgroup" }, rest),
       children
     );
   }, "TrGroupComponent"),
@@ -43021,7 +43021,7 @@ const defaultProps$1 = {
     var children = _ref3.children, className = _ref3.className, rest = _objectWithoutProperties$2(_ref3, ["children", "className"]);
     return React$1.createElement(
       "div",
-      _extends$e({ className: classNames$1("rt-tr", className), role: "row" }, rest),
+      _extends$f({ className: classNames$1("rt-tr", className), role: "row" }, rest),
       children
     );
   }, "TrComponent"),
@@ -43031,7 +43031,7 @@ const defaultProps$1 = {
       // eslint-disable-next-line jsx-a11y/click-events-have-key-events
       React$1.createElement(
         "div",
-        _extends$e({
+        _extends$f({
           className: classNames$1("rt-th", className),
           onClick: /* @__PURE__ */ __name(function onClick(e2) {
             return toggleSort && toggleSort(e2);
@@ -43049,7 +43049,7 @@ const defaultProps$1 = {
     var className = _ref5.className, children = _ref5.children, rest = _objectWithoutProperties$2(_ref5, ["toggleSort", "className", "children"]);
     return React$1.createElement(
       "div",
-      _extends$e({ className: classNames$1("rt-td", className), role: "gridcell" }, rest),
+      _extends$f({ className: classNames$1("rt-td", className), role: "gridcell" }, rest),
       children
     );
   }, "TdComponent"),
@@ -43117,7 +43117,7 @@ const defaultProps$1 = {
     var className = _ref10.className, loading = _ref10.loading, loadingText = _ref10.loadingText, rest = _objectWithoutProperties$2(_ref10, ["className", "loading", "loadingText"]);
     return React$1.createElement(
       "div",
-      _extends$e({ className: classNames$1("-loading", { "-active": loading }, className) }, rest),
+      _extends$f({ className: classNames$1("-loading", { "-active": loading }, className) }, rest),
       React$1.createElement(
         "div",
         { className: "-loading-inner" },
@@ -43321,7 +43321,7 @@ var _slicedToArray$2 = /* @__PURE__ */ function() {
     }
   };
 }();
-var _extends$d = Object.assign || function(target) {
+var _extends$e = Object.assign || function(target) {
   for (var i2 = 1; i2 < arguments.length; i2++) {
     var source = arguments[i2];
     for (var key in source) {
@@ -43431,7 +43431,7 @@ var ReactTable = function(_Methods) {
         var index2 = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : -1;
         return [rows.map(function(row, i2) {
           index2 += 1;
-          var rowWithViewIndex = _extends$d({}, row, {
+          var rowWithViewIndex = _extends$e({}, row, {
             _viewIndex: index2
           });
           var newPath = path2.concat([i2]);
@@ -43456,7 +43456,7 @@ var ReactTable = function(_Methods) {
         return _$1.getFirstDefined(resizedColumn.value, d2.width, d2.minWidth);
       }));
       var rowIndex = -1;
-      var finalState = _extends$d({}, resolvedState, {
+      var finalState = _extends$e({}, resolvedState, {
         startRow,
         endRow,
         pageRows,
@@ -43490,8 +43490,8 @@ var ReactTable = function(_Methods) {
         var theadGroupThProps = _$1.splitProps(getTheadGroupThProps(finalState, void 0, column, _this2));
         var columnHeaderProps = _$1.splitProps(column.getHeaderProps(finalState, void 0, column, _this2));
         var classes = [column.headerClassName, theadGroupThProps.className, columnHeaderProps.className];
-        var styles2 = _extends$d({}, column.headerStyle, theadGroupThProps.style, columnHeaderProps.style);
-        var rest = _extends$d({}, theadGroupThProps.rest, columnHeaderProps.rest);
+        var styles2 = _extends$e({}, column.headerStyle, theadGroupThProps.style, columnHeaderProps.style);
+        var rest = _extends$e({}, theadGroupThProps.rest, columnHeaderProps.rest);
         var flexStyles = {
           flex: flex + " 0 auto",
           width: _$1.asPx(width),
@@ -43499,10 +43499,10 @@ var ReactTable = function(_Methods) {
         };
         return React$1.createElement(
           ThComponent3,
-          _extends$d({
+          _extends$e({
             key: i2 + "-" + column.id,
             className: classNames$1(classes),
-            style: _extends$d({}, styles2, flexStyles)
+            style: _extends$e({}, styles2, flexStyles)
           }, rest),
           _$1.normalizeComponent(column.Header, {
             data: sortedData,
@@ -43515,15 +43515,15 @@ var ReactTable = function(_Methods) {
         var theadGroupTrProps = _$1.splitProps(getTheadGroupTrProps(finalState, void 0, void 0, _this2));
         return React$1.createElement(
           TheadComponent,
-          _extends$d({
+          _extends$e({
             className: classNames$1("-headerGroups", theadGroupProps.className),
-            style: _extends$d({}, theadGroupProps.style, {
+            style: _extends$e({}, theadGroupProps.style, {
               minWidth: rowMinWidth + "px"
             })
           }, theadGroupProps.rest),
           React$1.createElement(
             TrComponent2,
-            _extends$d({
+            _extends$e({
               className: theadGroupTrProps.className,
               style: theadGroupTrProps.style
             }, theadGroupTrProps.rest),
@@ -43544,10 +43544,10 @@ var ReactTable = function(_Methods) {
         var theadThProps = _$1.splitProps(getTheadThProps(finalState, void 0, column, _this2));
         var columnHeaderProps = _$1.splitProps(column.getHeaderProps(finalState, void 0, column, _this2));
         var classes = [column.headerClassName, theadThProps.className, columnHeaderProps.className];
-        var styles2 = _extends$d({}, column.headerStyle, theadThProps.style, columnHeaderProps.style);
-        var rest = _extends$d({}, theadThProps.rest, columnHeaderProps.rest);
+        var styles2 = _extends$e({}, column.headerStyle, theadThProps.style, columnHeaderProps.style);
+        var rest = _extends$e({}, theadThProps.rest, columnHeaderProps.rest);
         var isResizable = _$1.getFirstDefined(column.resizable, resizable, false);
-        var resizer = isResizable ? React$1.createElement(ResizerComponent, _extends$d({
+        var resizer = isResizable ? React$1.createElement(ResizerComponent, _extends$e({
           onMouseDown: /* @__PURE__ */ __name(function onMouseDown(e2) {
             return _this2.resizeColumnStart(e2, column, false);
           }, "onMouseDown"),
@@ -43558,10 +43558,10 @@ var ReactTable = function(_Methods) {
         var isSortable = _$1.getFirstDefined(column.sortable, sortable, false);
         return React$1.createElement(
           ThComponent3,
-          _extends$d({
+          _extends$e({
             key: i2 + "-" + column.id,
             className: classNames$1(classes, isResizable && "rt-resizable-header", sort2 ? sort2.desc ? "-sort-desc" : "-sort-asc" : "", isSortable && "-cursor-pointer", !show2 && "-hidden", pivotBy && pivotBy.slice(0, -1).includes(column.id) && "rt-header-pivot"),
-            style: _extends$d({}, styles2, {
+            style: _extends$e({}, styles2, {
               flex: width + " 0 auto",
               width: _$1.asPx(width),
               maxWidth: _$1.asPx(maxWidth)
@@ -43586,15 +43586,15 @@ var ReactTable = function(_Methods) {
         var theadTrProps = _$1.splitProps(getTheadTrProps(finalState, void 0, void 0, _this2));
         return React$1.createElement(
           TheadComponent,
-          _extends$d({
+          _extends$e({
             className: classNames$1("-header", theadProps.className),
-            style: _extends$d({}, theadProps.style, {
+            style: _extends$e({}, theadProps.style, {
               minWidth: rowMinWidth + "px"
             })
           }, theadProps.rest),
           React$1.createElement(
             TrComponent2,
-            _extends$d({
+            _extends$e({
               className: theadTrProps.className,
               style: theadTrProps.style
             }, theadTrProps.rest),
@@ -43611,8 +43611,8 @@ var ReactTable = function(_Methods) {
         var theadFilterThProps = _$1.splitProps(getTheadFilterThProps(finalState, void 0, column, _this2));
         var columnHeaderProps = _$1.splitProps(column.getHeaderProps(finalState, void 0, column, _this2));
         var classes = [column.headerClassName, theadFilterThProps.className, columnHeaderProps.className];
-        var styles2 = _extends$d({}, column.headerStyle, theadFilterThProps.style, columnHeaderProps.style);
-        var rest = _extends$d({}, theadFilterThProps.rest, columnHeaderProps.rest);
+        var styles2 = _extends$e({}, column.headerStyle, theadFilterThProps.style, columnHeaderProps.style);
+        var rest = _extends$e({}, theadFilterThProps.rest, columnHeaderProps.rest);
         var filter2 = filtered.find(function(filter3) {
           return filter3.id === column.id;
         });
@@ -43620,10 +43620,10 @@ var ReactTable = function(_Methods) {
         var isFilterable = _$1.getFirstDefined(column.filterable, filterable, false);
         return React$1.createElement(
           ThComponent3,
-          _extends$d({
+          _extends$e({
             key: i2 + "-" + column.id,
             className: classNames$1(classes),
-            style: _extends$d({}, styles2, {
+            style: _extends$e({}, styles2, {
               flex: width + " 0 auto",
               width: _$1.asPx(width),
               maxWidth: _$1.asPx(maxWidth)
@@ -43643,15 +43643,15 @@ var ReactTable = function(_Methods) {
         var theadFilterTrProps = _$1.splitProps(getTheadFilterTrProps(finalState, void 0, void 0, _this2));
         return React$1.createElement(
           TheadComponent,
-          _extends$d({
+          _extends$e({
             className: classNames$1("-filters", theadFilterProps.className),
-            style: _extends$d({}, theadFilterProps.style, {
+            style: _extends$e({}, theadFilterProps.style, {
               minWidth: rowMinWidth + "px"
             })
           }, theadFilterProps.rest),
           React$1.createElement(
             TrComponent2,
-            _extends$d({
+            _extends$e({
               className: theadFilterTrProps.className,
               style: theadFilterTrProps.style
             }, theadFilterTrProps.rest),
@@ -43679,10 +43679,10 @@ var ReactTable = function(_Methods) {
         var trProps = _$1.splitProps(getTrProps(finalState, rowInfo, void 0, _this2));
         return React$1.createElement(
           TrGroupComponent2,
-          _extends$d({ key: rowInfo.nestingPath.join("_") }, trGroupProps),
+          _extends$e({ key: rowInfo.nestingPath.join("_") }, trGroupProps),
           React$1.createElement(
             TrComponent2,
-            _extends$d({
+            _extends$e({
               className: classNames$1(trProps.className, row._viewIndex % 2 ? "-even" : "-odd"),
               style: trProps.style
             }, trProps.rest),
@@ -43696,10 +43696,10 @@ var ReactTable = function(_Methods) {
               var tdProps = _$1.splitProps(getTdProps(finalState, rowInfo, column, _this2));
               var columnProps = _$1.splitProps(column.getProps(finalState, rowInfo, column, _this2));
               var classes = [tdProps.className, column.className, columnProps.className];
-              var styles2 = _extends$d({}, tdProps.style, column.style, columnProps.style);
-              var cellInfo = _extends$d({}, rowInfo, {
+              var styles2 = _extends$e({}, tdProps.style, column.style, columnProps.style);
+              var cellInfo = _extends$e({}, rowInfo, {
                 isExpanded,
-                column: _extends$d({}, column),
+                column: _extends$e({}, column),
                 value: rowInfo.row[column.id],
                 pivoted: column.pivoted,
                 expander: column.expander,
@@ -43753,7 +43753,7 @@ var ReactTable = function(_Methods) {
                 isBranch = rowInfo.row[pivotIDKey] === column.id && cellInfo.subRows;
                 isPreview = pivotBy.indexOf(column.id) > pivotBy.indexOf(rowInfo.row[pivotIDKey]) && cellInfo.subRows;
                 if (isBranch) {
-                  resolvedCell = _$1.normalizeComponent(ResolvedPivotComponent, _extends$d({}, cellInfo, {
+                  resolvedCell = _$1.normalizeComponent(ResolvedPivotComponent, _extends$e({}, cellInfo, {
                     value: row[pivotValKey]
                   }), row[pivotValKey]);
                 } else if (isPreview) {
@@ -43796,10 +43796,10 @@ var ReactTable = function(_Methods) {
               }
               return React$1.createElement(
                 TdComponent2,
-                _extends$d({
+                _extends$e({
                   key: i22 + "-" + column.id,
                   className: classNames$1(classes, !cellInfo.expandable && !show2 && "hidden", cellInfo.expandable && "rt-expandable", (isBranch || isPreview) && "rt-pivot"),
-                  style: _extends$d({}, styles2, {
+                  style: _extends$e({}, styles2, {
                     flex: width + " 0 auto",
                     width: _$1.asPx(width),
                     maxWidth: _$1.asPx(maxWidth)
@@ -43829,13 +43829,13 @@ var ReactTable = function(_Methods) {
         var tdProps = _$1.splitProps(getTdProps(finalState, void 0, column, _this2));
         var columnProps = _$1.splitProps(column.getProps(finalState, void 0, column, _this2));
         var classes = [tdProps.className, column.className, columnProps.className];
-        var styles2 = _extends$d({}, tdProps.style, column.style, columnProps.style);
+        var styles2 = _extends$e({}, tdProps.style, column.style, columnProps.style);
         return React$1.createElement(
           TdComponent2,
-          _extends$d({
+          _extends$e({
             key: i2 + "-" + column.id,
             className: classNames$1(classes, !show2 && "hidden"),
-            style: _extends$d({}, styles2, {
+            style: _extends$e({}, styles2, {
               flex: flex + " 0 auto",
               width: _$1.asPx(width),
               maxWidth: _$1.asPx(maxWidth)
@@ -43849,7 +43849,7 @@ var ReactTable = function(_Methods) {
         var trProps = _$1.splitProps(getTrProps(finalState, void 0, void 0, _this2));
         return React$1.createElement(
           TrGroupComponent2,
-          _extends$d({ key: "pad-" + i2 }, trGroupProps),
+          _extends$e({ key: "pad-" + i2 }, trGroupProps),
           React$1.createElement(
             TrComponent2,
             {
@@ -43871,13 +43871,13 @@ var ReactTable = function(_Methods) {
         var columnProps = _$1.splitProps(column.getProps(finalState, void 0, column, _this2));
         var columnFooterProps = _$1.splitProps(column.getFooterProps(finalState, void 0, column, _this2));
         var classes = [tFootTdProps.className, column.className, columnProps.className, columnFooterProps.className];
-        var styles2 = _extends$d({}, tFootTdProps.style, column.style, columnProps.style, columnFooterProps.style);
+        var styles2 = _extends$e({}, tFootTdProps.style, column.style, columnProps.style, columnFooterProps.style);
         return React$1.createElement(
           TdComponent2,
-          _extends$d({
+          _extends$e({
             key: i2 + "-" + column.id,
             className: classNames$1(classes, !show2 && "hidden"),
-            style: _extends$d({}, styles2, {
+            style: _extends$e({}, styles2, {
               flex: width + " 0 auto",
               width: _$1.asPx(width),
               maxWidth: _$1.asPx(maxWidth)
@@ -43894,15 +43894,15 @@ var ReactTable = function(_Methods) {
         var tFootTrProps = _$1.splitProps(getTfootTrProps(finalState, void 0, void 0, _this2));
         return React$1.createElement(
           TfootComponent,
-          _extends$d({
+          _extends$e({
             className: tFootProps.className,
-            style: _extends$d({}, tFootProps.style, {
+            style: _extends$e({}, tFootProps.style, {
               minWidth: rowMinWidth + "px"
             })
           }, tFootProps.rest),
           React$1.createElement(
             TrComponent2,
-            _extends$d({
+            _extends$e({
               className: classNames$1(tFootTrProps.className),
               style: tFootTrProps.style
             }, tFootTrProps.rest),
@@ -43912,7 +43912,7 @@ var ReactTable = function(_Methods) {
       }, "makeColumnFooters");
       var makePagination = /* @__PURE__ */ __name(function makePagination2(isTop) {
         var paginationProps = _$1.splitProps(getPaginationProps(finalState, void 0, void 0, _this2));
-        return React$1.createElement(PaginationComponent, _extends$d({}, resolvedState, {
+        return React$1.createElement(PaginationComponent, _extends$e({}, resolvedState, {
           pages,
           canPrevious,
           canNext,
@@ -43926,9 +43926,9 @@ var ReactTable = function(_Methods) {
       var makeTable = /* @__PURE__ */ __name(function makeTable2() {
         return React$1.createElement(
           "div",
-          _extends$d({
+          _extends$e({
             className: classNames$1("ReactTable", className, rootProps.className),
-            style: _extends$d({}, style2, rootProps.style)
+            style: _extends$e({}, style2, rootProps.style)
           }, rootProps.rest, {
             ref: /* @__PURE__ */ __name(function ref2(r2) {
               if (!r2) return;
@@ -43945,7 +43945,7 @@ var ReactTable = function(_Methods) {
           ) : null,
           React$1.createElement(
             TableComponent2,
-            _extends$d({
+            _extends$e({
               className: classNames$1(tableProps.className, currentlyResizing ? "rt-resizing" : ""),
               style: tableProps.style
             }, tableProps.rest),
@@ -43954,9 +43954,9 @@ var ReactTable = function(_Methods) {
             hasFilters ? makeFilters() : null,
             React$1.createElement(
               TbodyComponent,
-              _extends$d({
+              _extends$e({
                 className: classNames$1(tBodyProps.className),
-                style: _extends$d({}, tBodyProps.style, {
+                style: _extends$e({}, tBodyProps.style, {
                   minWidth: rowMinWidth + "px"
                 })
               }, tBodyProps.rest),
@@ -43985,7 +43985,7 @@ var ReactTable = function(_Methods) {
             noDataProps,
             _$1.normalizeComponent(noDataText)
           ),
-          React$1.createElement(LoadingComponent3, _extends$d({ loading, loadingText }, loadingProps))
+          React$1.createElement(LoadingComponent3, _extends$e({ loading, loadingText }, loadingProps))
         );
       }, "makeTable");
       return children ? children(finalState, makeTable, this) : makeTable();
@@ -46568,6 +46568,23 @@ function applyWhereClause(records, where) {
               if (!isString$1(value) || !new RegExp(conditionValue.replace(/%/g, ".*")).test(value))
                 return false;
               break;
+            case "_in":
+              if (!some2(conditionValue, (item) => isEqual$3(value, item)))
+                return false;
+              break;
+            case "_nin":
+              if (some2(conditionValue, (item) => isEqual$3(value, item)))
+                return false;
+              break;
+            case "_regex": {
+              try {
+                if (!isString$1(value) || !new RegExp(conditionValue).test(value))
+                  return false;
+              } catch (e2) {
+                return false;
+              }
+              break;
+            }
             default:
               if (operator.startsWith("_")) {
                 console.warn(`Unsupported operator: ${operator}`);
@@ -48220,7 +48237,7 @@ var get$2 = /* @__PURE__ */ __name(function get(c1, c2, size3, serverCanvas) {
   checkboardCache[key] = checkboard;
   return checkboard;
 }, "get");
-var _extends$c = Object.assign || function(target) {
+var _extends$d = Object.assign || function(target) {
   for (var i2 = 1; i2 < arguments.length; i2++) {
     var source = arguments[i2];
     for (var key in source) {
@@ -48243,7 +48260,7 @@ var Checkboard = /* @__PURE__ */ __name(function Checkboard2(_ref) {
       }
     }
   });
-  return reactExports.isValidElement(children) ? React$1.cloneElement(children, _extends$c({}, children.props, { style: _extends$c({}, children.props.style, styles2.grid) })) : React$1.createElement("div", { style: styles2.grid });
+  return reactExports.isValidElement(children) ? React$1.cloneElement(children, _extends$d({}, children.props, { style: _extends$d({}, children.props.style, styles2.grid) })) : React$1.createElement("div", { style: styles2.grid });
 }, "Checkboard");
 Checkboard.defaultProps = {
   size: 8,
@@ -48251,7 +48268,7 @@ Checkboard.defaultProps = {
   grey: "rgba(0,0,0,.08)",
   renderers: {}
 };
-var _extends$b = Object.assign || function(target) {
+var _extends$c = Object.assign || function(target) {
   for (var i2 = 1; i2 < arguments.length; i2++) {
     var source = arguments[i2];
     for (var key in source) {
@@ -48379,7 +48396,7 @@ var Alpha = function(_ref) {
             top: rgb.a * 100 + "%"
           }
         },
-        "overwrite": _extends$b({}, this.props.style)
+        "overwrite": _extends$c({}, this.props.style)
       }, {
         vertical: this.props.direction === "vertical",
         overwrite: true
@@ -50129,7 +50146,7 @@ var isvalidColorString = /* @__PURE__ */ __name(function isvalidColorString2(str
   var stringWithoutDegree = string2.replace("°", "");
   return tinycolor(type2 + " (" + stringWithoutDegree + ")")._ok;
 }, "isvalidColorString");
-var _extends$a = Object.assign || function(target) {
+var _extends$b = Object.assign || function(target) {
   for (var i2 = 1; i2 < arguments.length; i2++) {
     var source = arguments[i2];
     for (var key in source) {
@@ -50200,7 +50217,7 @@ var ColorWrap = /* @__PURE__ */ __name(function ColorWrap2(Picker) {
           _this.props.onSwatchHover && _this.props.onSwatchHover(colors, event);
         }
       };
-      _this.state = _extends$a({}, toState(props.color, 0));
+      _this.state = _extends$b({}, toState(props.color, 0));
       _this.debounce = debounce(function(fn4, data, event) {
         fn4(data, event);
       }, 100);
@@ -50214,20 +50231,20 @@ var ColorWrap = /* @__PURE__ */ __name(function ColorWrap2(Picker) {
         if (this.props.onSwatchHover) {
           optionalEvents.onSwatchHover = this.handleSwatchHover;
         }
-        return React$1.createElement(Picker, _extends$a({}, this.props, this.state, {
+        return React$1.createElement(Picker, _extends$b({}, this.props, this.state, {
           onChange: this.handleChange
         }, optionalEvents));
       }, "render")
     }], [{
       key: "getDerivedStateFromProps",
       value: /* @__PURE__ */ __name(function getDerivedStateFromProps(nextProps, state2) {
-        return _extends$a({}, toState(nextProps.color, state2.oldHue));
+        return _extends$b({}, toState(nextProps.color, state2.oldHue));
       }, "getDerivedStateFromProps")
     }]);
     return ColorPicker2;
   }(reactExports.PureComponent || reactExports.Component);
-  ColorPicker.propTypes = _extends$a({}, Picker.propTypes);
-  ColorPicker.defaultProps = _extends$a({}, Picker.defaultProps, {
+  ColorPicker.propTypes = _extends$b({}, Picker.propTypes);
+  ColorPicker.defaultProps = _extends$b({}, Picker.defaultProps, {
     color: {
       h: 250,
       s: 0.5,
@@ -50237,7 +50254,7 @@ var ColorWrap = /* @__PURE__ */ __name(function ColorWrap2(Picker) {
   });
   return ColorPicker;
 }, "ColorWrap");
-var _extends$9 = Object.assign || function(target) {
+var _extends$a = Object.assign || function(target) {
   for (var i2 = 1; i2 < arguments.length; i2++) {
     var source = arguments[i2];
     for (var key in source) {
@@ -50310,14 +50327,14 @@ var handleFocus = /* @__PURE__ */ __name(function handleFocus2(Component) {
         return React$1.createElement(
           Span,
           { onFocus: this.handleFocus, onBlur: this.handleBlur },
-          React$1.createElement(Component, _extends$9({}, this.props, this.state))
+          React$1.createElement(Component, _extends$a({}, this.props, this.state))
         );
       }, "render")
     }]);
     return Focus;
   }(React$1.Component);
 }, "handleFocus");
-var _extends$8 = Object.assign || function(target) {
+var _extends$9 = Object.assign || function(target) {
   for (var i2 = 1; i2 < arguments.length; i2++) {
     var source = arguments[i2];
     for (var key in source) {
@@ -50335,7 +50352,7 @@ var Swatch = /* @__PURE__ */ __name(function Swatch2(_ref) {
   var transparent = color2 === "transparent";
   var styles2 = reactCSS({
     default: {
-      swatch: _extends$8({
+      swatch: _extends$9({
         background: color2,
         height: "100%",
         width: "100%",
@@ -50360,7 +50377,7 @@ var Swatch = /* @__PURE__ */ __name(function Swatch2(_ref) {
   }
   return React$1.createElement(
     "div",
-    _extends$8({
+    _extends$9({
       style: styles2.swatch,
       onClick: handleClick,
       title,
@@ -50396,7 +50413,7 @@ var AlphaPointer = /* @__PURE__ */ __name(function AlphaPointer2(_ref) {
   }, { vertical: direction === "vertical" });
   return React$1.createElement("div", { style: styles2.picker });
 }, "AlphaPointer");
-var _extends$7 = Object.assign || function(target) {
+var _extends$8 = Object.assign || function(target) {
   for (var i2 = 1; i2 < arguments.length; i2++) {
     var source = arguments[i2];
     for (var key in source) {
@@ -50425,7 +50442,7 @@ var AlphaPicker = /* @__PURE__ */ __name(function AlphaPicker2(_ref) {
   return React$1.createElement(
     "div",
     { style: styles2.picker, className: "alpha-picker " + className },
-    React$1.createElement(Alpha, _extends$7({}, styles2.alpha, {
+    React$1.createElement(Alpha, _extends$8({}, styles2.alpha, {
       rgb,
       hsl,
       pointer,
@@ -51671,7 +51688,7 @@ var SliderPointer$1 = /* @__PURE__ */ __name(function SliderPointer(_ref) {
   }, { vertical: direction === "vertical" });
   return React$1.createElement("div", { style: styles2.picker });
 }, "SliderPointer");
-var _extends$6 = Object.assign || function(target) {
+var _extends$7 = Object.assign || function(target) {
   for (var i2 = 1; i2 < arguments.length; i2++) {
     var source = arguments[i2];
     for (var key in source) {
@@ -51702,7 +51719,7 @@ var HuePicker = /* @__PURE__ */ __name(function HuePicker2(_ref) {
   return React$1.createElement(
     "div",
     { style: styles2.picker, className: "hue-picker " + className },
-    React$1.createElement(Hue, _extends$6({}, styles2.hue, {
+    React$1.createElement(Hue, _extends$7({}, styles2.hue, {
       hsl,
       pointer,
       onChange: handleChange,
@@ -52486,7 +52503,7 @@ var SketchFields = /* @__PURE__ */ __name(function SketchFields2(_ref) {
     )
   );
 }, "SketchFields");
-var _extends$5 = Object.assign || function(target) {
+var _extends$6 = Object.assign || function(target) {
   for (var i2 = 1; i2 < arguments.length; i2++) {
     var source = arguments[i2];
     for (var key in source) {
@@ -52543,7 +52560,7 @@ var SketchPresetColors = /* @__PURE__ */ __name(function SketchPresetColors2(_re
       return React$1.createElement(
         "div",
         { key, style: styles2.swatchWrap },
-        React$1.createElement(Swatch$1, _extends$5({}, c2, {
+        React$1.createElement(Swatch$1, _extends$6({}, c2, {
           style: styles2.swatch,
           onClick: handleClick,
           onHover: onSwatchHover,
@@ -52561,7 +52578,7 @@ SketchPresetColors.propTypes = {
     title: PropTypes.string
   })])).isRequired
 };
-var _extends$4 = Object.assign || function(target) {
+var _extends$5 = Object.assign || function(target) {
   for (var i2 = 1; i2 < arguments.length; i2++) {
     var source = arguments[i2];
     for (var key in source) {
@@ -52575,7 +52592,7 @@ var _extends$4 = Object.assign || function(target) {
 var Sketch = /* @__PURE__ */ __name(function Sketch2(_ref) {
   var width = _ref.width, rgb = _ref.rgb, hex = _ref.hex, hsv = _ref.hsv, hsl = _ref.hsl, onChange = _ref.onChange, onSwatchHover = _ref.onSwatchHover, disableAlpha = _ref.disableAlpha, presetColors = _ref.presetColors, renderers = _ref.renderers, _ref$styles = _ref.styles, passedStyles = _ref$styles === void 0 ? {} : _ref$styles, _ref$className = _ref.className, className = _ref$className === void 0 ? "" : _ref$className;
   var styles2 = reactCSS(merge$1({
-    "default": _extends$4({
+    "default": _extends$5({
       picker: {
         width,
         padding: "10px 10px 0",
@@ -64434,7 +64451,7 @@ function createLocation(path2, state2, key, currentLocation) {
     location2 = parsePath(path2);
     location2.state = state2;
   } else {
-    location2 = _extends$j({}, path2);
+    location2 = _extends$k({}, path2);
     if (location2.pathname === void 0) location2.pathname = "";
     if (location2.search) {
       if (location2.search.charAt(0) !== "?") location2.search = "?" + location2.search;
@@ -64592,7 +64609,7 @@ function createBrowserHistory(props) {
   __name(createKey2, "createKey");
   var transitionManager = createTransitionManager();
   function setState(nextState) {
-    _extends$j(history, nextState);
+    _extends$k(history, nextState);
     history.length = globalHistory.length;
     transitionManager.notifyListeners(history.location, history.action);
   }
@@ -64827,7 +64844,7 @@ function createHashHistory(props) {
   __name(getDOMLocation, "getDOMLocation");
   var transitionManager = createTransitionManager();
   function setState(nextState) {
-    _extends$j(history, nextState);
+    _extends$k(history, nextState);
     history.length = globalHistory.length;
     transitionManager.notifyListeners(history.location, history.action);
   }
@@ -65022,7 +65039,7 @@ function createMemoryHistory(props) {
   var _props = props, getUserConfirmation = _props.getUserConfirmation, _props$initialEntries = _props.initialEntries, initialEntries = _props$initialEntries === void 0 ? ["/"] : _props$initialEntries, _props$initialIndex = _props.initialIndex, initialIndex = _props$initialIndex === void 0 ? 0 : _props$initialIndex, _props$keyLength = _props.keyLength, keyLength = _props$keyLength === void 0 ? 6 : _props$keyLength;
   var transitionManager = createTransitionManager();
   function setState(nextState) {
-    _extends$j(history, nextState);
+    _extends$k(history, nextState);
     history.length = history.entries.length;
     transitionManager.notifyListeners(history.location, history.action);
   }
@@ -65131,16 +65148,16 @@ function createMemoryHistory(props) {
   return history;
 }
 __name(createMemoryHistory, "createMemoryHistory");
-function _extends$3() {
-  return _extends$3 = Object.assign ? Object.assign.bind() : function(n2) {
+function _extends$4() {
+  return _extends$4 = Object.assign ? Object.assign.bind() : function(n2) {
     for (var e2 = 1; e2 < arguments.length; e2++) {
       var t2 = arguments[e2];
       for (var r2 in t2) ({}).hasOwnProperty.call(t2, r2) && (n2[r2] = t2[r2]);
     }
     return n2;
-  }, _extends$3.apply(null, arguments);
+  }, _extends$4.apply(null, arguments);
 }
-__name(_extends$3, "_extends$3");
+__name(_extends$4, "_extends$4");
 var pathToRegexp$1 = { exports: {} };
 var isarray;
 var hasRequiredIsarray;
@@ -65743,7 +65760,7 @@ function Redirect(_ref) {
     !context2 ? invariant$1() : void 0;
     var history = context2.history, staticContext = context2.staticContext;
     var method = push3 ? history.push : history.replace;
-    var location2 = createLocation(computedMatch ? typeof to === "string" ? generatePath(to, computedMatch.params) : _extends$3({}, to, {
+    var location2 = createLocation(computedMatch ? typeof to === "string" ? generatePath(to, computedMatch.params) : _extends$4({}, to, {
       pathname: generatePath(to.pathname, computedMatch.params)
     }) : to);
     if (staticContext) {
@@ -65756,7 +65773,7 @@ function Redirect(_ref) {
       }, "onMount"),
       onUpdate: /* @__PURE__ */ __name(function onUpdate2(self2, prevProps) {
         var prevLocation = createLocation(prevProps.to);
-        if (!locationsAreEqual(prevLocation, _extends$3({}, location2, {
+        if (!locationsAreEqual(prevLocation, _extends$4({}, location2, {
           key: prevLocation.key
         }))) {
           method(location2);
@@ -65843,7 +65860,7 @@ var Route = /* @__PURE__ */ function(_React$Component) {
       !context$1 ? invariant$1() : void 0;
       var location2 = _this.props.location || context$1.location;
       var match = _this.props.computedMatch ? _this.props.computedMatch : _this.props.path ? matchPath(location2.pathname, _this.props) : context$1.match;
-      var props = _extends$3({}, context$1, {
+      var props = _extends$4({}, context$1, {
         location: location2,
         match
       });
@@ -65864,7 +65881,7 @@ function addLeadingSlash(path2) {
 __name(addLeadingSlash, "addLeadingSlash");
 function addBasename(basename2, location2) {
   if (!basename2) return location2;
-  return _extends$3({}, location2, {
+  return _extends$4({}, location2, {
     pathname: addLeadingSlash(basename2) + location2.pathname
   });
 }
@@ -65873,7 +65890,7 @@ function stripBasename(basename2, location2) {
   if (!basename2) return location2;
   var base = addLeadingSlash(basename2);
   if (location2.pathname.indexOf(base) !== 0) return location2;
-  return _extends$3({}, location2, {
+  return _extends$4({}, location2, {
     pathname: location2.pathname.substr(base.length)
   });
 }
@@ -65937,7 +65954,7 @@ __name(noop$6, "noop$6");
       listen: this.handleListen,
       block: this.handleBlock
     };
-    return /* @__PURE__ */ React$1.createElement(Router, _extends$3({}, rest, {
+    return /* @__PURE__ */ React$1.createElement(Router, _extends$4({}, rest, {
       history,
       staticContext: context2
     }));
@@ -65961,7 +65978,7 @@ __name(noop$6, "noop$6");
         if (match == null && /* @__PURE__ */ React$1.isValidElement(child)) {
           element2 = child;
           var path2 = child.props.path || child.props.from;
-          match = path2 ? matchPath(location2.pathname, _extends$3({}, child.props, {
+          match = path2 ? matchPath(location2.pathname, _extends$4({}, child.props, {
             path: path2
           })) : context2.match;
         }
@@ -65980,7 +65997,7 @@ function withRouter(Component) {
     var wrappedComponentRef = props.wrappedComponentRef, remainingProps = _objectWithoutPropertiesLoose$3(props, ["wrappedComponentRef"]);
     return /* @__PURE__ */ React$1.createElement(context.Consumer, null, function(context2) {
       !context2 ? invariant$1() : void 0;
-      return /* @__PURE__ */ React$1.createElement(Component, _extends$3({}, remainingProps, context2, {
+      return /* @__PURE__ */ React$1.createElement(Component, _extends$4({}, remainingProps, context2, {
         ref: wrappedComponentRef
       }));
     });
@@ -66001,16 +66018,16 @@ function _inheritsLoose$1(t2, o2) {
   t2.prototype = Object.create(o2.prototype), t2.prototype.constructor = t2, _setPrototypeOf$1(t2, o2);
 }
 __name(_inheritsLoose$1, "_inheritsLoose$1");
-function _extends$2() {
-  return _extends$2 = Object.assign ? Object.assign.bind() : function(n2) {
+function _extends$3() {
+  return _extends$3 = Object.assign ? Object.assign.bind() : function(n2) {
     for (var e2 = 1; e2 < arguments.length; e2++) {
       var t2 = arguments[e2];
       for (var r2 in t2) ({}).hasOwnProperty.call(t2, r2) && (n2[r2] = t2[r2]);
     }
     return n2;
-  }, _extends$2.apply(null, arguments);
+  }, _extends$3.apply(null, arguments);
 }
-__name(_extends$2, "_extends$2");
+__name(_extends$3, "_extends$3");
 function _objectWithoutPropertiesLoose$2(r2, e2) {
   if (null == r2) return {};
   var t2 = {};
@@ -66083,7 +66100,7 @@ __name(isModifiedEvent, "isModifiedEvent");
 var LinkAnchor = forwardRef(function(_ref, forwardedRef) {
   var innerRef = _ref.innerRef, navigate = _ref.navigate, _onClick = _ref.onClick, rest = _objectWithoutPropertiesLoose$2(_ref, ["innerRef", "navigate", "onClick"]);
   var target = rest.target;
-  var props = _extends$2({}, rest, {
+  var props = _extends$3({}, rest, {
     onClick: /* @__PURE__ */ __name(function onClick(event) {
       try {
         if (_onClick) _onClick(event);
@@ -66114,7 +66131,7 @@ var Link = forwardRef(function(_ref2, forwardedRef) {
     var history = context2.history;
     var location2 = normalizeToLocation(resolveToLocation(to, context2.location), context2.location);
     var href = location2 ? history.createHref(location2) : "";
-    var props = _extends$2({}, rest, {
+    var props = _extends$3({}, rest, {
       href,
       navigate: /* @__PURE__ */ __name(function navigate() {
         var location22 = resolveToLocation(to, context2.location);
@@ -66166,9 +66183,9 @@ var NavLink = forwardRef$1(function(_ref, forwardedRef) {
     var style2 = typeof styleProp === "function" ? styleProp(isActive2) : styleProp;
     if (isActive2) {
       className = joinClassnames(className, activeClassName);
-      style2 = _extends$2({}, style2, activeStyle);
+      style2 = _extends$3({}, style2, activeStyle);
     }
-    var props = _extends$2({
+    var props = _extends$3({
       "aria-current": isActive2 && ariaCurrent || null,
       className,
       style: style2,
@@ -80103,7 +80120,7 @@ const FilterAndSortMenu = /* @__PURE__ */ __name(({
       filterValToUse = false;
     } else if (ccSelectedFilter2 === "inList" || ccSelectedFilter2 === "notInList") {
       if (dataType === "number") {
-        filterValToUse = filterValue && filterValue.map((val2) => parseFloat(val2.replaceAll(",", "")));
+        filterValToUse = filterValue && filterValue.map((val2) => parseFloat(`${val2}`.replaceAll(",", "")));
       }
     }
     if (isInvalidFilterValue(filterValToUse)) {
@@ -80209,7 +80226,7 @@ const FilterInput = /* @__PURE__ */ __name(({
           multi: true,
           creatable: true,
           value: (filterValue || []).map((val2) => ({
-            label: val2,
+            label: `${val2}`,
             value: val2
           })),
           onChange: /* @__PURE__ */ __name((selectedOptions) => {
@@ -82158,8 +82175,8 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 __name(_createClass, "_createClass");
-function _extends$1() {
-  _extends$1 = Object.assign ? Object.assign.bind() : function(target) {
+function _extends$2() {
+  _extends$2 = Object.assign ? Object.assign.bind() : function(target) {
     for (var i2 = 1; i2 < arguments.length; i2++) {
       var source = arguments[i2];
       for (var key in source) {
@@ -82170,9 +82187,9 @@ function _extends$1() {
     }
     return target;
   };
-  return _extends$1.apply(this, arguments);
+  return _extends$2.apply(this, arguments);
 }
-__name(_extends$1, "_extends$1");
+__name(_extends$2, "_extends$2");
 function _inheritsLoose(subClass, superClass) {
   subClass.prototype = Object.create(superClass.prototype);
   subClass.prototype.constructor = subClass;
@@ -82259,7 +82276,7 @@ function createDecoratorAnnotation(annotation) {
 __name(createDecoratorAnnotation, "createDecoratorAnnotation");
 function storeAnnotation(prototype, key, annotation) {
   if (!hasProp(prototype, storedAnnotationsSymbol)) {
-    addHiddenProp(prototype, storedAnnotationsSymbol, _extends$1({}, prototype[storedAnnotationsSymbol]));
+    addHiddenProp(prototype, storedAnnotationsSymbol, _extends$2({}, prototype[storedAnnotationsSymbol]));
   }
   if (!isOverride(annotation)) {
     prototype[storedAnnotationsSymbol][key] = annotation;
@@ -82628,7 +82645,7 @@ function make_$3(adm, key, descriptor) {
 __name(make_$3, "make_$3");
 function extend_$3(adm, key, descriptor, proxyTrap) {
   assertComputedDescriptor(adm, this, key, descriptor);
-  return adm.defineComputedProperty_(key, _extends$1({}, this.options_, {
+  return adm.defineComputedProperty_(key, _extends$2({}, this.options_, {
     get: descriptor.get,
     set: descriptor.set
   }), proxyTrap);
@@ -82639,7 +82656,7 @@ function decorate_20223_$3(get42, context2) {
   var key = context2.name, addInitializer = context2.addInitializer;
   addInitializer(function() {
     var adm = asObservableObject(this)[$mobx];
-    var options = _extends$1({}, ann.options_, {
+    var options = _extends$2({}, ann.options_, {
       get: get42,
       context: this
     });
@@ -85438,7 +85455,7 @@ var ObservableObjectAdministration = /* @__PURE__ */ function() {
         }
         var newValue = change3.newValue;
         if (descriptor.value !== newValue) {
-          descriptor = _extends$1({}, descriptor, {
+          descriptor = _extends$2({}, descriptor, {
             value: newValue
           });
         }
@@ -101116,8 +101133,8 @@ const batch$1 = createAction("Batch", function() {
   }
   return actions2;
 });
-function _extends() {
-  _extends = Object.assign || function(target) {
+function _extends$1() {
+  _extends$1 = Object.assign || function(target) {
     for (var i2 = 1; i2 < arguments.length; i2++) {
       var source = arguments[i2];
       for (var key in source) {
@@ -101128,9 +101145,9 @@ function _extends() {
     }
     return target;
   };
-  return _extends.apply(this, arguments);
+  return _extends$1.apply(this, arguments);
 }
-__name(_extends, "_extends");
+__name(_extends$1, "_extends$1");
 function normalizeType(typeOrActionCreator) {
   if (typeOrActionCreator && typeOrActionCreator.getType) {
     return typeOrActionCreator.toString();
@@ -101145,7 +101162,7 @@ function createReducer() {
     payload: true,
     fallback: null
   };
-  var reducer2 = _extends(reduce2, {
+  var reducer2 = _extends$1(reduce2, {
     has: has4,
     on: on2,
     off,
@@ -115528,6 +115545,10 @@ function genbankToJson(string2, options = {}) {
       feat.name = feat.notes.ApEinfo_label[0];
     } else if (feat.notes.name) {
       feat.name = feat.notes.name[0];
+    } else if (feat.notes.product) {
+      feat.name = feat.notes.product[0];
+    } else if (feat.notes.region_name) {
+      feat.name = feat.notes.region_name[0];
     } else if (feat.notes.organism) {
       feat.name = feat.notes.organism[0];
     } else if (feat.notes.locus_tag) {
@@ -124683,7 +124704,44 @@ function getCurrentDateString() {
   return day2 + "-" + month + "-" + year;
 }
 __name(getCurrentDateString, "getCurrentDateString");
+const standardLineLength = 79;
 function featureNoteInDataToGenbankString(name2, value, options) {
+  const valueString = mangleOrStripUrls(value, options);
+  if (valueString.length > standardLineLength - 25 - name2.length) {
+    const lines = [];
+    let currentIndex = 0;
+    while (currentIndex < valueString.length) {
+      if (currentIndex === 0) {
+        const chunk = valueString.substring(
+          currentIndex,
+          currentIndex + standardLineLength - name2.length - 24
+        );
+        lines.push(
+          StringUtil.lpad("/", " ", 22) + name2 + '="' + chunk + (currentIndex + standardLineLength - 22 - name2.length >= valueString.length ? '"' : "")
+        );
+        currentIndex += standardLineLength - name2.length - 24;
+      } else {
+        const chunk = valueString.substring(
+          currentIndex,
+          currentIndex + standardLineLength - 21
+        );
+        if (currentIndex + standardLineLength - 21 >= valueString.length) {
+          const lineString = " ".repeat(21) + chunk;
+          if (lineString.length === standardLineLength) {
+            lines.push(lineString);
+            lines.push(" ".repeat(21) + '"');
+          } else {
+            lines.push(lineString + '"');
+          }
+        } else {
+          const lineString = " ".repeat(21) + chunk;
+          lines.push(lineString);
+        }
+        currentIndex += standardLineLength - 21;
+      }
+    }
+    return lines.join("\r\n");
+  }
   return StringUtil.lpad("/", " ", 22) + name2 + '="' + mangleOrStripUrls(value, options) + '"';
 }
 __name(featureNoteInDataToGenbankString, "featureNoteInDataToGenbankString");
@@ -129665,6 +129723,16 @@ var rafSchd = /* @__PURE__ */ __name(function rafSchd2(fn4) {
   };
   return wrapperFn;
 }, "rafSchd");
+function _extends() {
+  return _extends = Object.assign ? Object.assign.bind() : function(n2) {
+    for (var e2 = 1; e2 < arguments.length; e2++) {
+      var t2 = arguments[e2];
+      for (var r2 in t2) ({}).hasOwnProperty.call(t2, r2) && (n2[r2] = t2[r2]);
+    }
+    return n2;
+  }, _extends.apply(null, arguments);
+}
+__name(_extends, "_extends");
 function log(type2, message) {
   {
     return;
@@ -134196,7 +134264,7 @@ function useAnnouncer(contextId) {
     el.id = id2;
     el.setAttribute("aria-live", "assertive");
     el.setAttribute("aria-atomic", "true");
-    _extends$j(el.style, visuallyHidden$1);
+    _extends(el.style, visuallyHidden$1);
     getBodyElement().appendChild(el);
     return /* @__PURE__ */ __name(function cleanup() {
       setTimeout(/* @__PURE__ */ __name(function remove3() {
@@ -136072,7 +136140,7 @@ function PublicDraggable(props) {
   const isEnabled = typeof props.isDragDisabled === "boolean" ? !props.isDragDisabled : true;
   const canDragInteractiveElements = Boolean(props.disableInteractiveElementBlocking);
   const shouldRespectForcePress = Boolean(props.shouldRespectForcePress);
-  return React$1.createElement(PrivateDraggable, _extends$j({}, props, {
+  return React$1.createElement(PrivateDraggable, _extends({}, props, {
     isClone: false,
     isEnabled,
     canDragInteractiveElements,
@@ -139746,10 +139814,39 @@ const _AnnotationPositioner = class _AnnotationPositioner extends React$1.PureCo
 __name(_AnnotationPositioner, "AnnotationPositioner");
 let AnnotationPositioner = _AnnotationPositioner;
 let measureCanvas;
-function getAnnotationTextWidth(text2, fontSize = ANNOTATION_LABEL_FONT_WIDTH, fontFamily = "monospace") {
+let cachedFontSize = null;
+function getVeMonospaceFontSize() {
+  if (cachedFontSize !== null) {
+    return cachedFontSize;
+  }
+  const tempElement = document.createElement("div");
+  tempElement.className = "ve-monospace-font";
+  tempElement.style.position = "absolute";
+  tempElement.style.visibility = "hidden";
+  tempElement.style.pointerEvents = "none";
+  document.body.appendChild(tempElement);
+  try {
+    const computedStyle = window.getComputedStyle(tempElement);
+    const fontSize = parseFloat(computedStyle.fontSize);
+    cachedFontSize = fontSize || ANNOTATION_LABEL_FONT_WIDTH;
+    return cachedFontSize;
+  } catch (error) {
+    console.warn(
+      "Failed to compute ve-monospace-font size, using fallback",
+      error
+    );
+    cachedFontSize = ANNOTATION_LABEL_FONT_WIDTH;
+    return cachedFontSize;
+  } finally {
+    document.body.removeChild(tempElement);
+  }
+}
+__name(getVeMonospaceFontSize, "getVeMonospaceFontSize");
+function getAnnotationTextWidth(text2, fontFamily = "monospace") {
   if (!measureCanvas) {
     measureCanvas = document.createElement("canvas");
   }
+  const fontSize = getVeMonospaceFontSize();
   const ctx = measureCanvas.getContext("2d");
   ctx.font = `${fontSize}px ${fontFamily}`;
   return ctx.measureText(text2).width;
@@ -139757,7 +139854,8 @@ function getAnnotationTextWidth(text2, fontSize = ANNOTATION_LABEL_FONT_WIDTH, f
 __name(getAnnotationTextWidth, "getAnnotationTextWidth");
 const doesLabelFitInAnnotation = /* @__PURE__ */ __name((text2 = "", { range: range2, width }, charWidth2) => {
   const textLength = getAnnotationTextWidth(text2);
-  const widthMinusOne = range2 ? getWidth(range2, charWidth2, 0) - ANNOTATION_LABEL_FONT_WIDTH * 2 : width - ANNOTATION_LABEL_FONT_WIDTH * 2;
+  const fontSize = getVeMonospaceFontSize();
+  const widthMinusOne = range2 ? getWidth(range2, charWidth2, 0) - fontSize * 2 : width - fontSize * 2;
   return widthMinusOne > textLength;
 }, "doesLabelFitInAnnotation");
 function getAnnotationClassnames({ overlapsSelf }, { viewName, type: type2 }) {
@@ -145854,12 +145952,13 @@ function showFileDialog({ multiple = false, onSelect }) {
 }
 __name(showFileDialog, "showFileDialog");
 const name = "@teselagen/ove";
-const version = "0.8.34";
+const version = "0.8.38";
 const main = "./src/index.js";
 const type = "module";
 const repository = "https://github.com/TeselaGen/tg-oss";
 const exports$1 = { ".": { "import": "./index.es.js", "require": "./index.cjs.js" }, "./*": "./*" };
-const dependencies = { "@blueprintjs/core": "3.54.0", "@hello-pangea/dnd": "16.2.0", "@risingstack/react-easy-state": "^6.3.0", "@teselagen/bio-parsers": "file:../bio-parsers", "@teselagen/file-utils": "file:../file-utils", "@teselagen/range-utils": "file:../range-utils", "@teselagen/react-list": "0.8.18", "@teselagen/sequence-utils": "file:../sequence-utils", "@teselagen/ui": "file:../ui", "@use-gesture/react": "10.3.0", "biomsa": "^0.2.4", "classnames": "^2.3.2", "clipboard": "^2.0.11", "color": "^3.2.1", "combokeys": "^3.0.1", "copy-to-clipboard": "^3.3.1", "deep-equal": "^1.1.1", "dom-to-image": "^2.6.0", "downloadjs": "^1.4.7", "file-saver": "^2.0.5", "html2canvas": "^1.4.1", "immer": "^9.0.15", "is-mobile": "^3.0.0", "lodash": "4.17.21", "lodash-es": "^4.17.21", "node-interval-tree": "^1.3.3", "papaparse": "5.3.2", "paths-js": "^0.4.11", "pluralize": "^7.0.0", "popper.js": "^1.16.1", "prop-types": "^15.6.2", "react": "^18.3.1", "react-dom": "^18.3.1", "react-draggable": "4.4.5", "react-dropzone": "^11.4.2", "react-markdown": "9.0.1", "react-measure": "^2.5.2", "react-redux": "^8.0.5", "react-sizeme": "^2.6.12", "recompose": "npm:react-recompose@0.31.1", "redux": "^4.1.2", "redux-act": "^1.8.0", "redux-form": "^8.3.10", "redux-thunk": "2.4.1", "remark-gfm": "^4.0.0", "reselect": "^4.1.7", "shortid": "2.2.16", "tg-use-local-storage-state": "^16.0.3", "to-regex-range": "5.0.1", "use-debounce": "^8.0.4", "validate.io-nonnegative-integer-array": "^1.0.1" };
+const dependencies = { "@blueprintjs/core": "3.54.0", "@hello-pangea/dnd": "16.2.0", "@risingstack/react-easy-state": "^6.3.0", "@teselagen/bio-parsers": "file:../bio-parsers", "@teselagen/file-utils": "file:../file-utils", "@teselagen/range-utils": "file:../range-utils", "@teselagen/react-list": "0.8.18", "@teselagen/sequence-utils": "file:../sequence-utils", "@teselagen/ui": "file:../ui", "@use-gesture/react": "10.3.0", "classnames": "^2.3.2", "clipboard": "^2.0.11", "color": "^3.2.1", "combokeys": "^3.0.1", "copy-to-clipboard": "^3.3.1", "deep-equal": "^1.1.1", "dom-to-image": "^2.6.0", "downloadjs": "^1.4.7", "file-saver": "^2.0.5", "html2canvas": "^1.4.1", "immer": "^9.0.15", "is-mobile": "^3.0.0", "lodash": "4.17.21", "lodash-es": "^4.17.21", "node-interval-tree": "^1.3.3", "papaparse": "5.3.2", "paths-js": "^0.4.11", "pluralize": "^7.0.0", "popper.js": "^1.16.1", "prop-types": "^15.6.2", "react": "^18.3.1", "react-dom": "^18.3.1", "react-draggable": "4.4.5", "react-dropzone": "^11.4.2", "react-measure": "^2.5.2", "react-redux": "^8.0.5", "react-sizeme": "^2.6.12", "recompose": "npm:react-recompose@0.31.1", "redux": "^4.1.2", "redux-act": "^1.8.0", "redux-form": "^8.3.10", "redux-thunk": "2.4.1", "reselect": "^4.1.7", "shortid": "2.2.16", "tg-use-local-storage-state": "^16.0.3", "use-debounce": "^8.0.4", "validate.io-nonnegative-integer-array": "^1.0.1" };
+const devDependencies = { "biomsa": "^0.2.4", "react-markdown": "9.0.1", "remark-gfm": "^4.0.0", "to-regex-range": "5.0.1" };
 const packageJson = {
   name,
   version,
@@ -145867,12 +145966,14 @@ const packageJson = {
   type,
   repository,
   exports: exports$1,
-  dependencies
+  dependencies,
+  devDependencies
 };
 const _package = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   default: packageJson,
   dependencies,
+  devDependencies,
   exports: exports$1,
   main,
   name,
@@ -154775,14 +154876,13 @@ const _ComponentToPrint = class _ComponentToPrint extends React$1.Component {
 };
 __name(_ComponentToPrint, "ComponentToPrint");
 let ComponentToPrint = _ComponentToPrint;
-const sizeSchema = /* @__PURE__ */ __name((isProtein2) => ({
+const sizeSchema = /* @__PURE__ */ __name(() => ({
   path: "size",
   type: "number",
-  render: /* @__PURE__ */ __name((val2, _record) => {
-    const record = isProtein2 ? convertDnaCaretPositionOrRangeToAA(_record) : _record;
+  render: /* @__PURE__ */ __name((val2, record) => {
     const base1Range = convertRangeTo1Based(record);
     const hasJoinedLocations = record.locations && record.locations.length > 1;
-    return /* @__PURE__ */ React$1.createElement("span", null, isProtein2 ? Math.floor(val2 / 3) : val2, " ", /* @__PURE__ */ React$1.createElement("span", { style: { fontSize: 10 } }, hasJoinedLocations ? record.locations.map((loc, i2) => {
+    return /* @__PURE__ */ React$1.createElement("span", null, val2, " ", /* @__PURE__ */ React$1.createElement("span", { style: { fontSize: 10 } }, hasJoinedLocations ? record.locations.map((loc, i2) => {
       const base1Range2 = convertRangeTo1Based(loc);
       return /* @__PURE__ */ React$1.createElement("span", { key: i2 }, "(", base1Range2.start, "-", base1Range2.end, ")");
     }) : /* @__PURE__ */ React$1.createElement("span", null, "(", base1Range.start, "-", base1Range.end, ")")));
@@ -154792,11 +154892,7 @@ const getMemoOrfs = /* @__PURE__ */ (() => {
   let lastDeps;
   let lastResult;
   return (editorState) => {
-    const {
-      sequenceData: sequenceData2,
-      minimumOrfSize: minimumOrfSize2,
-      useAdditionalOrfStartCodons: useAdditionalOrfStartCodons2
-    } = editorState;
+    const { sequenceData: sequenceData2, minimumOrfSize: minimumOrfSize2, useAdditionalOrfStartCodons: useAdditionalOrfStartCodons2 } = editorState;
     const { sequence: sequence2, circular: circular2 } = sequenceData2;
     const deps = {
       sequence: sequence2,
@@ -160813,6 +160909,7 @@ const RemoveDuplicatesDialog = /* @__PURE__ */ __name((props) => {
   const ignoreName = useFormValue(dialogFormName, "ignoreName");
   const ignoreStartAndEnd = useFormValue(dialogFormName, "ignoreStartAndEnd");
   const ignoreStrand = useFormValue(dialogFormName, "ignoreStrand");
+  const isProteinSeq = isProtein2 || sequenceData2.isProtein;
   const recomputeDups = reactExports.useCallback(
     (values3) => {
       const ignoreName2 = values3 == null ? void 0 : values3.ignoreName;
@@ -160821,17 +160918,20 @@ const RemoveDuplicatesDialog = /* @__PURE__ */ __name((props) => {
       const annotations = sequenceData2[type2];
       const newDups = [];
       const seqsHashByStartEndStrandName = {};
-      forEach$1(annotations, (a2) => {
-        const hash2 = `${ignoreStartAndEnd2 ? "" : a2.start}&${ignoreStartAndEnd2 ? "" : a2.end}&${ignoreStrand2 ? "" : a2.strand}&${ignoreName2 ? "" : a2.name}`;
+      forEach$1(annotations, (_annotation) => {
+        const annotation = isProteinSeq ? convertDnaCaretPositionOrRangeToAA(_annotation) : _annotation;
+        const hash2 = `${ignoreStartAndEnd2 ? "" : annotation.start}&${ignoreStartAndEnd2 ? "" : annotation.end}&${ignoreStrand2 ? "" : annotation.strand}&${ignoreName2 ? "" : annotation.name}`;
         if (seqsHashByStartEndStrandName[hash2]) {
-          newDups.push(__spreadProps(__spreadValues({}, a2), { size: getRangeLength(a2, sequenceLength) }));
+          newDups.push(__spreadProps(__spreadValues({}, annotation), {
+            size: getRangeLength(annotation, sequenceLength)
+          }));
         } else {
           seqsHashByStartEndStrandName[hash2] = true;
         }
       });
       return newDups;
     },
-    [sequenceData2, sequenceLength, type2]
+    [sequenceData2, sequenceLength, type2, isProteinSeq]
   );
   const [dups, setDups] = reactExports.useState(recomputeDups);
   const selectedIds = reactExports.useMemo(() => dups.map((d2) => d2.id), [dups]);
@@ -160853,11 +160953,11 @@ const RemoveDuplicatesDialog = /* @__PURE__ */ __name((props) => {
       fields: [
         { path: "name", type: "string" },
         // ...(noType ? [] : [{ path: "type", type: "string" }]),
-        sizeSchema(isProtein2),
+        sizeSchema(),
         { path: "strand", type: "string" }
       ]
     }),
-    [isProtein2]
+    []
   );
   return /* @__PURE__ */ React$1.createElement("div", { className: classNames$1(DIALOG_BODY, "tg-min-width-dialog") }, /* @__PURE__ */ React$1.createElement(
     WrappedDT,
@@ -169496,7 +169596,7 @@ function withContentRect(types2) {
         _this$props.innerRef;
         _this$props.onResize;
         var props = _objectWithoutPropertiesLoose$5(_this$props, ["innerRef", "onResize"]);
-        return reactExports.createElement(WrappedComponent, _extends$j({}, props, {
+        return reactExports.createElement(WrappedComponent, _extends$k({}, props, {
           measureRef: this._handleRef,
           measure: this.measure,
           contentRect: this.state.contentRect
@@ -171319,14 +171419,15 @@ const genericAnnotationProperties = /* @__PURE__ */ __name(({
     const annotationPropertiesSelectedEntities = _annotationPropertiesSelectedEntities.filter((a2) => annotations[a2.id]);
     const deleteAnnotation = props[`delete${annotationTypeUpper}`];
     const annotationsToUse = React$1.useMemo(
-      () => map$3(annotations, (annotation) => {
+      () => map$3(annotations, (_annotation) => {
+        const annotation = isProtein2 ? convertDnaCaretPositionOrRangeToAA(_annotation) : _annotation;
         return __spreadProps(__spreadValues(__spreadValues({}, annotation), annotation.strand === void 0 && {
           strand: annotation.forward ? 1 : -1
         }), {
           size: getRangeLength(annotation, sequenceLength)
         });
       }),
-      [annotations, sequenceLength]
+      [annotations, sequenceLength, isProtein2]
     );
     const keyedPartTags = (_a2 = getKeyedTagsAndTagOptions(allPartTags)) != null ? _a2 : {};
     const additionalColumns = ((_c2 = (_b2 = PropertiesProps == null ? void 0 : PropertiesProps.propertiesList) == null ? void 0 : _b2.find(
@@ -171396,7 +171497,7 @@ const genericAnnotationProperties = /* @__PURE__ */ __name(({
               }, "render")
             }
           ],
-          sizeSchema(isProtein2),
+          sizeSchema(),
           ...withTags && allPartTags ? [
             {
               path: "tags",
@@ -171890,7 +171991,7 @@ const _OrfProperties = class _OrfProperties extends React$1.Component {
               displayName: "Size (aa)",
               type: "number"
             },
-            sizeSchema(this.props.isProtein),
+            sizeSchema(),
             { path: "frame", type: "number" },
             { path: "strand", type: "number" }
           ]
@@ -182810,7 +182911,7 @@ function VersionSwitcher({
   reactExports.useEffect(() => {
     (/* @__PURE__ */ __name(function fetchData() {
       return __async(this, null, function* () {
-        const res = yield __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../bio-parsers/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-CXOK-ltK.js"), true ? [] : void 0, import.meta.url), "../../bio-parsers/package.json"), "../../file-utils/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-08dWTk1g.js"), true ? [] : void 0, import.meta.url), "../../file-utils/package.json"), "../../ove/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => Promise.resolve().then(() => _package), true ? void 0 : void 0, import.meta.url), "../../ove/package.json"), "../../range-utils/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-1cRi1FH2.js"), true ? [] : void 0, import.meta.url), "../../range-utils/package.json"), "../../sequence-utils/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-D6fPAr3T.js"), true ? [] : void 0, import.meta.url), "../../sequence-utils/package.json"), "../package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-D8eyE4je.js"), true ? [] : void 0, import.meta.url), "../package.json"), "../../ui/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-BxbC5z4A.js"), true ? [] : void 0, import.meta.url), "../../ui/package.json") }), `../../${packageName}/package.json`, 4);
+        const res = yield __variableDynamicImportRuntimeHelper(/* @__PURE__ */ Object.assign({ "../../bio-parsers/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-B-kisy6l.js"), true ? [] : void 0, import.meta.url), "../../bio-parsers/package.json"), "../../file-utils/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-08dWTk1g.js"), true ? [] : void 0, import.meta.url), "../../file-utils/package.json"), "../../ove/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => Promise.resolve().then(() => _package), true ? void 0 : void 0, import.meta.url), "../../ove/package.json"), "../../range-utils/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-1cRi1FH2.js"), true ? [] : void 0, import.meta.url), "../../range-utils/package.json"), "../../sequence-utils/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-D6fPAr3T.js"), true ? [] : void 0, import.meta.url), "../../sequence-utils/package.json"), "../package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-D8eyE4je.js"), true ? [] : void 0, import.meta.url), "../package.json"), "../../ui/package.json": /* @__PURE__ */ __name(() => __vitePreload(() => import("./package-Bl_kGu9h.js"), true ? [] : void 0, import.meta.url), "../../ui/package.json") }), `../../${packageName}/package.json`, 4);
         setVersion(res.version);
         try {
           if (window.Cypress) return;
