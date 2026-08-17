@@ -12,6 +12,8 @@ export default ({
     viewportHeight: 800,
     viewportWidth: 1280,
     video: false,
+    experimentalMemoryManagement: true,
+    numTestsKeptInMemory: 0,
     pageLoadTimeout: 40000,
     e2e: {
       retries: {

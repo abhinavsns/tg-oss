@@ -1,0 +1,56 @@
+name: React 19 packages
+
+on:
+  push:
+    branches: [develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.6
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+        env:
+          CYPRESS_INSTALL_BINARY: 0
+
+      - name: Test React packages
+        run: bun test packages/ui packages/ove
+
+      - name: Build React packages
+        run: |
+          bun tools/scripts/build.mjs packages/ui
+          bun tools/scripts/build.mjs packages/ove
+
+      - name: Create installable packages
+        run: |
+          mkdir artifacts
+          npm pack ./dist/ui --pack-destination ./artifacts
+          npm pack ./dist/ove --pack-destination ./artifacts
+          cp .github/artifact-install.md artifacts/README.md
+          shasum -a 256 artifacts/*.tgz > artifacts/SHA256SUMS
+
+      - name: Upload packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: tg-oss-react19-${{ github.sha }}
+          path: artifacts
+          if-no-files-found: error
+          retention-days: 30

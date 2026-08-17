@@ -25,7 +25,7 @@ import {
   FormGroup,
   Button,
   TextArea,
-  Popover
+  PopoverNext
 } from "@blueprintjs/core";
 import { DateInput, DateRangeInput } from "@blueprintjs/datetime";
 import useDeepCompareEffect from "use-deep-compare-effect";
@@ -194,7 +194,6 @@ const AbstractInput = ({
         intent={isLabelTooltip ? "none" : error ? "danger" : "warning"}
         content={isLabelTooltip ? label : error || warning}
         position={Position.TOP}
-        modifiers={popoverOverflowModifiers}
         {...tooltipProps}
       >
         {children}
@@ -265,7 +264,7 @@ const AbstractInput = ({
         <div style={{ zIndex: 10, position: "relative", height: 0, width: 0 }}>
           <div style={{ position: "absolute", left: "0px", top: "0px" }}>
             <Tooltip
-              modifiers={popoverOverflowModifiers}
+              middleware={popoverOverflowModifiers}
               content="Allows a Default to be Set. Click to Enter Set Default Mode (or press Shift+D when outside the input field)"
             >
               <div
@@ -777,7 +776,7 @@ export const renderSelect = ({
     <div
       className={
         `${minimal && Classes.MINIMAL} ` +
-        classNames(Classes.SELECT, Classes.FILL, className)
+        classNames(Classes.HTML_SELECT, Classes.FILL, className)
       }
     >
       <select
@@ -943,10 +942,10 @@ export const renderBlueprintRadioGroup = ({
 };
 
 export const RenderReactColorPicker = ({ input, onFieldSubmit, ...rest }) => (
-  <Popover
+  <PopoverNext
     position="bottom-right"
     minimal
-    modifiers={popoverOverflowModifiers}
+    middleware={popoverOverflowModifiers}
     content={
       <SketchPicker
         className="tg-color-picker-selector"
@@ -980,7 +979,7 @@ export const RenderReactColorPicker = ({ input, onFieldSubmit, ...rest }) => (
         }}
       />
     </div>
-  </Popover>
+  </PopoverNext>
 );
 
 export function generateField(component, opts) {

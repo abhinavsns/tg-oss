@@ -4,10 +4,11 @@ describe("rowView", function () {
   });
   it("inserting bps at the end of the seq shouldn't cause the new selection to wrap the origin by default", function () {
     cy.selectRange(5299, 5299);
+    cy.get("[data-test=jumpToEndButton]").click({ force: true });
     cy.get(
       ".veRowViewSelectionLayer:not(.cutsiteLabelSelectionLayer)"
     ).rightclick();
-    cy.contains(".bp3-menu-item", "Replace").click();
+    cy.contains(".bp6-menu-item", "Replace").click();
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(0);
     cy.focused().type("agagagagag{enter}", { delay: 40 });

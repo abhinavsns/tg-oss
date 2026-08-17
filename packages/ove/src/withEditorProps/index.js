@@ -101,7 +101,7 @@ async function getSaveDialogEl() {
     });
 
     const id = setInterval(() => {
-      const componentToPrint = document.querySelector(".bp3-dialog");
+      const componentToPrint = document.querySelector(".bp6-dialog");
       if (componentToPrint) {
         clearInterval(id);
         resolve(componentToPrint);
@@ -117,7 +117,7 @@ async function getSaveDialogEl() {
 const generatePngFromPrintDialog = async props => {
   const saveDialog = await getSaveDialogEl(props);
 
-  const printArea = saveDialog.querySelector(".bp3-dialog-body");
+  const printArea = saveDialog.querySelector(".bp6-dialog-body");
 
   const result = await domtoimage
     .toBlob(printArea)
@@ -370,8 +370,12 @@ export default compose(
           options
         } = props.beforeSequenceInsertOrDelete
           ? (await props.beforeSequenceInsertOrDelete(
-              tidyUpSequenceData(_sequenceDataToInsert, { getAcceptedInsertChars: props.getAcceptedInsertChars }),
-              tidyUpSequenceData(_existingSequenceData, { getAcceptedInsertChars: props.getAcceptedInsertChars }),
+              tidyUpSequenceData(_sequenceDataToInsert, {
+                getAcceptedInsertChars: props.getAcceptedInsertChars
+              }),
+              tidyUpSequenceData(_existingSequenceData, {
+                getAcceptedInsertChars: props.getAcceptedInsertChars
+              }),
               _caretPositionOrRange,
               _options
             )) || {}
@@ -559,10 +563,11 @@ const getEditorState = createSelector(
   (state, editorName) => editorName,
   (VectorEditor, editorName) => {
     const editorState = VectorEditor[editorName];
-    editorState && (editorState.editorSize =  Object.values(VectorEditor).filter(
-    editorItem => editorItem?.sequenceData
-  ).length);
-  return editorState;
+    editorState &&
+      (editorState.editorSize = Object.values(VectorEditor).filter(
+        editorItem => editorItem?.sequenceData
+      ).length);
+    return editorState;
   }
 );
 
@@ -634,7 +639,7 @@ function mapStateToProps(state, ownProps) {
   const selectedCutsites = s.selectedCutsitesSelector(editorState);
   const allCutsites = s.cutsitesSelector(
     editorState,
-    ownProps.additionalEnzymes,
+    ownProps.additionalEnzymes
   );
 
   const { matchedSearchLayer, searchLayers, matchesTotal } =
@@ -899,7 +904,7 @@ export function getShowGCContent(state, ownProps) {
 }
 
 function jsonToJson(incomingJson, options) {
-  const {getAcceptedInsertChars} = options || {};
+  const { getAcceptedInsertChars } = options || {};
   return JSON.stringify(
     omit(
       cleanUpTeselagenJsonForExport(

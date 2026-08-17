@@ -7,14 +7,14 @@
   border-bottom-right-radius: 5px;
 }
 
-.veFindBar > .bp3-control {
+.veFindBar > .bp6-control {
   margin-bottom: 0px;
 }
 .veFindBar > * {
   width: fit-content;
 }
 
-.bp3-dark .veFindBar {
+.bp6-dark .veFindBar {
   border-radius: 5px;
   background: #30404d !important;
   border-bottom: 1px solid #202b33 !important;

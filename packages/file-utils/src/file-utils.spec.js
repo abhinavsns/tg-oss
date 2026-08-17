@@ -101,12 +101,10 @@ global.FileReaderSync = class {
 // If the 'file-utils.js' code depends on window.toastr, we need to mock it.
 // This mock prevents the 'window is not defined' error during tests.
 // You might want to enhance this mock if you need to assert toastr calls.
-global.window = {
-  toastr: {
-    warning: () => {}, // Mock the warning method
-    error: () => {}, // Mock other methods if used
-    success: () => {}
-  }
+global.window.toastr = {
+  warning: () => {}, // Mock the warning method
+  error: () => {}, // Mock other methods if used
+  success: () => {}
 };
 
 describe("parseCsvFile", () => {

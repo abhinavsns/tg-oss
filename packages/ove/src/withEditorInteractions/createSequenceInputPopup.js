@@ -1,4 +1,5 @@
-import { render, unmountComponentAtNode, findDOMNode } from "react-dom";
+import { createRoot } from "react-dom/client";
+import { flushSync } from "react-dom";
 
 import { getRangeLength } from "@teselagen/range-utils";
 // import Tether from "tether";
@@ -16,7 +17,7 @@ import { Classes } from "@blueprintjs/core";
 import { getNodeToRefocus } from "../utils/editorUtils";
 import { noop } from "lodash-es";
 
-let div;
+let activePopup;
 
 class SequenceInputNoHotkeys extends React.Component {
   state = {
@@ -37,9 +38,7 @@ class SequenceInputNoHotkeys extends React.Component {
     );
   }
   handleUnmountIfClickOustidePopup = e => {
-    const n = findDOMNode(this);
-    if (!n) return;
-    const node = n.parentNode;
+    const node = this.popupRef.current?.parentNode;
     if (!node) return;
     if (node.contains(e.target)) {
       return;
@@ -48,18 +47,13 @@ class SequenceInputNoHotkeys extends React.Component {
   };
   handleUnmount = () => {
     setTimeout(() => {
-      const n = findDOMNode(this);
-      if (!n) return;
-      const node = n.parentNode;
-      if (!node) return;
-      unmountComponentAtNode(node);
+      this.props.closePopup();
       this.props.nodeToReFocus && this.props.nodeToReFocus.focus();
-      document.getElementById("sequenceInputBubble").outerHTML = "";
     });
   };
-  handleInsert() {
+  popupRef = React.createRef();
+  handleInsert(charsToInsert = this.state.charsToInsert) {
     const { handleInsert = noop, isProtein } = this.props;
-    const { charsToInsert } = this.state;
     if (!charsToInsert.length) {
       return;
     }
@@ -131,7 +125,7 @@ class SequenceInputNoHotkeys extends React.Component {
       );
     }
     return (
-      <div className="sequenceInputBubble">
+      <div ref={this.popupRef} className="sequenceInputBubble">
         <input
           autoCorrect="off"
           onKeyDown={e => {
@@ -139,7 +133,7 @@ class SequenceInputNoHotkeys extends React.Component {
               this.handleUnmount();
             }
             if (e.keyCode === 13) {
-              this.handleInsert();
+              this.handleInsert(e.currentTarget.value);
               this.handleUnmount();
             }
           }}
@@ -154,7 +148,7 @@ class SequenceInputNoHotkeys extends React.Component {
                 ...sequenceData,
                 name: undefined,
                 getAcceptedInsertChars
-              },
+              }
             );
             if (warnings.length) {
               this.setState({
@@ -233,35 +227,44 @@ export default function createSequenceInputPopup(props) {
   // function closeInput() {
   //   sequenceInputBubble.remove();
   // }
-  if (document.getElementById("sequenceInputBubble")) {
-    // remove the old one if it exists
-    document.getElementById("sequenceInputBubble").outerHTML = "";
-  }
-  div = document.createElement("div");
+  activePopup?.close();
+  const div = document.createElement("div");
   div.style.zIndex = "400000";
   div.id = "sequenceInputBubble";
   document.body.appendChild(div);
 
-  const innerEl = (
-    <SequenceInputNoHotkeys
-      nodeToReFocus={caretEl.nodeToRefocus || getNodeToRefocus(caretEl)}
-      {...props}
-    />
-  );
-
-  render(innerEl, div);
-
   if (!caretEl) {
+    div.remove();
     return console.error(
       "there must be a caret element present in order to display the insertSequence popup"
     );
   }
 
-  new Popper(caretEl, div, {
+  const root = createRoot(div);
+  const popper = new Popper(caretEl, div, {
     placement: "bottom",
     modifiers: {
       offset: { offset: "94" }
     }
+  });
+  const popup = {
+    close() {
+      if (activePopup !== popup) return;
+      activePopup = undefined;
+      popper?.destroy();
+      root.unmount();
+      div.remove();
+    }
+  };
+  activePopup = popup;
+  flushSync(() => {
+    root.render(
+      <SequenceInputNoHotkeys
+        closePopup={popup.close}
+        nodeToReFocus={caretEl.nodeToRefocus || getNodeToRefocus(caretEl)}
+        {...props}
+      />
+    );
   });
 }
 

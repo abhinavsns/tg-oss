@@ -16,8 +16,7 @@ import {
   getOverlapsOfPotentiallyCircularRanges,
   isRangeOrPositionWithinRange,
   getMiddleOfRange,
-  getSequenceWithinRange,
-  trimRangeByAnotherRange
+  getSequenceWithinRange
 } from "@teselagen/range-utils";
 import React, { useEffect, useRef, useState } from "react";
 import Draggable from "react-draggable";
@@ -105,7 +104,6 @@ function getNearestCursorPositionToMouseEvent(
     sequenceLength,
     event,
     doNotWrapOrigin: !(sequenceData && sequenceData.circular),
-    className: event.target.parentNode.className.animVal,
     shiftHeld: event.shiftKey,
     nearestCaretPos,
     selectionStartGrabbed: event.target.parentNode.classList.contains(
@@ -768,12 +766,12 @@ export function CircularView(props) {
           zoomHelper={zoomHelper}
           smallSlider={smallSlider}
           onZoom={() => {
-            const caret =
-              caretPosition > -1
+            const hasSelection = selectionLayer.start > -1;
+            const caret = hasSelection
+              ? getMiddleOfRange(selectionLayer, sequenceLength)
+              : caretPosition > -1
                 ? caretPosition
-                : selectionLayer.start > -1
-                  ? getMiddleOfRange(selectionLayer, sequenceLength)
-                  : undefined;
+                : undefined;
             if (caret !== undefined) {
               const radToRotateTo = (caret / sequenceLength) * Math.PI * 2;
               rotateHelper.current.triggerChange &&
@@ -783,19 +781,7 @@ export function CircularView(props) {
                     rangeToShow,
                     sequenceLength
                   );
-                  if (!isInView) {
-                    if (selectionLayer.start > -1) {
-                      const trimmed = trimRangeByAnotherRange(
-                        selectionLayer,
-                        rangeToShow,
-                        sequenceLength
-                      );
-                      if (
-                        trimmed.start !== selectionLayer.start ||
-                        trimmed.end !== selectionLayer.end
-                      )
-                        return;
-                    }
+                  if (hasSelection || !isInView) {
                     changeValue((radToRotateTo / Math.PI) * 180);
                   }
                 });
@@ -808,6 +794,7 @@ export function CircularView(props) {
         />
       )}
       <Draggable
+        nodeRef={target}
         // enableUserSelectHack={false} //needed to prevent the input bubble from losing focus post user drag
         bounds={{ top: 0, left: 0, right: 0, bottom: 0 }}
         onDrag={event => {
@@ -822,9 +809,7 @@ export function CircularView(props) {
         }}
         onStop={editorDragStopped}
       >
-        <div
-          ref={withZoomCircularView && hasZoomableLength ? target : undefined}
-        >
+        <div ref={target}>
           <svg
             key="circViewSvg"
             onClick={event => {

@@ -125,7 +125,7 @@ export default ({ properties, setProperties, style }) => {
         ></div>
         <HeaderItem title="Track Properties" />
 
-        <div className="bp3-tab-panel">
+        <div className="bp6-tab-panel">
           <RowItem item={name} title="Name" />
           <RowItem item={isProtein ? proteinSize : size} title="Length" />
           <RowItem

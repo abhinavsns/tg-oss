@@ -35,7 +35,7 @@ import {
   Button,
   Menu,
   MenuItem,
-  ContextMenu,
+  showContextMenu as showBlueprintContextMenu,
   Icon,
   Intent,
   Callout,
@@ -2219,7 +2219,10 @@ const DataTable = ({
           )}
         </Menu>
       );
-      ContextMenu.show(menu, { left: e.clientX, top: e.clientY });
+      showBlueprintContextMenu({
+        content: menu,
+        targetOffset: { left: e.clientX, top: e.clientY }
+      });
     },
     [
       contextMenu,

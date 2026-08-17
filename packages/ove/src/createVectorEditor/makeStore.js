@@ -1,7 +1,7 @@
 //optionally connect to the redux store
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import VectorEditor, { vectorEditorMiddleware } from "../redux";
-import thunk from "redux-thunk";
+import { thunk } from "redux-thunk";
 import { reducer as form } from "redux-form";
 
 const makeStore = () => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@blueprintjs/core";
 import { Transition } from "react-transition-group";
 
@@ -23,6 +23,7 @@ function ScrollToTop({
   const [shouldShow, setShouldShow] = useState(
     scrollContainer.scrollTop >= showAt
   );
+  const nodeRef = useRef(null);
 
   useEffect(() => {
     const scrollListener = () => {
@@ -47,10 +48,13 @@ function ScrollToTop({
   };
 
   return (
-    <Transition in={shouldShow} timeout={duration}>
+    <Transition in={shouldShow} nodeRef={nodeRef} timeout={duration}>
       {state =>
         state === "exited" ? null : (
-          <div style={{ position: "fixed", bottom: 25, right: 25, zIndex: 10 }}>
+          <div
+            ref={nodeRef}
+            style={{ position: "fixed", bottom: 25, right: 25, zIndex: 10 }}
+          >
             <Button
               style={{
                 borderRadius: "50%",

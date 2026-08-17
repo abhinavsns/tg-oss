@@ -5,14 +5,14 @@
   --reversed: #293742;
 }
 
-body.bp3-dark {
+body.bp6-dark {
   --base1: #393a3a;
   --base2: #293742;
   --base3: #959697;
   --reversed: #cdcdcd;
 }
 
-.bp3-dark .tg-card {
+.bp6-dark .tg-card {
   background: #394b59 !important;
 }
 
@@ -20,7 +20,7 @@ body.bp3-dark {
   white-space: pre-line;
 }
 
-.bp3-dialog {
+.bp6-dialog {
   max-width: 100vw;
 }
 
@@ -61,12 +61,12 @@ h3,
 h4,
 h5,
 h6,
-h1.bp3-heading,
-h2.bp3-heading,
-h3.bp3-heading,
-h4.bp3-heading,
-h5.bp3-heading,
-h6.bp3-heading {
+h1.bp6-heading,
+h2.bp6-heading,
+h3.bp6-heading,
+h4.bp6-heading,
+h5.bp6-heading,
+h6.bp6-heading {
   color: #182026;
   font-weight: 300;
   margin: 0 0 10px;
@@ -74,44 +74,44 @@ h6.bp3-heading {
   line-height: normal;
 }
 
-.bp3-dark h1,
-.bp3-dark h2,
-.bp3-dark h3,
-.bp3-dark h4,
-.bp3-dark h5,
-.bp3-dark h6 {
+.bp6-dark h1,
+.bp6-dark h2,
+.bp6-dark h3,
+.bp6-dark h4,
+.bp6-dark h5,
+.bp6-dark h6 {
   color: #f5f8fa;
 }
-.bp3-dark textarea {
+.bp6-dark textarea {
   background: #293742;
   color: #f5f8fa;
 }
 
 /* bp3 fix https://github.com/palantir/blueprint/issues/2807 */
-.bp3-popover-wrapper {
+.bp6-popover-wrapper {
   display: inline-block;
   position: relative;
   vertical-align: top;
 }
 /* this line is necessary otherwise the line above setting "position: relative;" caused nested long bp3 submenus to not appear correctly when using the fix below */
-.bp3-submenu .bp3-popover-wrapper {
+.bp6-submenu .bp6-popover-wrapper {
   position: unset;
 }
 /* this fixes https://github.com/palantir/blueprint/issues/4791 but requires the "position: unset;" fix above */
-.bp3-submenu > * > .bp3-menu {
+.bp6-submenu > * > .bp6-menu {
   max-height: 96vh;
   overflow: auto;
 }
 
 /* bp3 fix https://github.com/palantir/blueprint/issues/2807 */
-span.bp3-popover-target {
+span.bp6-popover-target {
   display: block;
 }
 
-.bp3-portal {
+.bp6-portal {
   z-index: 100000;
 }
-.bp3-switch {
+.bp6-switch {
   width: fit-content;
   display: flex;
   align-items: center;
@@ -122,15 +122,15 @@ span.bp3-popover-target {
 }
 
 /* override the default blueprint input focus to instead rely on an inset box shadow. This resolves any issues with overflow:hidden cutting off input box shadows */
-.bp3-dark .bp3-input:focus,
-.bp3-input:focus {
+.bp6-dark .bp6-input:focus,
+.bp6-input:focus {
   box-shadow: inset 0 0 3px 1px #137cbd;
 }
 
 .notClickable {
   cursor: default !important;
 }
-.bp3-toast-container {
+.bp6-toast-container {
   z-index: 100001;
 }
 
@@ -157,7 +157,7 @@ code {
   white-space: pre-wrap;
 }
 
-.bp3-toast.no-close-button [aria-label="Close"] {
+.bp6-toast.no-close-button [aria-label="Close"] {
   display: none;
 }
 
@@ -186,11 +186,11 @@ code {
 [data-tippy-root] .tippy-box[data-theme~="teselagen"] .tippy-arrow {
   color: #394b59;
 }
-.bp3-dark [data-tippy-root] .tippy-box[data-theme~="teselagen"] {
+.bp6-dark [data-tippy-root] .tippy-box[data-theme~="teselagen"] {
   background-color: #e1e8ed;
   color: #394b59;
 }
-.bp3-dark [data-tippy-root] .tippy-box[data-theme~="teselagen"] .tippy-arrow {
+.bp6-dark [data-tippy-root] .tippy-box[data-theme~="teselagen"] .tippy-arrow {
   /* background-color: #e1e8ed; */
   color: #e1e8ed;
 }
@@ -214,7 +214,7 @@ code {
 }
 
 /* make AnchorButton match Button */
-.bp3-button {
+.bp6-button {
   font-family: Arial;
 }
 
@@ -225,19 +225,19 @@ button {
 button:not(:disabled):active {
   transform: translateY(1px);
 }
-.bp3-tabs.bp3-vertical > .bp3-tab-panel {
+.bp6-tabs.bp6-vertical > .bp6-tab-panel {
   min-width: 0px;
 }
-.bp3-toast[class*="bp3-intent-"] .bp3-button.tg-clear-all-toasts {
+.bp6-toast[class*="bp6-intent-"] .bp6-button.tg-clear-all-toasts {
   border: 1px solid white !important;
 }
-.bp3-toast[class*="bp3-intent-"] .bp3-button.tg-clear-all-toasts:hover {
+.bp6-toast[class*="bp6-intent-"] .bp6-button.tg-clear-all-toasts:hover {
   /* background: blue !important; */
   /* background: unset !important; */
   background-color: #137cbd !important;
 }
 
-/* .bp3-toast .tg-clear-all-toasts {
+/* .bp6-toast .tg-clear-all-toasts {
   background: unset !important;
   color: unset !important;
   padding: unset !important;
@@ -250,20 +250,20 @@ button:not(:disabled):active {
   cursor: pointer !important;
 } */
 
-.bp3-dialog-header .bp3-heading {
+.bp6-dialog-header .bp6-heading {
   width: 10px; /* tnw: this is a hack to prevent the dialog title from causing the dialog width to expand larger than the dialog content*/
 }
 
 /* to fix tooltip styling issue - https://github.com/palantir/blueprint/issues/3430 */
-.bp3-popover[style*="transform-origin"][style*="bottom"] .bp3-popover-arrow {
+.bp6-popover[style*="transform-origin"][style*="bottom"] .bp6-popover-arrow {
   transform: translate(0, -0.5px);
 }
-.bp3-popover[style*="transform-origin"][style*="left"] .bp3-popover-arrow {
+.bp6-popover[style*="transform-origin"][style*="left"] .bp6-popover-arrow {
   transform: translate(0.5px, 0);
 }
-.bp3-popover[style*="transform-origin"][style*="top"] .bp3-popover-arrow {
+.bp6-popover[style*="transform-origin"][style*="top"] .bp6-popover-arrow {
   transform: translate(0, 0.5px);
 }
-.bp3-popover[style*="transform-origin"][style*="right"] .bp3-popover-arrow {
+.bp6-popover[style*="transform-origin"][style*="right"] .bp6-popover-arrow {
   transform: translate(-0.5px, 0);
 }

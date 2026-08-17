@@ -21,6 +21,8 @@ export const editorDragged = function ({
   selectionLayer = { start: -1, end: -1 },
   sequenceLength
 }) {
+  document?.body.classList.add("sequenceDragging");
+  window.__veDragging = true;
   if (easyStore && easyStore.selectionLayer) {
     caretPosition = easyStore.caretPosition;
     selectionLayer = easyStore.selectionLayer;
@@ -82,9 +84,6 @@ export const editorClicked = function ({
 };
 
 export const editorDragStarted = function (opts) {
-  document?.body.classList.add("sequenceDragging"); //needed to prevent the input bubble from losing focus post user drag
-  window.__veDragging = true;
-
   caretPositionOnDragStart = opts.nearestCaretPos; //bump the drag counter
   selectionStartOrEndGrabbed = opts.selectionStartGrabbed
     ? "start"

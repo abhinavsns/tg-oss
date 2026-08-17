@@ -2,6 +2,12 @@ import "cypress-real-events";
 import { isString } from "lodash-es";
 import toRegexRange from "to-regex-range";
 import { insertSequenceDataAtPositionOrRange } from "@teselagen/sequence-utils";
+
+Cypress.on("uncaught:exception", error => {
+  if (/ResizeObserver loop (limit exceeded|completed)/.test(error.message)) {
+    return false;
+  }
+});
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -120,17 +126,99 @@ Cypress.Commands.add("dragBetween", (dragSelector, dropSelector) => {
 
 Cypress.Commands.add("dragBetweenSimple", (dragSelector, dropSelector) => {
   const getOrWrap = selector =>
-    isString(selector)
-      ? cy.get(selector).then(el => {
-          return el.first();
+    isString(selector) ? cy.get(selector).first() : cy.wrap(selector);
+
+  return getOrWrap(dragSelector).then(dragElement => {
+    return getOrWrap(dropSelector).then(dropElement => {
+      const [startX, startY] = getCenter(dragElement.get(0));
+      const source = dragElement.get(0);
+      const target = dropElement.get(0);
+      const [targetCenterX, endY] = getCenter(target);
+      const endX =
+        source.classList.contains("veSelectionLayerStart") &&
+        target.matches("[data-tick-mark]")
+          ? target.getBoundingClientRect().left
+          : targetCenterX;
+      const MouseEvent = source.ownerDocument.defaultView.MouseEvent;
+      const nextFrame = () =>
+        new Cypress.Promise(resolve =>
+          source.ownerDocument.defaultView.requestAnimationFrame(resolve)
+        );
+      const dispatch = (element, type, options) =>
+        element.dispatchEvent(
+          new MouseEvent(type, {
+            bubbles: true,
+            cancelable: true,
+            ...options
+          })
+        );
+
+      return cy
+        .then(() => {
+          dispatch(source, "mousedown", {
+            button: 0,
+            buttons: 1,
+            clientX: startX,
+            clientY: startY
+          });
         })
-      : cy.wrap(selector);
-  getOrWrap(dragSelector)
-    .trigger("mousedown", { force: true })
-    .trigger("mousemove", 10, 10, { force: true });
-  getOrWrap(dropSelector)
-    .trigger("mousemove", { force: true })
-    .trigger("mouseup", { force: true });
+        .then(nextFrame)
+        .then(() => {
+          dispatch(target, "mousemove", {
+            button: 0,
+            buttons: 1,
+            clientX: endX,
+            clientY: endY
+          });
+        })
+        .then(nextFrame)
+        .then(() => {
+          dispatch(target, "mousemove", {
+            button: 0,
+            buttons: 1,
+            clientX: endX,
+            clientY: endY
+          });
+        })
+        .then(nextFrame)
+        .then(() => {
+          dispatch(source.ownerDocument, "mouseup", {
+            button: 0,
+            buttons: 0,
+            clientX: endX,
+            clientY: endY
+          });
+        });
+    });
+  });
+});
+
+Cypress.Commands.add("setSliderToMax", sliderSelector => {
+  cy.get(`${sliderSelector} .bp6-slider`).then($slider => {
+    const { right, top, height } = $slider[0].getBoundingClientRect();
+    const clientY = top + height / 2;
+    cy.wrap($slider).trigger("mousedown", {
+      button: 0,
+      buttons: 1,
+      clientX: right,
+      clientY,
+      force: true
+    });
+    cy.document().trigger("mouseup", {
+      button: 0,
+      buttons: 0,
+      clientX: right,
+      clientY,
+      force: true
+    });
+  });
+  cy.get(`${sliderSelector} .bp6-slider-handle`).should($handle => {
+    const min = Number($handle.attr("aria-valuemin"));
+    const max = Number($handle.attr("aria-valuemax"));
+    expect(Number($handle.attr("aria-valuenow"))).to.be.greaterThan(
+      max - (max - min) * 0.02
+    );
+  });
 });
 
 Cypress.Commands.add("tgToggle", (type, onOrOff = true) => {
@@ -306,48 +394,46 @@ Cypress.Commands.add("scrollAlignmentToPercent", percent => {
   window.Cypress.scrollAlignmentToPercent(percent);
 });
 Cypress.Commands.add("closeDialog", () => {
-  cy.get(`.bp3-dialog [aria-label="Close"]`).click();
+  cy.get(`.bp6-dialog [aria-label="Close"]`).click();
 });
 Cypress.Commands.add("replaceSelection", sequenceString => {
-  cy.get(".veRowViewSelectionLayer")
+  cy.get(
+    ".veRowViewSelectionLayer.notCaret:not(.cutsiteLabelSelectionLayer):not(.veSearchLayer)"
+  )
     .first()
-    .trigger("contextmenu", { force: true });
-  cy.contains(".bp3-menu-item", "Replace").click();
+    .rightclick({ force: true });
+  cy.contains(".bp6-menu-item", "Replace").click();
   // eslint-disable-next-line cypress/no-unnecessary-waiting
   cy.wait(200);
-  cy.contains(".bp3-menu-item", "Replace").should("not.exist");
+  cy.contains(".bp6-menu-item", "Replace").should("not.exist");
   cy.get(".sequenceInputBubble input").type(
     (Cypress.config("isInteractive") ? "" : "            ") +
       `${sequenceString}{enter}`
   );
 });
 Cypress.Commands.add("deleteSelection", () => {
-  cy.get(
-    ".veRowViewSelectionLayer.notCaret:not(.cutsiteLabelSelectionLayer):not(.veSearchLayer)"
-  )
-    .first()
-    .trigger("contextmenu", { force: true });
-  cy.contains(".bp3-menu-item", "Cut").click();
+  cy.contains(".tg-menu-bar button", "Edit").click();
+  cy.contains(".tg-menu-bar-popover .bp6-menu-item", "Cut").realClick();
 });
 
 Cypress.Commands.add("waitForDialogClose", ({ timeout } = {}) => {
-  cy.get(".bp3-dialog", {
+  cy.get(".bp6-dialog", {
     timeout: timeout || 40000
   }).should("not.exist");
 });
 
 Cypress.Commands.add("waitForMenuClose", ({ timeout } = {}) => {
-  cy.get(".bp3-menu", {
+  cy.get(".bp6-menu", {
     timeout: timeout || 40000
   }).should("not.exist");
 });
 
 Cypress.Commands.add("closeDialog", ({ timeout } = {}) => {
-  cy.get(".bp3-dialog-close-button").click();
+  cy.get(".bp6-dialog-close-button").click();
   cy.waitForDialogClose({ timeout: timeout || 40000 });
 });
 Cypress.Commands.add("hideMenu", () => {
-  cy.get(".bp3-popover").invoke("hide");
+  cy.get(".bp6-popover").invoke("hide");
 });
 
 Cypress.Commands.add("closeToasts", () => {

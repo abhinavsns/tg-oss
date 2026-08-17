@@ -857,12 +857,6 @@ export const useColumns = ({
               minimal
               small
               style={{ padding: 2 }}
-              popoverProps={{
-                modifiers: {
-                  preventOverflow: { enabled: false },
-                  hide: { enabled: false }
-                }
-              }}
               onClick={() => {
                 showCollapseAll
                   ? setExpandedEntityIdMap({})

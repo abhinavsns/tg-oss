@@ -5,7 +5,7 @@ import {
   Intent,
   Menu,
   MenuItem,
-  Popover,
+  PopoverNext,
   Position,
   Tag
 } from "@blueprintjs/core";
@@ -150,22 +150,17 @@ export function FindMismatches(props) {
   return (
     <div className="veDiffNavigator">
       {/* Filter dropdown — single button replacing 5 filter chips */}
-      <Popover
-        minimal
-        position={Position.BOTTOM_LEFT}
-        content={filterMenu}
-        target={
-          <Button
-            minimal
-            data-tip="Filter Difference Type"
-            small
-            rightIcon="caret-down"
-            className="veDiffFilter-trigger"
-          >
-            {activeLabel}
-          </Button>
-        }
-      />
+      <PopoverNext minimal position={Position.BOTTOM_LEFT} content={filterMenu}>
+        <Button
+          minimal
+          data-tip="Filter Difference Type"
+          small
+          rightIcon="caret-down"
+          className="veDiffFilter-trigger"
+        >
+          {activeLabel}
+        </Button>
+      </PopoverNext>
 
       {/* Navigation control */}
       {noDifferences ? (

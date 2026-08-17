@@ -2,55 +2,82 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 // test-setup.js
 import { JSDOM } from "jsdom";
-import { beforeEach, afterEach } from "bun:test";
+import { afterEach } from "bun:test";
+import { cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom"; // Import for custom matchers
 
-// Declare jsdom and related globals at a higher scope
-// so they can be reassigned in beforeEach and cleaned in afterEach
-let jsdomInstance;
-let window;
-let document;
+const jsdomInstance = new JSDOM("<!DOCTYPE html><html><body></body></html>", {
+  pretendToBeVisual: true,
+  url: "http://localhost/"
+});
 
-beforeEach(() => {
-  // Create a *new* JSDOM instance before each test
-  jsdomInstance = new JSDOM("<!DOCTYPE html><html><body></body></html>", {
-    url: "http://localhost/"
-  });
+Object.assign(global, {
+  window: jsdomInstance.window,
+  document: jsdomInstance.window.document,
+  navigator: jsdomInstance.window.navigator,
+  Node: jsdomInstance.window.Node,
+  Element: jsdomInstance.window.Element,
+  HTMLElement: jsdomInstance.window.HTMLElement,
+  SVGElement: jsdomInstance.window.SVGElement,
+  customElements: jsdomInstance.window.customElements,
+  DocumentFragment: jsdomInstance.window.DocumentFragment,
+  Event: jsdomInstance.window.Event,
+  CustomEvent: jsdomInstance.window.CustomEvent,
+  KeyboardEvent: jsdomInstance.window.KeyboardEvent,
+  MouseEvent: jsdomInstance.window.MouseEvent,
+  localStorage: jsdomInstance.window.localStorage,
+  sessionStorage: jsdomInstance.window.sessionStorage,
+  alert: jsdomInstance.window.alert,
+  confirm: jsdomInstance.window.confirm,
+  getComputedStyle: jsdomInstance.window.getComputedStyle,
+  IS_REACT_ACT_ENVIRONMENT: true
+});
 
-  // Expose JSDOM globals to the global scope for the current test
-  window = jsdomInstance.window;
-  document = jsdomInstance.window.document;
-
-  global.window = window;
-  global.document = document;
-  global.navigator = jsdomInstance.window.navigator;
-  global.HTMLElement = jsdomInstance.window.HTMLElement;
-  global.customElements = jsdomInstance.window.customElements;
-  global.DocumentFragment = jsdomInstance.window.DocumentFragment;
-  global.KeyboardEvent = jsdomInstance.window.KeyboardEvent;
-  global.MouseEvent = jsdomInstance.window.MouseEvent;
-
-  // Add other common globals you might need
-  global.localStorage = jsdomInstance.window.localStorage;
-  global.sessionStorage = jsdomInstance.window.sessionStorage;
-  global.alert = jsdomInstance.window.alert;
-  global.confirm = jsdomInstance.window.confirm;
-
-  // Mock necessary browser APIs if JSDOM doesn't fully implement them
-  if (typeof global.IntersectionObserver === "undefined") {
-    global.IntersectionObserver = class IntersectionObserver {
-      constructor() {}
-      disconnect() {}
-      observe() {}
-      unobserve() {}
-    };
+for (const property of Object.getOwnPropertyNames(window)) {
+  if (!(property in global)) {
+    Object.defineProperty(
+      global,
+      property,
+      Object.getOwnPropertyDescriptor(window, property)
+    );
   }
+}
+
+global.IntersectionObserver ??= class IntersectionObserver {
+  disconnect() {}
+  observe() {}
+  unobserve() {}
+};
+
+global.ResizeObserver ??= class ResizeObserver {
+  disconnect() {}
+  observe() {}
+  unobserve() {}
+};
+
+window.matchMedia ??= () => ({
+  addEventListener() {},
+  addListener() {},
+  matches: false,
+  removeEventListener() {},
+  removeListener() {}
+});
+
+window.toastr = {
+  error() {},
+  info() {},
+  success() {},
+  warning() {}
+};
+
+Object.defineProperties(HTMLElement.prototype, {
+  offsetHeight: { configurable: true, get: () => 600 },
+  offsetWidth: { configurable: true, get: () => 800 }
 });
 
 afterEach(() => {
-  // Clean up the JSDOM instance after each test
-  jsdomInstance.window.close(); // Close the window to release resources
-  // Optionally clear global references, though a new instance in beforeEach often suffices
-  global.window = undefined;
-  global.document = undefined;
+  cleanup();
+  document.body.replaceChildren();
+  localStorage.clear();
+  sessionStorage.clear();
 });

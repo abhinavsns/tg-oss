@@ -9,10 +9,7 @@ describe("zoomLinearView.spec", function () {
     cy.get(".S").should("not.exist");
     cy.get(".cutsiteLabelSelectionLayer").should("not.exist");
 
-    cy.dragBetween(
-      ".veZoomLinearSlider .bp3-slider-handle",
-      ".veZoomLinearSlider .bp3-icon-plus"
-    );
+    cy.setSliderToMax(".veZoomLinearSlider");
     cy.get(".ve-monospace-font").contains("gacgt").should("exist");
     cy.get(".S").should("exist");
     cy.get(".cutsiteLabelSelectionLayer").should("exist");
@@ -54,7 +51,7 @@ describe("zoomLinearView.spec", function () {
       "not.be.visible"
     );
 
-    cy.get(".veZoomLinearSlider .bp3-icon-minus").click();
+    cy.get(".veZoomLinearSlider .bp6-icon-minus").click();
     cy.get(".veRowViewFeature:contains(dbl term):first").should("be.visible");
   });
   it(
@@ -65,6 +62,6 @@ describe("zoomLinearView.spec", function () {
 
 function pressZoom(times) {
   for (let i = 0; i < times; i++) {
-    cy.get(".veZoomLinearSlider .bp3-icon-plus").click();
+    cy.get(".veZoomLinearSlider .bp6-icon-plus").click();
   }
 }

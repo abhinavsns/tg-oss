@@ -1,7 +1,7 @@
 import { connectToEditor } from "../withEditorProps";
 // import download from 'in-browser-download'
 import {
-  Popover,
+  PopoverNext,
   Position,
   Tooltip,
   Icon as BpIcon,
@@ -157,7 +157,7 @@ class ToolbarItem extends React.Component {
       <div style={{ display: "flex", alignItems: "center" }}>
         {index !== 0 && <div className="veToolbarSpacer" />}
 
-        <Popover
+        <PopoverNext
           disabled={popoverDisabled}
           isOpen={!!Dropdown && isOpen}
           onClose={e => {
@@ -179,9 +179,10 @@ class ToolbarItem extends React.Component {
           canEscapeKeyClose
           minimal
           position={Position.BOTTOM}
-          target={target}
           content={content}
-        />
+        >
+          {target}
+        </PopoverNext>
       </div>
     );
   }

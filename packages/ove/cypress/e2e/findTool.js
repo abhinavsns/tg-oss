@@ -9,8 +9,11 @@ describe("find tool", function () {
     cy.get(".veRowViewSelectionLayer.veSearchLayerActive").should("not.exist");
     cy.get(`[data-test="veFindBarOptionsToggle"]`).click();
     cy.get(`.tg-mismatches-allowed-input input`).type("1");
-    cy.get(".veRowViewSelectionLayer.veSearchLayerActive").should("exist");
-    cy.contains("1").should("exist");
+    cy.window({ log: false }).should(win => {
+      expect(win.document.querySelector(".veFindBar").textContent).to.include(
+        "1/1"
+      );
+    });
   });
   it(`the find tool shouldn't get stuck in a weird state where the match number is greater than the number of matches`, () => {
     cy.get(`[data-test="ve-find-tool-toggle"]`).click();
@@ -54,7 +57,7 @@ describe("find tool", function () {
     cy.get(`[data-test="ve-find-tool-toggle"]`).click();
     cy.focused().type("gataca", { delay: 1 }); //this should cause 1 region to be selected
     cy.get(`[data-test="veFindBarOptionsToggle"]`).click();
-    cy.contains(".ve-find-options-popover .bp3-switch", "Expanded").click();
+    cy.contains(".ve-find-options-popover .bp6-switch", "Expanded").click();
     cy.get(".veFindBar textarea").should("have.value", "gataca");
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(0);
@@ -95,12 +98,12 @@ describe("find tool", function () {
     cy.get(".veSearchLayer.veRowViewSelectionLayer")
       .should("be.visible")
       .rightclick(); //click the search layer
-    cy.contains(".bp3-menu-item", "Create").click();
-    cy.contains(".bp3-menu-item", "New Feature").click({ force: true });
-    cy.contains(".bp3-radio", "Positive")
+    cy.contains(".bp6-menu-item", "Create").click();
+    cy.contains(".bp6-menu-item", "New Feature").click({ force: true });
+    cy.contains(".bp6-radio", "Positive")
       .find("input")
       .should("not.be.checked");
-    cy.contains(".bp3-radio", "Negative").find("input").should("be.checked");
+    cy.contains(".bp6-radio", "Negative").find("input").should("be.checked");
   });
   it(`reverse strand matches should cause annotations created from click and then subsequent create to be in reverse direction`, () => {
     cy.get(`[data-test="ve-find-tool-toggle"]`).click();
@@ -109,16 +112,16 @@ describe("find tool", function () {
       .should("be.visible")
       .click(); //click the search layer
     cy.triggerFileCmd("New Primer");
-    cy.contains(".bp3-radio", "Positive")
+    cy.contains(".bp6-radio", "Positive")
       .find("input")
       .should("not.be.checked");
-    cy.contains(".bp3-radio", "Negative").find("input").should("be.checked");
+    cy.contains(".bp6-radio", "Negative").find("input").should("be.checked");
   });
   it(`clear search layers when closed and retain the previous search and be selected when re-opened`, () => {
     cy.get(`[data-test="ve-find-tool-toggle"]`).click();
     cy.focused().type("gattac", { noPrevValue: true }); //this should cause 1 region to be selected
     cy.get(".veSearchLayerContainer").should("exist");
-    cy.get(".veFindBar .bp3-icon-small-cross").click();
+    cy.get(".veFindBar .bp6-icon-small-cross").click();
     cy.get(".veSearchLayerContainer").should("not.exist");
     cy.get(`[data-test="ve-find-tool-toggle"]`).click();
     cy.get(".veSearchLayerContainer").should("exist"); //test that the search didn't get cleared
@@ -137,13 +140,17 @@ describe("find tool", function () {
     cy.get(".veFindBar").contains("0/0");
     cy.get(".veFindBar").contains("1/1").should("not.exist");
     cy.focused().type("gattac");
+    cy.tick(100);
     cy.get(".veFindBar").contains("1/1");
     cy.focused().type("c");
+    cy.tick(100);
     cy.get(".veFindBar").contains("0/0");
     cy.get(`[data-test="veFindBarOptionsToggle"]`).click();
     cy.get(".ve-find-options-popover").contains("Highlight All").click();
+    cy.get(`[data-test="veFindBarOptionsToggle"]`).click();
 
     cy.get(".veFindBar input").clear().type("gat");
+    cy.tick(100);
     cy.get(".selectionLayerCaret").should("have.length.greaterThan", 100);
     cy.get(`[data-test="veFindBarOptionsToggle"]`).click();
     cy.get(`.ve-find-options-popover [type="checkbox"]`).should("be.checked");
@@ -184,11 +191,4 @@ describe("find tool", function () {
       "not.exist"
     );
   });
-});
-
-Cypress.on("uncaught:exception", (err, runnable) => {
-  // returning false here prevents Cypress from
-  // failing the test
-  console.warn("err, runnable:", err, runnable);
-  return false;
 });

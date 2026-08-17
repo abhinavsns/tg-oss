@@ -7,7 +7,7 @@ import {
   useTableEntities
 } from "@teselagen/ui";
 import { compose } from "redux";
-import { Button, Classes, Popover } from "@blueprintjs/core";
+import { Button, Classes, PopoverNext } from "@blueprintjs/core";
 import classNames from "classnames";
 import withEditorProps from "../../withEditorProps";
 import { forEach, camelCase, startCase } from "lodash-es";
@@ -121,8 +121,7 @@ const RemoveDuplicatesDialog = props => {
           justifyContent: "space-between"
         }}
       >
-        <Popover
-          target={<Button icon="settings" />}
+        <PopoverNext
           content={
             <div style={{ padding: 20, maxWidth: 250 }}>
               <div>Ignore These Fields While Finding Duplicates:</div>
@@ -155,7 +154,9 @@ const RemoveDuplicatesDialog = props => {
               />
             </div>
           }
-        />
+        >
+          <Button icon="settings" />
+        </PopoverNext>
 
         <Button
           intent="primary"

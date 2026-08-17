@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { Provider } from "react-redux";
 import makeStore from "./makeStore";
-import { render, unmountComponentAtNode } from "react-dom";
+import { createRoot } from "react-dom/client";
 
 import Editor from "../Editor";
 import updateEditor from "../updateEditor";
 import addAlignment from "../addAlignment";
 import AlignmentView from "../AlignmentView";
-import sizeMe from "react-sizeme";
 import VersionHistoryView from "../VersionHistoryView";
 
 let store;
@@ -24,15 +23,27 @@ function StandaloneEditor(props) {
 }
 
 function StandaloneAlignment(props) {
+  const containerRef = useRef(null);
+  const [width, setWidth] = useState(0);
+
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    const updateWidth = () => setWidth(container.getBoundingClientRect().width);
+    updateWidth();
+    const observer = new ResizeObserver(updateWidth);
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
   if (!store) {
     store = makeStore();
   }
   return (
-    <Provider store={store}>
-      <AlignmentView
-        {...{ ...props, dimensions: { width: props.size.width } }}
-      />
-    </Provider>
+    <div ref={containerRef} style={{ width: "100%" }}>
+      <Provider store={store}>
+        <AlignmentView {...{ ...props, dimensions: { width } }} />
+      </Provider>
+    </div>
   );
 }
 
@@ -63,13 +74,11 @@ export default function createVectorEditor(
   } else {
     node = _node;
   }
-  const editor = {};
-  editor.renderResponse = render(
-    <StandaloneEditor {...{ editorName, ...rest }} />,
-    node
-  );
+  const root = createRoot(node);
+  const editor = { renderResponse: root };
+  root.render(<StandaloneEditor {...{ editorName, ...rest }} />);
   editor.close = () => {
-    unmountComponentAtNode(node);
+    root.unmount();
     node.remove();
   };
   editor.updateEditor = values => {
@@ -92,11 +101,10 @@ export function createVersionHistoryView(
   if (!store) {
     store = makeStore();
   }
-  const editor = {};
-  editor.renderResponse = render(
-    <StandaloneVersionHistoryView {...{ editorName, ...rest }} />,
-    node
-  );
+  const root = createRoot(node);
+  const editor = { renderResponse: root };
+  root.render(<StandaloneVersionHistoryView {...{ editorName, ...rest }} />);
+  editor.close = () => root.unmount();
 
   editor.updateEditor = values => {
     updateEditor(store, editorName, values);
@@ -108,13 +116,14 @@ export function createVersionHistoryView(
   return editor;
 }
 
-const SizedStandaloneAlignment = sizeMe()(StandaloneAlignment);
 export function createAlignmentView(node, props = {}) {
   if (!store) {
     store = makeStore();
   }
-  const editor = {};
-  editor.renderResponse = render(<SizedStandaloneAlignment {...props} />, node);
+  const root = createRoot(node);
+  const editor = { renderResponse: root };
+  root.render(<StandaloneAlignment {...props} />);
+  editor.close = () => root.unmount();
 
   editor.updateAlignment = values => {
     addAlignment(store, values);

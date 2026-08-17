@@ -10,7 +10,7 @@ const TgHTMLSelect = ({ disabled, ...rest }) => {
   if (disabled) {
     const opt = rest.options.find(o => o.value === rest.value);
     return (
-      <div {...rest} className={classNames("bp3-html-select", rest.className)}>
+      <div {...rest} className={classNames("bp6-html-select", rest.className)}>
         {opt.label}
       </div>
     );

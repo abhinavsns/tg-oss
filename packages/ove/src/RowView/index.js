@@ -32,6 +32,8 @@ const rowJumpButtonStyle = {
 
 const bounds = { top: 0, left: 0, right: 0, bottom: 0 };
 class _RowView extends React.Component {
+  nodeRef = React.createRef();
+
   static defaultProps = {
     sequenceData: { sequence: "" },
     selectionLayer: {},
@@ -469,13 +471,17 @@ class _RowView extends React.Component {
     // const shouldClear = this.shouldClearCache();
     return (
       <Draggable
+        nodeRef={this.nodeRef}
         bounds={bounds}
         onDrag={this.onDrag}
         onStart={this.onStart}
         onStop={this.onStop}
       >
         <div
-          ref={this.getRef}
+          ref={node => {
+            this.nodeRef.current = node;
+            this.getRef(node);
+          }}
           className={classnames("veRowView", className)}
           style={{
             overflowY: "auto",

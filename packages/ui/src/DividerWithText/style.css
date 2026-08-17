@@ -3,7 +3,7 @@
 }
 
 /* Override Blueprint's default divider when we use text */
-.tg-blueprint-divider-with-text.bp3-divider {
+.tg-blueprint-divider-with-text.bp6-divider {
   /* Remove Blueprint's default border styling to avoid duplication */
   border: none;
   display: flex;
@@ -27,11 +27,11 @@
 }
 
 /* Dark theme support */
-.bp3-dark .tg-blueprint-divider-with-text::before,
-.bp3-dark .tg-blueprint-divider-with-text::after {
+.bp6-dark .tg-blueprint-divider-with-text::before,
+.bp6-dark .tg-blueprint-divider-with-text::after {
   border-bottom-color: rgba(255, 255, 255, 0.15);
 }
 
-.bp3-dark .tg-blueprint-divider-text {
+.bp6-dark .tg-blueprint-divider-text {
   color: rgba(167, 182, 194, 0.6);
 }

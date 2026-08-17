@@ -27,6 +27,12 @@
 import "cypress-real-events";
 const { isString } = require("lodash-es");
 
+Cypress.on("uncaught:exception", error => {
+  if (/ResizeObserver loop (limit exceeded|completed)/.test(error.message)) {
+    return false;
+  }
+});
+
 Cypress.Commands.add("tgToggle", (type, onOrOff = true) => {
   return cy
     .get(`[data-test="${type}"]`)
@@ -173,7 +179,7 @@ function dropFile({
     .then(() => {
       if (!noFileList) {
         cy.get(
-          `.bp3-form-group:has(${selector}) .tg-upload-file-list-item`
+          `.bp6-form-group:has(${selector}) .tg-upload-file-list-item`
         ).should("exist");
         cy.get(".tg-spin").should("not.exist");
       }

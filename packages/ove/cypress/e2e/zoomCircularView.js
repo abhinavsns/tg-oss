@@ -21,10 +21,7 @@ describe("zoomCircularView.spec", function () {
     cy.get(
       `.veLabels .veLabelText:contains(CmR I'm a real long label)`
     ).click();
-    cy.dragBetween(
-      ".veZoomCircularSlider .bp3-slider-handle",
-      ".veZoomCircularSlider .bp3-icon-plus"
-    );
+    cy.setSliderToMax(".veZoomCircularSlider");
     cy.get(`.veLabels .veLabelText:contains(CmR I'm a real long label)`).should(
       "not.exist"
     );
@@ -39,10 +36,7 @@ describe("zoomCircularView.spec", function () {
       "not.exist"
     );
     //rotate to the end of the sequence
-    cy.dragBetween(
-      ".veRotateCircularSlider .bp3-slider-handle",
-      ".veRotateCircularSlider .bp3-icon-arrow-right"
-    );
+    cy.setSliderToMax(".veRotateCircularSlider");
     //new stuff should come in/out of view
     cy.get(".veCircularViewDnaSequence").should("exist");
     cy.get(".ve-dna-letter-5300:contains(a):contains(t)").should("exist");
@@ -61,15 +55,12 @@ describe("zoomCircularView.spec", function () {
       "not.exist"
     );
     cy.dragBetween(
-      ".veRotateCircularSlider .bp3-slider-handle",
+      ".veRotateCircularSlider .bp6-slider-handle",
       ".veTabCircularMap"
     );
-    cy.get(`.circularViewSvg g[style="transform: rotate(255deg);"]`);
+    cy.get('.circularViewSvg g[style="transform: rotate(255deg);"]');
     cy.get(`.veCircularViewLabelText:contains(pBAD promoter)`);
-    cy.dragBetween(
-      ".veZoomCircularSlider .bp3-slider-handle",
-      ".veZoomCircularSlider .bp3-icon-plus"
-    );
+    cy.setSliderToMax(".veZoomCircularSlider");
     //after zoom in make sure we're not rotated back to the start of the sequence
     cy.get(`.veCircularViewFeature:contains(GFPuv)`).should("exist");
     cy.get(`.veAnnotations-part .veLabelText:contains(Part 0)`).should(
@@ -80,10 +71,7 @@ describe("zoomCircularView.spec", function () {
   it(`zoom level and rotation should be preserved even when the circular view is hidden and re-shown`, () => {
     //zoom all the way in
     cy.visit("");
-    cy.dragBetween(
-      ".veZoomCircularSlider .bp3-slider-handle",
-      ".veZoomCircularSlider .bp3-icon-plus"
-    );
+    cy.setSliderToMax(".veZoomCircularSlider");
     cy.get(".veCircularViewDnaSequence").should("exist");
     cy.get(".veTabLinearMap").click();
     cy.get(".veCircularViewDnaSequence").should("not.exist");
@@ -123,7 +111,7 @@ describe("zoomCircularView.spec", function () {
   //     "not.be.visible"
   //   );
 
-  //   cy.get(".tg-zoom-bar .bp3-icon-minus").click();
+  //   cy.get(".tg-zoom-bar .bp6-icon-minus").click();
   //   cy.get(".veRowViewFeature:contains(dbl term):first").should("be.visible");
   // });
 });

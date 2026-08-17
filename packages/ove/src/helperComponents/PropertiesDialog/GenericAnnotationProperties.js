@@ -23,7 +23,7 @@ import {
 } from "@blueprintjs/core";
 import { getRangeLength } from "@teselagen/range-utils";
 import pluralize from "pluralize";
-// import { Popover } from "@blueprintjs/core";
+// import { PopoverNext } from "@blueprintjs/core";
 // import ColorPicker from "./ColorPicker";
 import { connectToEditor } from "../../withEditorProps";
 import { compose } from "recompose";
@@ -248,7 +248,7 @@ const genericAnnotationProperties = ({
               <ButtonGroup style={{ marginTop: 3, marginRight: 4 }}>
                 <Tooltip
                   position="top"
-                  modifiers={popoverOverflowModifiers}
+                  middleware={popoverOverflowModifiers}
                   content="New"
                 >
                   <AnchorButton
@@ -270,7 +270,7 @@ const genericAnnotationProperties = ({
                 </Tooltip>
                 <Tooltip
                   position="top"
-                  modifiers={popoverOverflowModifiers}
+                  middleware={popoverOverflowModifiers}
                   content="Edit"
                 >
                   <AnchorButton
@@ -309,7 +309,7 @@ const genericAnnotationProperties = ({
                 {additionalFooterEls && additionalFooterEls(props)}
                 <Tooltip
                   position="top"
-                  modifiers={popoverOverflowModifiers}
+                  middleware={popoverOverflowModifiers}
                   content="Delete"
                 >
                   <AnchorButton
@@ -415,12 +415,12 @@ export default genericAnnotationProperties;
 
 // const ColorPickerPopover = ({ readOnly, onColorSelect, children }) => {
 //   return (
-//     <Popover
+//     <PopoverNext
 //       disabled={readOnly}
 //       content={<ColorPicker onColorSelect={onColorSelect} />}
 //     >
 //       {children}
-//     </Popover>
+//     </PopoverNext>
 //   );
 // };
 

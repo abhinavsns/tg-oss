@@ -1,11 +1,6 @@
-// will help tooltip to not get smushed
+// Keep floating content visible inside the viewport.
 const popoverOverflowModifiers = {
-  preventOverflow: { boundariesElement: "viewport" },
-  hide: {
-    enabled: false
-  },
-  flip: {
-    boundariesElement: "viewport"
-  }
+  flip: {},
+  shift: {}
 };
 export default popoverOverflowModifiers;

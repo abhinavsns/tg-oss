@@ -7,7 +7,6 @@
 import ReflexSplitter from "./ReflexSplitter";
 import ReflexEvents from "./ReflexEvents";
 import PropTypes from "prop-types";
-import ReactDOM from "react-dom";
 import React from "react";
 import { cloneDeep, round } from "lodash-es";
 
@@ -34,6 +33,8 @@ class ReflexContainer extends React.Component {
     this.onElementSize = this.onElementSize.bind(this);
 
     this.children = [];
+    this.childRefs = new Map();
+    this.containerRef = React.createRef();
   }
 
   /////////////////////////////////////////////////////////
@@ -130,9 +131,8 @@ class ReflexContainer extends React.Component {
   //
   /////////////////////////////////////////////////////////
   getSize(element) {
-    const ref = element.ref ? this.refs[element.ref] : element;
-
-    const domElement = ReactDOM.findDOMNode(ref);
+    const component = this.childRefs.get(element.props.reflexRef);
+    const domElement = component.getDomElement();
 
     switch (this.props.orientation) {
       case "horizontal":
@@ -281,11 +281,14 @@ class ReflexContainer extends React.Component {
     document.body.style.cursor = "auto";
 
     const resizedRefs = this.elements.map(element => {
-      return element.ref;
+      return element.props.reflexRef;
     });
 
     const elements = this.children.filter(child => {
-      return !this.isSplitterElement(child) && resizedRefs.includes(child.ref);
+      return (
+        !this.isSplitterElement(child) &&
+        resizedRefs.includes(child.props.reflexRef)
+      );
     });
 
     this.emitElementsEvent(elements, "onStopResize");
@@ -472,7 +475,7 @@ class ReflexContainer extends React.Component {
   //
   /////////////////////////////////////////////////////////
   computePixelFlex() {
-    const domElement = ReactDOM.findDOMNode(this);
+    const domElement = this.containerRef.current;
 
     switch (this.props.orientation) {
       case "horizontal":
@@ -615,10 +618,10 @@ class ReflexContainer extends React.Component {
   emitElementsEvent(elements, event) {
     this.toArray(elements).forEach(element => {
       if (element.props[event]) {
-        const ref = this.refs[element.ref];
+        const component = this.childRefs.get(element.props.reflexRef);
 
         element.props[event]({
-          domElement: ReactDOM.findDOMNode(ref),
+          domElement: component.getDomElement(),
           component: element
         });
       }
@@ -660,7 +663,7 @@ class ReflexContainer extends React.Component {
         sizeFlex: (props.size || Number.MAX_VALUE) * pixelFlex,
         minFlex: (props.minSize || 1) * pixelFlex,
         constrained: props.flex !== undefined,
-        guid: props.ref || this.guid(),
+        guid: props.reflexRef || this.guid(),
         flex: props.flex || 0,
         type: child.type
       };
@@ -763,7 +766,11 @@ class ReflexContainer extends React.Component {
           minSize: child.props.minSize || 1,
           events: this.events,
           flex: round(flexData.flex, 5), //tnr: this rounding is necessary because flex was getting computed very slightly off (eg -1.423432e-17). This corrects for that
-          ref: flexData.guid,
+          reflexRef: flexData.guid,
+          ref: component => {
+            if (component) this.childRefs.set(flexData.guid, component);
+            else this.childRefs.delete(flexData.guid);
+          },
           index: idx
         });
 
@@ -772,7 +779,11 @@ class ReflexContainer extends React.Component {
     );
 
     return (
-      <div className={classNames.join(" ")} style={this.props.style}>
+      <div
+        ref={this.containerRef}
+        className={classNames.join(" ")}
+        style={this.props.style}
+      >
         {this.children}
       </div>
     );

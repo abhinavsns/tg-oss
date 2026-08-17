@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import classNames from "classnames";
-import { Icon, Popover } from "@blueprintjs/core";
+import { Icon, PopoverNext } from "@blueprintjs/core";
 
 export const ColumnFilterMenu = ({
   addFilters,
@@ -19,15 +19,10 @@ export const ColumnFilterMenu = ({
 }) => {
   const [columnFilterMenuOpen, setColumnFilterMenuOpen] = useState(false);
   return (
-    <Popover
+    <PopoverNext
       position="bottom"
       onClose={() => setColumnFilterMenuOpen(false)}
       isOpen={columnFilterMenuOpen}
-      modifiers={{
-        preventOverflow: { enabled: true },
-        hide: { enabled: false },
-        flip: { enabled: false }
-      }}
       content={
         <FilterMenu
           formName={formName}
@@ -57,6 +52,6 @@ export const ColumnFilterMenu = ({
           "tg-active-filter": !!filterActiveForColumn
         })}
       />
-    </Popover>
+    </PopoverNext>
   );
 };

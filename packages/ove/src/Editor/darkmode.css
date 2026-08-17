@@ -1,12 +1,12 @@
-.bp3-dark .veAxisLine {
+.bp6-dark .veAxisLine {
   stroke: #f5f8fa !important;
 }
-.bp3-dark .veAxisTick,
-.bp3-dark .veCutsite {
+.bp6-dark .veAxisTick,
+.bp6-dark .veCutsite {
   fill: #f5f8fa;
 }
 
-.bp3-dark .veEditor:not(.tg-simple-dna-view) {
+.bp6-dark .veEditor:not(.tg-simple-dna-view) {
   background: #293742 !important;
 }
 
@@ -15,96 +15,96 @@
   stroke: black;
   background: black;
 }
-.bp3-dark .veCaret,
-.bp3-dark .veLabelLine {
+.bp6-dark .veCaret,
+.bp6-dark .veLabelLine {
   stroke: white;
   background: white;
 }
-.bp3-dark .veLabelLine,
-.bp3-dark .aminoAcidNumber {
+.bp6-dark .veLabelLine,
+.bp6-dark .aminoAcidNumber {
   stroke: #f5f8fa !important;
   background: #f5f8fa !important;
 }
 
-.bp3-dark .veEditor .veRowViewCaret {
+.bp6-dark .veEditor .veRowViewCaret {
   background: #f5f8fa !important;
 }
 
-.bp3-dark .veEditor text {
+.bp6-dark .veEditor text {
   fill: #f5f8fa;
 }
 
-.bp3-dark .veRowViewPartsContainer text,
-.bp3-dark .veLabelText.black {
+.bp6-dark .veRowViewPartsContainer text,
+.bp6-dark .veLabelText.black {
   fill: #f5f8fa !important;
 }
 
-.bp3-dark .tag-selection.selected {
+.bp6-dark .tag-selection.selected {
   border-color: #f5f8fa !important;
 }
 
-.bp3-dark .veLinearView text {
+.bp6-dark .veLinearView text {
   fill: #f5f8fa !important;
 }
-.bp3-dark .veCircularViewAxisNumber rect {
+.bp6-dark .veCircularViewAxisNumber rect {
   fill: #f5f8fa !important;
 }
 
-.bp3-dark .menu-bar {
+.bp6-dark .menu-bar {
   background: none !important;
 }
 
 .alignmentViewTrackContainer {
   background: white;
 }
-.bp3-dark .alignmentViewTrackContainer {
+.bp6-dark .alignmentViewTrackContainer {
   background: #293742;
 }
-.bp3-dark .alignmentViewTrackContainer text {
+.bp6-dark .alignmentViewTrackContainer text {
   fill: #f5f8fa !important;
 }
-.bp3-dark [data-tick-mark] {
-  fill: #f5f8fa !important;
-}
-
-.bp3-dark .rowViewTextContainer *::selection {
-  fill: #f5f8fa !important;
-}
-.bp3-dark .veRowViewAxis *::selection {
+.bp6-dark [data-tick-mark] {
   fill: #f5f8fa !important;
 }
 
-/* .bp3-dark .veRowViewAxis text {
+.bp6-dark .rowViewTextContainer *::selection {
+  fill: #f5f8fa !important;
+}
+.bp6-dark .veRowViewAxis *::selection {
+  fill: #f5f8fa !important;
+}
+
+/* .bp6-dark .veRowViewAxis text {
   stroke: #f5f8fa !important;
 } */
 
-.bp3-dark .translationLayer text {
+.bp6-dark .translationLayer text {
   fill: black !important;
 }
 
-.bp3-dark .step-group.active .step-text {
+.bp6-dark .step-group.active .step-text {
   color: #2b95d6 !important;
 }
 
-.bp3-dark .step-group.active .step-mark {
+.bp6-dark .step-group.active .step-mark {
   background-color: #2b95d6 !important;
   border-color: #2b95d6 !important;
 }
 
-.bp3-dark .tool-select-item:hover {
+.bp6-dark .tool-select-item:hover {
   background: #0e5a8a !important;
 }
 
-.bp3-dark .veWhiteBackground {
+.bp6-dark .veWhiteBackground {
   background: #293742;
 }
 
-.bp3-dark .vePart path:first-of-type {
+.bp6-dark .vePart path:first-of-type {
   stroke-width: 1;
   stroke: #df7ff1 !important;
 }
 
-.bp3-dark .vePart .veLabelText,
-.bp3-dark .veLabelText.vePart {
+.bp6-dark .vePart .veLabelText,
+.bp6-dark .veLabelText.vePart {
   fill: #ac68cc !important;
 }

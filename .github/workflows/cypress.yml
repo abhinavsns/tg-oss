@@ -1,30 +1,28 @@
 name: Cypress tests
+
 on: [push, pull_request]
+
 jobs:
   cypress-run:
-    name: Cypress run
+    name: ${{ matrix.project }} browser tests
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     strategy:
+      fail-fast: false
       matrix:
-        # the actual items in the array do not matter,
-        # just the number - to force CI to sping 3 copies
-        # of the current job in parallel
-        machines: [1, 2, 3, 4, 5, 6]
+        project: [ui, ove]
     steps:
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 18
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          # We need to fetch all branches and commits so that Nx affected has a base to compare against.
-          fetch-depth: 0
+          node-version: 22
+          cache: yarn
+
       - name: Install dependencies
-        uses: cypress-io/github-action@v6
-        with:
-          # just perform install
-          runTests: false
-      - uses: mansagroup/nrwl-nx-action@v3
-        with:
-          parallel: 1
-          targets: e2e
+        run: yarn install --frozen-lockfile
+
+      - name: Run browser tests
+        run: yarn nx run ${{ matrix.project }}:e2e --browser electron

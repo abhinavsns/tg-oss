@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.11.0 (2026-08-16)
+
+- feat: support React 19 and Blueprint 6
+- feat: publish ESM, CommonJS, type declarations, and an explicit stylesheet export
+- fix: update Redux integrations, dialogs, menus, selects, and browser tests for current React behavior
+
 ## 0.10.24 (2026-05-22)
 
 - feat: DataTable copy now also writes `text/html` to the clipboard, so pasting into rich-text editors (ELN, Google Docs, Notion) keeps the table structure

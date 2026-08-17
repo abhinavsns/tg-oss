@@ -41,7 +41,7 @@ export default function DividerWithTextDemo() {
 
       <Card
         style={{ marginTop: 20, backgroundColor: "#30404D", color: "white" }}
-        className="bp3-dark"
+        className="bp6-dark"
       >
         <h3>Dark Theme</h3>
         <p>Divider in dark theme</p>

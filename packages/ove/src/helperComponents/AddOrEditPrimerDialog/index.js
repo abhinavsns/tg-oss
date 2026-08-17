@@ -115,7 +115,7 @@ const CustomContentEditable = generateField(function CustomContentEditable({
         ref={inputRef}
         spellCheck="false"
         contentEditable={!disabled}
-        className={classNames("bp3-input tg-custom-sequence-editable", {
+        className={classNames("bp6-input tg-custom-sequence-editable", {
           hasTempError
         })}
         onInput={emitChange}
@@ -313,7 +313,7 @@ const RenderBases = props => {
 
 const TextInnerWrapper = p => (
   <div
-    className="bp3-text-muted bp3-text-small"
+    className="bp6-text-muted bp6-text-small"
     style={{
       marginBottom: 15,
       marginTop: -5,

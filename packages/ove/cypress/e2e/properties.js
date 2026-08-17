@@ -16,7 +16,7 @@ describe("properties", function () {
     cy.get(`[name="forward"]:last[value="true"]`).should("not.exist");
     //flip it to the reverse strand
     cy.get(`[name="forward"]:last[value="false"]`).click({ force: true });
-    cy.get(".bp3-dialog").contains("Save").click();
+    cy.get(".bp6-dialog").contains("Save").click();
     cy.get(`[data-tab-id="genbank"]`).click();
     cy.contains("textarea", `primer_bind complement(10..20)`);
     cy.contains("textarea", `/label="fakeprimer"`);
@@ -27,24 +27,20 @@ describe("properties", function () {
     cy.get(".veTabProperties").click();
     cy.get(`[data-tab-id="features"]`).click();
     cy.get(".propertiesVisFilter").click();
-    cy.get(".bp3-menu-item:contains(Features):contains(22)");
-    cy.get(`.tgDeleteAnnsBtn`).should("have.class", "bp3-disabled");
+    cy.get(".bp6-menu-item:contains(Features):contains(22)");
+    cy.get(`.tgDeleteAnnsBtn`).should("have.class", "bp6-disabled");
     cy.contains(".ReactTable", "araC").click();
-    cy.get(`.tgDeleteAnnsBtn`).should("not.have.class", "bp3-disabled").click();
+    cy.get(`.tgDeleteAnnsBtn`).should("not.have.class", "bp6-disabled").click();
 
-    cy.get(`.tgDeleteAnnsBtn`).should("have.class", "bp3-disabled");
-    cy.get(".tgNewAnnBtn").should("not.have.class", "bp3-disabled");
+    cy.get(`.tgDeleteAnnsBtn`).should("have.class", "bp6-disabled");
+    cy.get(".tgNewAnnBtn").should("not.have.class", "bp6-disabled");
     cy.get(".tg-menu-bar").contains("Edit").click();
     cy.get(".tg-menu-bar-popover").contains("Select All").click();
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(100);
-    cy.get(
-      ".veSelectionLayer:contains(Selecting 5299 bps from 1 to 5299)"
-    ).trigger("contextmenu", { force: true });
-    // eslint-disable-next-line cypress/no-unnecessary-waiting
-    cy.wait(100);
-    cy.get(".bp3-menu-item:contains(Cut)").realClick();
-    cy.get(".tgNewAnnBtn").should("have.class", "bp3-disabled");
+    cy.get(".tg-menu-bar").contains("Edit").click();
+    cy.get(".tg-menu-bar-popover").contains("Cut").realClick();
+    cy.get(".tgNewAnnBtn").should("have.class", "bp6-disabled");
   });
   it(`a custom properties tab should be able to be added`, () => {
     cy.tgToggle("propertiesOverridesExample");
@@ -56,7 +52,7 @@ describe("properties", function () {
   it(`can change to linear mode via the general properties panel and get a warning that annotations will be truncated`, () => {
     cy.get(".veTabProperties").click();
     cy.get(".circularLinearSelect select").select("Linear");
-    cy.contains(".bp3-dialog", "Truncate Annotations").should("be.visible");
+    cy.contains(".bp6-dialog", "Truncate Annotations").should("be.visible");
   });
   it(`we should be able to view and edit a description in general properties
   and have that visible within the genbank view as well we should be able to edit a description in general properties, not make any changes, hit ok, and have the description not clear (bug! https://github.com/TeselaGen/lims/issues/5492)
@@ -145,10 +141,10 @@ describe("properties", function () {
     cy.get(`.veToolbarCutsiteFilterHolder .tg-select`).click();
     cy.contains(".tg-select-option", "Van").click();
     cy.get(".veLabelText:contains(Van):first").rightclick();
-    cy.get(".bp3-menu-item:contains(View Cut Site Properties)").click();
+    cy.get(".bp6-menu-item:contains(View Cut Site Properties)").click();
     cy.contains(".rt-tr-group.selected", "831");
     cy.get(".veLabelText:contains(Van):last").rightclick();
-    cy.get(".bp3-menu-item:contains(View Cut Site Properties)").click();
+    cy.get(".bp6-menu-item:contains(View Cut Site Properties)").click();
     cy.contains(".rt-tr-group.selected", "4730");
   });
 
@@ -159,7 +155,7 @@ describe("properties", function () {
     cy.get(".datatable-search-input").type("879{enter}");
     cy.contains(".data-table-footer", "0 Selected / 2 Total");
     cy.contains(".ReactTable", "araC");
-    cy.contains(".ReactTable", "araD");
+    cy.contains(".ReactTable", "araE");
   });
 });
 

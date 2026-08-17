@@ -131,7 +131,7 @@ const FilterAndSortMenu = ({
   return (
     <Menu className="data-table-header-menu">
       <div className="custom-menu-item">
-        <div className={classNames(Classes.SELECT, Classes.FILL)}>
+        <div className={classNames(Classes.HTML_SELECT, Classes.FILL)}>
           <select
             onChange={function (e) {
               const ccSelectedFilter = camelCase(e.target.value);

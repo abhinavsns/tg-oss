@@ -9,7 +9,7 @@ import {
   vectorEditorReducer as VectorEditor,
   vectorEditorMiddleware
 } from "../../src";
-import thunk from "redux-thunk";
+import { thunk } from "redux-thunk";
 import { reducer as form } from "redux-form";
 
 const composeEnhancer =

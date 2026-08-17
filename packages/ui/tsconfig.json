@@ -1,4 +1,14 @@
 {
   "extends": "../../tsconfig.react.json",
-  "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
+  "include": [
+    "src/**/*.js",
+    "src/**/*.jsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "demo/**/*.js",
+    "demo/**/*.jsx",
+    "demo/**/*.ts",
+    "demo/**/*.tsx"
+  ],
+  "exclude": ["src/**/*.spec.*", "src/**/*.test.*"]
 }

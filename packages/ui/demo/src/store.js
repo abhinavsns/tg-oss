@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { tg_modalState } from "../../src";
 import { reducer as form } from "redux-form";
-import thunk from "redux-thunk";
+import { thunk } from "redux-thunk";
 
 const composeEnhancer =
   (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&

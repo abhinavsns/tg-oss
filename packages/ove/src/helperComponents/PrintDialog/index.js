@@ -1,5 +1,4 @@
 import React from "react";
-import { findDOMNode } from "react-dom";
 import PropTypes from "prop-types";
 
 import { reduxForm } from "redux-form";
@@ -15,6 +14,7 @@ import LinearView from "../../LinearView";
 import "./style.css";
 
 class PrintDialog extends React.Component {
+  componentRef = React.createRef();
   state = {
     circular: null
   };
@@ -64,18 +64,19 @@ class PrintDialog extends React.Component {
           </div>
         )}
         <br />
-        <ComponentToPrint
-          fullscreen={this.state && this.state.fullscreen}
-          circular={isCirc}
-          editorName={editorName || "StandaloneEditor"}
-          ref={el => (this.componentRef = el)}
-        />
+        <div ref={this.componentRef}>
+          <ComponentToPrint
+            fullscreen={this.state && this.state.fullscreen}
+            circular={isCirc}
+            editorName={editorName || "StandaloneEditor"}
+          />
+        </div>
         <br />
         {!hidePrintButton && (
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <ReactToPrint
               trigger={() => <Button intent="primary">Print</Button>}
-              content={() => this.componentRef}
+              content={() => this.componentRef.current}
               onBeforePrint={() => {
                 this.setState({ fullscreen: true });
               }}
@@ -235,7 +236,7 @@ class ReactToPrint extends React.Component {
 
     // if (printPreview)  defaultPageStyle += " "
 
-    const contentNodes = findDOMNode(contentEl);
+    const contentNodes = contentEl;
     const linkNodes = document.querySelectorAll('link[rel="stylesheet"]');
 
     this.linkTotal = linkNodes.length || 0;

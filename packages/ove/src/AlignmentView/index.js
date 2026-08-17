@@ -26,7 +26,6 @@ import { store as _store } from "@risingstack/react-easy-state";
 import { throttle, map, some, isFunction, unset, omit } from "lodash-es";
 import { getSequenceDataBetweenRange } from "@teselagen/sequence-utils";
 import ReactList from "@teselagen/react-list";
-import ReactDOM from "react-dom";
 
 import { NonReduxEnhancedLinearView } from "../LinearView";
 import Minimap, { getTrimmedRangesToDisplay } from "./Minimap";
@@ -96,6 +95,8 @@ try {
 }
 
 export const AlignmentView = props => {
+  const latestProps = useRef(props);
+  latestProps.current = props;
   const {
     dimensions,
     alignmentType,
@@ -117,7 +118,6 @@ export const AlignmentView = props => {
     noVisibilityOptions,
     handleBackButtonClicked,
     allowTrimming,
-    additionalSelectionLayerRightClickedOptions,
     selectionLayerRightClicked,
     additionalTopEl,
     additionalTopLeftEl,
@@ -1320,6 +1320,7 @@ export const AlignmentView = props => {
             onScroll={isTemplate ? handleTopScroll : handleScroll}
           >
             <ReactDraggable
+              nodeRef={veTracksAndAlignmentHolder}
               disabled={isTrackDragging}
               bounds={{ top: 0, left: 0, right: 0, bottom: 0 }}
               onDrag={
@@ -1433,10 +1434,11 @@ export const AlignmentView = props => {
 
                           showContextMenu(
                             [
-                              ...(additionalSelectionLayerRightClickedOptions
-                                ? additionalSelectionLayerRightClickedOptions(
+                              ...(latestProps.current
+                                .additionalSelectionLayerRightClickedOptions
+                                ? latestProps.current.additionalSelectionLayerRightClickedOptions(
                                     ...args,
-                                    props
+                                    latestProps.current
                                   )
                                 : []),
                               {
@@ -1502,10 +1504,7 @@ export const AlignmentView = props => {
                   <ReactList
                     ref={c => {
                       InfiniteScroller.current = c;
-                      const domNode = ReactDOM.findDOMNode(c);
-                      if (domNode instanceof HTMLElement) {
-                        drop_provided.innerRef(domNode);
-                      }
+                      drop_provided.innerRef(c?.getEl() || null);
                     }}
                     type="variable"
                     itemSizeEstimator={estimateRowHeight}

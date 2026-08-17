@@ -58,8 +58,8 @@ function DialogFooter({
               function () {
                 try {
                   divRef.current
-                    .closest(".bp3-dialog")
-                    .querySelector(".bp3-dialog-close-button")
+                    .closest(".bp6-dialog")
+                    .querySelector(".bp6-dialog-close-button")
                     .click();
                 } catch (error) {
                   console.error(`error closing dialog:`, error);

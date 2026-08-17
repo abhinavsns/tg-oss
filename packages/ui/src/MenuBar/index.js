@@ -10,7 +10,7 @@ import {
 } from "lodash-es";
 import { Suggest } from "@blueprintjs/select";
 import "./style.css";
-import { Popover, Position, Menu, Button } from "@blueprintjs/core";
+import { PopoverNext, Position, Menu, Button } from "@blueprintjs/core";
 import { some } from "lodash-es";
 import {
   createDynamicMenu,
@@ -187,10 +187,12 @@ class MenuBar extends React.Component {
   handleItemClickOrSelect = __i => _i => {
     const i = __i || _i;
     if (!i.onClick) return;
-    !i.disabled && i.onClick();
     if (i.shouldDismissPopover !== false) {
+      this.searchInput?.blur();
+      this.pendingMenuAction = !i.disabled ? i.onClick : undefined;
       this.setState({ isOpen: false });
     } else {
+      !i.disabled && i.onClick();
       if (_i && _i.stopPropagation) {
         _i.stopPropagation();
         _i.preventDefault();
@@ -266,7 +268,7 @@ class MenuBar extends React.Component {
           return !topLevelItem.submenu ? (
             button
           ) : (
-            <Popover
+            <PopoverNext
               autoFocus={false}
               key={i}
               minimal
@@ -274,6 +276,9 @@ class MenuBar extends React.Component {
               onClosed={() => {
                 this.setState({ helpItemQueryStringTracker: "" });
                 this.props.onMenuClose && this.props.onMenuClose();
+                const pendingMenuAction = this.pendingMenuAction;
+                this.pendingMenuAction = undefined;
+                pendingMenuAction?.();
               }}
               portalClassName="tg-menu-bar-popover"
               position={Position.BOTTOM_LEFT}
@@ -300,7 +305,7 @@ class MenuBar extends React.Component {
               inline
             >
               {button}
-            </Popover>
+            </PopoverNext>
           );
         })}
         {extraContent}

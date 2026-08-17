@@ -6,9 +6,9 @@ import {
   Intent,
   Icon,
   Tooltip,
-  ContextMenu
+  showContextMenu as showBlueprintContextMenu,
+  BlueprintProvider
 } from "@blueprintjs/core";
-import PropTypes from "prop-types";
 
 import VersionHistoryView from "../VersionHistoryView";
 import { importSequenceFromFile } from "../withEditorProps";
@@ -121,10 +121,6 @@ export class Editor extends React.Component {
     return [];
   };
 
-  getChildContext() {
-    //tnrtodo this will need to be updated once blueprint uses the react 16 api
-    return { blueprintPortalClassName: "ove-portal" };
-  }
   componentDidUpdate(prevProps) {
     if (
       this.props.initialAnnotationToEdit &&
@@ -303,9 +299,12 @@ export class Editor extends React.Component {
     const { previewModeButtonMenu } = this.props;
     event.preventDefault();
     if (previewModeButtonMenu) {
-      ContextMenu.show(previewModeButtonMenu, {
-        left: getClientX(event),
-        top: getClientY(event)
+      showBlueprintContextMenu({
+        content: previewModeButtonMenu,
+        targetOffset: {
+          left: getClientX(event),
+          top: getClientY(event)
+        }
       });
     }
   };
@@ -861,7 +860,7 @@ export class Editor extends React.Component {
       );
     }
     return (
-      <React.Fragment>
+      <BlueprintProvider portalClassName="ove-portal">
         <DropHandler
           key="dropHandler"
           importSequenceFromFile={this.props.importSequenceFromFile}
@@ -978,14 +977,10 @@ export class Editor extends React.Component {
             "AddOrEditPrimerDialogOverride"
           ])}
         />
-      </React.Fragment>
+      </BlueprintProvider>
     );
   }
 }
-
-Editor.childContextTypes = {
-  blueprintPortalClassName: PropTypes.string
-};
 
 export default compose(
   connectToEditor(

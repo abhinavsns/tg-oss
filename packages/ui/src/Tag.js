@@ -56,7 +56,7 @@ function Tag({
       </div>
     );
     nameToUse = (
-      <Tooltip content={content} modifiers={popoverOverflowModifiers}>
+      <Tooltip content={content} middleware={popoverOverflowModifiers}>
         {nameToUse}
       </Tooltip>
     );

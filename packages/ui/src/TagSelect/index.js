@@ -1,4 +1,4 @@
-import { Button, InputGroup, Popover } from "@blueprintjs/core";
+import { Button, InputGroup, PopoverNext } from "@blueprintjs/core";
 import React from "react";
 
 import Tag from "../Tag";
@@ -13,7 +13,7 @@ export default ({ value = {}, options = [], onChange }) => {
   const filteredOptions = itemListPredicate(searchTerm, options, false);
 
   return (
-    <Popover
+    <PopoverNext
       isOpen={open}
       onInteraction={setOpen}
       content={
@@ -56,7 +56,7 @@ export default ({ value = {}, options = [], onChange }) => {
       }
     >
       <Tag style={{ maxWidth: 150 }} clickable {...convertTagVals(value)}></Tag>
-    </Popover>
+    </PopoverNext>
   );
 };
 

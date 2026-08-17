@@ -13,7 +13,7 @@ export default class ResizableDraggableDialog extends React.Component {
     setTimeout(() => {
       this.setDefaults();
       try {
-        const el = this.containerEl.querySelector(".bp3-dialog-body");
+        const el = this.containerEl.querySelector(".bp6-dialog-body");
         this.resizeObs = new ResizeObserver(
           debounce(() => {
             this.setDefaults({ doNotSetXOrWidth: true });
@@ -43,7 +43,7 @@ export default class ResizableDraggableDialog extends React.Component {
     if (height) {
       heightToUse = height;
     } else {
-      heightToUse = (document.querySelector(".bp3-dialog-body") || {})
+      heightToUse = (document.querySelector(".bp6-dialog-body") || {})
         .scrollHeight;
       if (heightToUse) {
         heightToUse = heightToUse + 60;
@@ -98,11 +98,11 @@ export default class ResizableDraggableDialog extends React.Component {
         ref={el => {
           if (el) this.containerEl = el;
         }}
-        className="tg-bp3-dialog-resizable-draggable"
+        className="tg-bp6-dialog-resizable-draggable"
         style={{ top: 0, left: 0, position: "fixed" }}
       >
         <Rnd
-          cancel=".bp3-dialog-close-button"
+          cancel=".bp6-dialog-close-button"
           enableResizing={{
             bottomLeft: true,
             bottomRight: true,

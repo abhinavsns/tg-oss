@@ -7,11 +7,11 @@ describe("copyPaste", function () {
 
     cy.contains(".veRowViewFeature", "araC")
       .first()
-      .trigger("contextmenu", { force: true });
-    cy.contains(".bp3-menu-item", "Copy").trigger("mouseover");
-    cy.contains(".bp3-menu-item", "Copy Genbank").click();
+      .rightclick({ force: true });
+    cy.contains(".bp6-menu-item", "Copy").trigger("mouseover");
+    cy.contains(".bp6-menu-item", "Copy Genbank").click();
     // cy.contains(".openVeCopy2", "Copy AA Sequence").click();
-    // cy.contains(".bp3-menu-item", "Copy Reverse Complement").click();
+    // cy.contains(".bp6-menu-item", "Copy Reverse Complement").click();
     cy.window().then(() => {
       assert(window.Cypress.textToCopy.includes("879 aa"));
       assert(window.Cypress.textToCopy.includes("fcillaavsg"));
@@ -26,11 +26,11 @@ describe("copyPaste", function () {
     cy.get(`[data-test="moleculeType"]`).select("Protein");
     cy.contains(".veRowViewFeature", "araC")
       .first()
-      .trigger("contextmenu", { force: true });
-    cy.contains(".bp3-menu-item", "Copy").trigger("mouseover");
-    cy.contains(".bp3-menu-item", "Copy AA Sequence").click();
+      .rightclick({ force: true });
+    cy.contains(".bp6-menu-item", "Copy").trigger("mouseover");
+    cy.contains(".bp6-menu-item", "Copy AA Sequence").click();
     // cy.contains(".openVeCopy2", "Copy AA Sequence").click();
-    // cy.contains(".bp3-menu-item", "Copy Reverse Complement").click();
+    // cy.contains(".bp6-menu-item", "Copy Reverse Complement").click();
     cy.window().then(() => {
       assert(
         window.Cypress.textToCopy ===
@@ -49,24 +49,30 @@ describe("copyPaste", function () {
     cy.selectRange(10, 12);
     cy.contains(".veRowViewFeature", "araE")
       .first()
-      .trigger("contextmenu", { force: true });
-    // cy.contains(".bp3-menu-item", "Copy").trigger("mouseover")
-    cy.contains(".bp3-menu-item", "Copy").click();
-    cy.contains(".openVeCopy2", "Copy").realClick();
+      .rightclick({ force: true });
+    // cy.contains(".bp6-menu-item", "Copy").trigger("mouseover")
+    cy.contains('.bp6-menu-item[aria-haspopup="menu"]', "Copy").trigger(
+      "mouseover"
+    );
+    cy.get(".openVeCopy2").click({ force: true });
+    cy.get(".tg-menu-bar").contains("Edit").click();
+    cy.get(".tg-menu-bar-popover").contains("Copy").realClick();
 
     cy.contains("Selection Copied");
 
-    cy.get(`.veVectorInteractionWrapper:focused input`).trigger("paste", {
-      force: true,
-      clipboardData: {
-        // we have to mock the paste event cause cypress doesn't actually trigger a paste event when typing cmd+v
-        getData: type =>
-          type === "application/json"
-            ? JSON.stringify(window.Cypress.seqDataToCopy)
-            : window.Cypress.seqDataToCopy.sequence,
-        types: ["application/json"]
-      }
-    });
+    cy.get(".veVectorInteractionWrapper input.clipboard")
+      .first()
+      .trigger("paste", {
+        force: true,
+        clipboardData: {
+          // we have to mock the paste event cause cypress doesn't actually trigger a paste event when typing cmd+v
+          getData: type =>
+            type === "application/json"
+              ? JSON.stringify(window.Cypress.seqDataToCopy)
+              : window.Cypress.seqDataToCopy.sequence,
+          types: ["application/json"]
+        }
+      });
 
     cy.contains(
       "Sorry, the pasted sequence exceeds the maximum allowed length of 50"
@@ -83,29 +89,35 @@ describe("copyPaste", function () {
 
     cy.focused().type("{rightarrow}{rightarrow}");
 
-    cy.get(".veRowViewCaret").trigger("contextmenu", { force: true });
-    cy.contains(".bp3-menu-item", "Insert").click();
+    cy.get(".veRowViewCaret").rightclick({ force: true });
+    cy.contains(".bp6-menu-item", "Insert").click();
     cy.contains("Press ENTER to insert 0 AAs after AA 2");
     // eslint-disable-next-line cypress/no-unnecessary-waiting
     cy.wait(0);
     cy.get(".sequenceInputBubble input").type("u");
-    cy.contains('Invalid character(s) detected and removed: u');
+    cy.contains("Invalid character(s) detected and removed: u");
 
     cy.selectRange(10, 12); //select some random range (we were seeing an error where the selection layer wasn't getting updated correctly)
     //right click a feature
     cy.get(`.veCircularViewFeature:contains("CmR"):first`).realClick();
-    cy.get(`.veVectorInteractionWrapper:focused input`).trigger("paste", {
+    cy.get(".veVectorInteractionWrapper input.clipboard")
+      .first()
+      .trigger("paste", {
         force: true,
         clipboardData: {
           // we have to mock the paste event cause cypress doesn't actually trigger a paste event when typing cmd+v
           getData: type =>
             type === "application/json"
-              ? JSON.stringify({sequence: "abctu", features: [], translations: []})
-              : 'abctu',
+              ? JSON.stringify({
+                  sequence: "abctu",
+                  features: [],
+                  translations: []
+                })
+              : "abctu",
           types: ["application/json"]
         }
       });
-      cy.contains('Invalid character(s) detected and removed: b');
+    cy.contains("Invalid character(s) detected and removed: b");
   });
 
   it(`should be able to copy reverse complement`, () => {
@@ -113,9 +125,9 @@ describe("copyPaste", function () {
     //right click a feature
     cy.contains(".veRowViewFeature", "araC")
       .first()
-      .trigger("contextmenu", { force: true });
-    cy.contains(".bp3-menu-item", "Copy").trigger("mouseover");
-    cy.contains(".bp3-menu-item", "Copy Reverse Complement").click();
+      .rightclick({ force: true });
+    cy.contains(".bp6-menu-item", "Copy").trigger("mouseover");
+    cy.contains(".bp6-menu-item", "Copy Reverse Complement").click();
     cy.window().then(() => {
       assert(
         window.Cypress.seqDataToCopy.sequence ===
@@ -128,11 +140,14 @@ describe("copyPaste", function () {
     //right click a feature
     cy.contains(".veRowViewFeature", "araD")
       .first()
-      .trigger("contextmenu", { force: true });
-    cy.get(`.veVectorInteractionWrapper:focus`).should("not.exist");
-    // cy.contains(".bp3-menu-item", "Copy").trigger("mouseover")
-    cy.contains(".bp3-menu-item", "Copy").click();
-    cy.contains(".openVeCopy2", "Copy").realClick();
+      .rightclick({ force: true });
+    // cy.contains(".bp6-menu-item", "Copy").trigger("mouseover")
+    cy.contains('.bp6-menu-item[aria-haspopup="menu"]', "Copy").trigger(
+      "mouseover"
+    );
+    cy.get(".openVeCopy2").click({ force: true });
+    cy.get(".tg-menu-bar").contains("Edit").click();
+    cy.get(".tg-menu-bar-popover").contains("Copy").realClick();
     cy.window().then(() => {
       assert(
         window.Cypress.seqDataToCopy.sequence ===
@@ -141,7 +156,6 @@ describe("copyPaste", function () {
       assert(window.Cypress.seqDataToCopy.features.length === 2);
       cy.contains("Selection Copied");
       // paste it back into the seq
-      cy.get(`.veVectorInteractionWrapper:focus`);
       cy.get(`.veCircularViewFeature:contains("CmR"):first`).realClick();
       // cy.get(`[data-test="ve-draggable-tabs0"] .veVectorInteractionWrapper`).should("be.focused");
       cy.get(`.veCircularViewFeature:contains("araD") textPath`).should(
@@ -153,17 +167,19 @@ describe("copyPaste", function () {
         1
       );
 
-      cy.get(`.veVectorInteractionWrapper:focused input`).trigger("paste", {
-        force: true,
-        clipboardData: {
-          // we have to mock the paste event cause cypress doesn't actually trigger a paste event when typing cmd+v
-          getData: type =>
-            type === "application/json"
-              ? JSON.stringify(window.Cypress.seqDataToCopy)
-              : window.Cypress.seqDataToCopy.sequence,
-          types: ["application/json"]
-        }
-      });
+      cy.get(".veVectorInteractionWrapper input.clipboard")
+        .first()
+        .trigger("paste", {
+          force: true,
+          clipboardData: {
+            // we have to mock the paste event cause cypress doesn't actually trigger a paste event when typing cmd+v
+            getData: type =>
+              type === "application/json"
+                ? JSON.stringify(window.Cypress.seqDataToCopy)
+                : window.Cypress.seqDataToCopy.sequence,
+            types: ["application/json"]
+          }
+        });
       cy.get(`.veCircularViewFeature:contains("araD") textPath`).should(
         "have.length",
         2
@@ -177,18 +193,36 @@ describe("copyPaste", function () {
     //right click a feature
     cy.contains(".veRowViewFeature", "araC")
       .first()
-      .trigger("contextmenu", { force: true });
-    // cy.contains(".bp3-menu-item", "Copy").trigger("mouseover")
-    cy.contains(".bp3-menu-item", "Copy").trigger("mouseover", { force: true });
-    cy.contains(".bp3-menu-item", "Copy Options").trigger("mouseover", {
-      force: true
-    });
-    cy.get(
-      `.bp3-menu-item:contains("Include Features") .bp3-icon-small-tick`
-    ).should("exist");
-    cy.contains(".bp3-menu-item", "Include Features").click({ force: true });
-    cy.get(
-      `.bp3-menu-item:contains("Include Features") .bp3-icon-small-tick`
-    ).should("not.exist");
+      .rightclick({ force: true });
+    // cy.contains(".bp6-menu-item", "Copy").trigger("mouseover")
+    cy.contains('.bp6-menu-item[aria-haspopup="menu"]', "Copy").trigger(
+      "mouseover",
+      { force: true }
+    );
+    cy.contains('.bp6-menu-item[aria-haspopup="menu"]', "Copy Options").trigger(
+      "mouseover",
+      { force: true }
+    );
+    cy.contains(
+      '.bp6-menu-item:not([aria-haspopup="menu"])',
+      "Include Features"
+    )
+      .find(".bp6-icon-small-tick")
+      .should("exist");
+    cy.contains(
+      '.bp6-menu-item:not([aria-haspopup="menu"])',
+      "Include Features"
+    ).click({ force: true });
+    cy.get(".bp6-context-menu-backdrop").click({ force: true });
+    cy.contains(".tg-menu-bar button", "Edit").click();
+    cy.contains(".tg-menu-bar-popover .bp6-menu-item", "Copy Options").trigger(
+      "mouseover"
+    );
+    cy.contains(
+      '.tg-menu-bar-popover .bp6-menu-item:not([aria-haspopup="menu"])',
+      "Include Features"
+    )
+      .find(".bp6-icon-small-tick")
+      .should("not.exist");
   });
 });

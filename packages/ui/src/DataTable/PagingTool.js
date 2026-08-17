@@ -158,7 +158,7 @@ const PagingTool = ({
       {!hideSetPageSize && (
         <div
           title="Set Page Size"
-          className={classNames(Classes.SELECT, Classes.MINIMAL)}
+          className={classNames(Classes.HTML_SELECT, Classes.MINIMAL)}
         >
           <select
             name="page-size"

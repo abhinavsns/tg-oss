@@ -372,7 +372,7 @@ function FormComponentsDemo({ handleSubmit }) {
             label="Select Simple with inlineLabel = true"
           />
           {
-            "<BPSelect onChange value /> component with className bp3-minimal passed (not redux form connected):"
+            "<BPSelect onChange value /> component with className bp6-minimal passed (not redux form connected):"
           }
           <BPSelect
             onChange={onFieldSubmit}

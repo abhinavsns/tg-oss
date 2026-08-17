@@ -46,10 +46,10 @@ class TgSelect extends React.Component {
         onClick={modifiers.disabled ? undefined : onClick}
         key={index}
         className={classNames(
-          "tg-select-option bp3-menu-item bp3-fill bp3-text-overflow-ellipsis",
+          "tg-select-option bp6-menu-item bp6-fill bp6-text-overflow-ellipsis",
           {
-            "bp3-active": modifiers.active,
-            "bp3-disabled": modifiers.disabled
+            "bp6-active": modifiers.active,
+            "bp6-disabled": modifiers.disabled
           }
         )}
       >
@@ -363,7 +363,7 @@ class TgSelect extends React.Component {
           isOpen: mustHaveQueryToOpen
             ? hasQuery && this.state.isOpen
             : this.state.isOpen,
-          modifiers: popoverOverflowModifiers,
+          middleware: popoverOverflowModifiers,
           ...popoverProps
         }}
         onItemSelect={this.handleItemSelect}

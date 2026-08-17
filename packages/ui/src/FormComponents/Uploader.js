@@ -13,7 +13,7 @@ import {
   Icon,
   Menu,
   MenuItem,
-  Popover,
+  PopoverNext,
   Position,
   Tooltip
 } from "@blueprintjs/core";
@@ -165,7 +165,7 @@ const InnerDropZone = ({
         "tg-dropzone-reject": isDragReject, // tnr: the acceptClassName/rejectClassName doesn't work with file extensions (only mimetypes are supported when dragging). Thus we'll just always turn the drop area blue when dragging and let the filtering occur on drop. See https://github.com/react-dropzone/react-dropzone/issues/888#issuecomment-773938074
         "tg-dropzone-accept": isDragAccept,
         "tg-dropzone-disabled": dropzoneDisabled,
-        "bp3-disabled": dropzoneDisabled
+        "bp6-disabled": dropzoneDisabled
       })}
     >
       <input {...getInputProps()} />
@@ -651,7 +651,9 @@ const Uploader = ({
                         acc.exampleFile ||
                         acc.exampleFiles
                       );
-                      const PopOrTooltip = acc.exampleFiles ? Popover : Tooltip;
+                      const PopOrTooltip = acc.exampleFiles
+                        ? PopoverNext
+                        : Tooltip;
                       const hasDownload = acc.exampleFile || acc.exampleFiles;
                       const CustomTag = !hasDownload ? "span" : "a";
                       return (
@@ -662,7 +664,7 @@ const Uploader = ({
                             disabled ||
                             !!window.Cypress?.tg_disableDownloadExampleHover
                           }
-                          modifiers={popoverOverflowModifiers}
+                          middleware={popoverOverflowModifiers}
                           content={
                             acc.exampleFiles ? (
                               <Menu>
@@ -1267,14 +1269,14 @@ const Uploader = ({
         </div>
         {threeDotMenuItems && (
           <div className="tg-dropzone-extra-options">
-            <Popover
+            <PopoverNext
               autoFocus={false}
               minimal
               content={<Menu>{threeDotMenuItems}</Menu>}
               position={Position.BOTTOM_RIGHT}
             >
               <Button minimal icon="more" />
-            </Popover>
+            </PopoverNext>
           </div>
         )}
       </div>

@@ -3,7 +3,7 @@ describe("alignment", function () {
     cy.visit("#/Alignment");
     cy.get(".tg-alignment-visibility-toggle").click();
     cy.contains("cds feature").should("not.exist");
-    cy.get(".bp3-popover .bp3-menu-item:contains(Features)").click();
+    cy.get(".bp6-popover .bp6-menu-item:contains(Features)").click();
     cy.contains("cds feature");
     cy.get(".tg-alignment-visibility-toggle").click();
     cy.contains("text", "long feat whose label should still appear").should(
@@ -12,7 +12,7 @@ describe("alignment", function () {
   });
   it("it should show an unmapped warning", function () {
     cy.visit("#/Alignment");
-    cy.get(".bp3-icon-warning-sign");
+    cy.get(".bp6-icon-warning-sign");
   });
 
   it("allowTrimming should work properly", function () {
@@ -52,24 +52,24 @@ describe("alignment", function () {
     cy.tgToggle("addSelectionRightClickOptions");
     cy.selectAlignmentRange(10, 20);
     cy.get(".veAlignmentSelectionLayer:first").rightclick({ force: true });
-    cy.contains(".bp3-menu-item", "I'm an additional option").click();
-    cy.contains(".bp3-toast", "You did it");
+    cy.contains(".bp6-menu-item", "I'm an additional option").click();
+    cy.contains(".bp6-toast", "You did it");
   });
   it("overriding right click options should work", function () {
     cy.visit("#/Alignment");
     cy.tgToggle("overrideSelectionRightClick");
     cy.selectAlignmentRange(10, 20);
     cy.get(".veAlignmentSelectionLayer:first").rightclick({ force: true });
-    cy.contains(".bp3-toast", "lezzz goooo!");
+    cy.contains(".bp6-toast", "lezzz goooo!");
   });
   it("selection right click options should work and the additionalTopEl should be visible", function () {
     cy.visit("#/Alignment");
     cy.contains("Additional Top El");
     cy.selectAlignmentRange(10, 20);
     cy.get(".veAlignmentSelectionLayer:first").rightclick({ force: true });
-    cy.contains(".bp3-menu-item", "Copy Selection of F05224 as Fasta");
-    cy.contains(".bp3-menu-item", "Copy Selection of All Alignments ").click();
-    cy.contains(".bp3-toast", "Selection Copied");
+    cy.contains(".bp6-menu-item", "Copy Selection of F05224 as Fasta");
+    cy.contains(".bp6-menu-item", "Copy Selection of All Alignments ").click();
+    cy.contains(".bp6-toast", "Selection Copied");
   });
 
   it("dragging in the alignment should only allow non-origin wrapping selections", function () {
@@ -102,10 +102,11 @@ describe("alignment", function () {
   it("shift clicking in the alignment should only allow non-origin wrapping selections (no selection present)", function () {
     cy.visit("#/Alignment");
     cy.contains(`[data-alignment-track-index="1"] text`, 10).click();
-    cy.get("body").type("{shift}", { release: false });
     cy.scrollAlignmentToPercent(0.99);
-    cy.contains(`[data-alignment-track-index="1"] text`, 3510).click();
-    cy.get(`[title="Selecting 3500 bps from 11 to 3510"]`);
+    cy.contains(`[data-alignment-track-index="1"] text`, 3510).click({
+      shiftKey: true
+    });
+    cy.get(`[title="Selecting 3499 bps from 11 to 3509"]`);
   });
   it("the alignment should show axis numbers correctly", function () {
     cy.visit("#/Alignment?alignmentDataId=39");
@@ -121,10 +122,11 @@ describe("alignment", function () {
     cy.get(`[data-alignment-track-index="1"]`);
     cy.selectAlignmentRange(56, 67);
 
-    cy.get("body").type("{shift}", { release: false });
     cy.scrollAlignmentToPercent(0.99);
-    cy.contains(`[data-alignment-track-index="1"] text`, 3510).click();
-    cy.get(`[title="Selecting 3455 bps from 56 to 3510"]`);
+    cy.contains(`[data-alignment-track-index="1"] text`, 3510).click({
+      shiftKey: true
+    });
+    cy.get(`[title="Selecting 3454 bps from 56 to 3509"]`);
   });
   it("scrolls the yellow scroll handle correctly", function () {
     cy.visit("#/Alignment");
@@ -135,9 +137,9 @@ describe("alignment", function () {
   it("can turn on/off the axis with one click", function () {
     cy.visit("#/Alignment");
     cy.contains(".alignmentHolder .veRowViewAxis", 1);
-    cy.get("button .bp3-icon-eye-open").click();
+    cy.get("button .bp6-icon-eye-open").click();
 
-    cy.contains(".bp3-menu-item", "Axis").click();
+    cy.contains(".bp6-menu-item", "Axis").click();
     cy.contains(".alignmentHolder .veRowViewAxis", 1).should("not.exist");
   });
 

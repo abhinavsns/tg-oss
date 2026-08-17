@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.0 (2026-08-16)
+
+- feat: support React 19, Blueprint 6, Redux 5, and the current React Redux APIs
+- feat: publish ESM, CommonJS, type declarations, and an explicit stylesheet export
+- fix: modernize standalone editor mounting, focus handling, sequence editing, and browser compatibility
+
 ## 0.8.42 (2026-04-16)
 
 - fix: better color parsing for snapgene files

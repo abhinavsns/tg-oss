@@ -9,7 +9,7 @@ import {
   Classes,
   ButtonGroup,
   InputGroup,
-  Popover,
+  PopoverNext,
   HTMLSelect,
   Tooltip,
   AnchorButton,
@@ -313,7 +313,7 @@ class EnzymesDialog extends React.Component {
                 position="bottom"
                 content="Create New Group"
               >
-                <Popover
+                <PopoverNext
                   content={
                     <div
                       className="veNewEnzymeGroupPopover"
@@ -327,10 +327,12 @@ class EnzymesDialog extends React.Component {
                         ></InputGroup>
                         <AnchorButton
                           className={Classes.POPOVER_DISMISS}
-                          onClick={() => {
-                            const newName = document.querySelector(
-                              ".veNewEnzymeGroupName input"
-                            ).value;
+                          onClick={event => {
+                            const newName = event.currentTarget
+                              .closest(".veNewEnzymeGroupPopover")
+                              .querySelector(
+                                ".veNewEnzymeGroupName input"
+                              ).value;
                             if (!newName) {
                               return window.toastr.error("Invalid name");
                             }
@@ -361,9 +363,9 @@ class EnzymesDialog extends React.Component {
                     minimal
                     icon="add"
                   ></AnchorButton>
-                </Popover>
+                </PopoverNext>
               </Tooltip>
-              <Popover
+              <PopoverNext
                 content={
                   <div
                     className="veEditEnzymeGroupPopover"
@@ -419,7 +421,7 @@ class EnzymesDialog extends React.Component {
                     icon="edit"
                   ></AnchorButton>
                 </Tooltip>
-              </Popover>
+              </PopoverNext>
               <Tooltip
                 disabled={window.Cypress}
                 position="bottom"
@@ -510,9 +512,10 @@ class EnzymesDialog extends React.Component {
                     position="left"
                     content="Copy Selection To Another Group"
                   >
-                    <Popover
+                    <PopoverNext
                       canEscapeKeyClose
                       disabled={!selectedCount}
+                      shouldReturnFocusOnClose={false}
                       // targetClassName={"veEnzymeDialogEnzymeAddIcon"}
                       // targetProps={{style: {flex: "0 0 auto"}}}
                       // wrapperTagName="div"
@@ -533,14 +536,13 @@ class EnzymesDialog extends React.Component {
                           }}
                         ></MoveToInner>
                       }
-                      target={
-                        <AnchorButton
-                          className="veEnzymeGroupAddEnzymesBtn"
-                          disabled={!selectedCount}
-                          icon="duplicate"
-                        ></AnchorButton>
-                      }
-                    ></Popover>
+                    >
+                      <AnchorButton
+                        className="veEnzymeGroupAddEnzymesBtn"
+                        disabled={!selectedCount}
+                        icon="duplicate"
+                      />
+                    </PopoverNext>
                   </Tooltip>
                 </div>
                 <div>
@@ -581,7 +583,7 @@ class EnzymesDialog extends React.Component {
                 </div>
 
                 <div>
-                  {/* <Popover
+                  {/* <PopoverNext
                   autoFocus={false}
                   captureDismiss
                   content={
@@ -712,7 +714,7 @@ class EnzymesDialog extends React.Component {
                   position={Position.RIGHT_TOP}
                 >
                   <AnchorButton>Select...</AnchorButton>
-                </Popover> */}
+                </PopoverNext> */}
                 </div>
                 <AnchorButton
                   onClick={() => {

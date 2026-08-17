@@ -121,7 +121,8 @@ const NoResults = withRestrictionEnzymes(props => {
 
   return (
     <div className="noResultsTextPlusButton">
-      No results... Add enzymes to your list via the {manageEnzymesLink} link{" "}
+      No results... Add enzymes to your list via the {manageEnzymesLink}{" "}
+      link{" "}
     </div>
   );
 });
@@ -297,7 +298,7 @@ export function CutsiteFilter(props) {
           additionalRightEl={
             showAndOr ? (
               <Tooltip
-                modifiers={popoverOverflowModifiers}
+                middleware={popoverOverflowModifiers}
                 content={
                   isEnzymeFilterAnd
                     ? `AND -- Viewing ${numEnzymesInAnd} enzymes that are shared by ${

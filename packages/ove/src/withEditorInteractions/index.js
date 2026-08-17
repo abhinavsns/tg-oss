@@ -286,7 +286,7 @@ function VectorInteractionHOC(Component /* options */) {
         copyOptions,
         disableBpEditing,
         readOnly,
-        getAcceptedInsertChars,
+        getAcceptedInsertChars
       } = this.props;
       const onCut = this.props.onCut || this.props.onCopy || noop;
       const seqData = tidyUpSequenceData(
@@ -612,12 +612,11 @@ function VectorInteractionHOC(Component /* options */) {
 
     insertHelper = {
       onClick: (e, ctxInfo) => {
-        this.handleDnaInsert({
-          useEventPositioning: {
-            e,
-            nodeToReFocus: getNodeToRefocus(ctxInfo.event.target)
-          }
-        });
+        const useEventPositioning = {
+          e: { clientX: e.clientX, clientY: e.clientY },
+          nodeToReFocus: getNodeToRefocus(ctxInfo.event.target)
+        };
+        setTimeout(() => this.handleDnaInsert({ useEventPositioning }));
       }
     };
 

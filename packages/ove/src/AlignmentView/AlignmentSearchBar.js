@@ -10,7 +10,7 @@ import {
   Button,
   InputGroup,
   NumericInput,
-  Popover,
+  PopoverNext,
   Position,
   Switch,
   TextArea,
@@ -418,7 +418,7 @@ export function AlignmentSearchBar(props) {
   const inlineNavEl = (
     <span style={{ display: "flex", alignItems: "center" }}>
       {!isExpanded && (
-        <Popover
+        <PopoverNext
           autoFocus={false}
           enforceFocus={false}
           isOpen={isPopoverOpen}
@@ -451,8 +451,9 @@ export function AlignmentSearchBar(props) {
               />
             </div>
           }
-          target={<Button minimal icon="wrench" data-tip="Options" />}
-        />
+        >
+          <Button minimal icon="wrench" data-tip="Options" />
+        </PopoverNext>
       )}
       {matchCounter}
       <Button
@@ -536,12 +537,10 @@ export function AlignmentSearchBar(props) {
   return (
     <div style={{ position: "relative" }}>
       {!isExpanded && (
-        <Popover
+        <PopoverNext
           autoFocus={false}
           enforceFocus={false}
-          modifiers={{
-            arrow: false
-          }}
+          arrow={false}
           position={Position.BOTTOM}
           isOpen={annotationPopoverOpen}
           content={
@@ -550,8 +549,9 @@ export function AlignmentSearchBar(props) {
               onClickMatch={handleFeatureClick}
             />
           }
-          target={inputEl}
-        />
+        >
+          {inputEl}
+        </PopoverNext>
       )}
 
       {isExpanded && (

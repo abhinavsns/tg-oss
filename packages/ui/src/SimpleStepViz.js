@@ -4,12 +4,12 @@ import classNames from "classnames";
 
 export default ({ steps, ...rest }) => (
   <div style={{ display: "flex", justifyContent: "center" }}>
-    <ul className="bp3-breadcrumbs" {...rest}>
+    <ul className="bp6-breadcrumbs" {...rest}>
       {steps.map(({ completed, active, text }, i) => (
         <li key={i}>
           <div
-            className={classNames("bp3-breadcrumb", {
-              "bp3-breadcrumb-current": active
+            className={classNames("bp6-breadcrumb", {
+              "bp6-breadcrumb-current": active
             })}
           >
             <Icon icon={completed ? "tick-circle" : undefined} />

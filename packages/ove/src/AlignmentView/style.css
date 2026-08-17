@@ -1,11 +1,11 @@
-.alignment-search-bar .bp3-input {
+.alignment-search-bar .bp6-input {
   border-radius: 5px !important;
 }
 
 .tg-pinch-helper {
   width: 100%;
 }
-.ove-slider .bp3-slider {
+.ove-slider .bp6-slider {
   min-width: 10px !important;
   margin-bottom: 4px;
 }
@@ -18,7 +18,7 @@
 .alignmentViewTrackContainer.isTrackSelected {
   background-color: #c0e2f5;
 }
-.bp3-dark .alignmentViewTrackContainer.isTrackSelected {
+.bp6-dark .alignmentViewTrackContainer.isTrackSelected {
   background-color: #2277a9;
 }
 .alignmentViewTrackContainer,
@@ -58,7 +58,7 @@
 .alignmentMinimapTracks::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
-.bp3-dark .alignmentTrackName {
+.bp6-dark .alignmentTrackName {
   background: #30404d;
 }
 /* .alignmentViewTrackContainer:hover .alignmentTrackNameDiv {
@@ -144,20 +144,20 @@
   padding: 0 4px;
 }
 
-.bp3-dark .veDiffNav {
+.bp6-dark .veDiffNav {
   background: rgba(167, 182, 194, 0.05);
   border-color: rgba(167, 182, 194, 0.14);
 }
 
-.bp3-dark .veDiffNav-fraction {
+.bp6-dark .veDiffNav-fraction {
   color: #5c7080;
 }
 
-.bp3-dark .veDiffNav-pos {
+.bp6-dark .veDiffNav-pos {
   color: #4f6272;
 }
 
-.bp3-dark .veDiffNav-empty {
+.bp6-dark .veDiffNav-empty {
   color: #5c7080;
 }
 .veRowItem:has(.rowViewTextContainer) .veAlignmentMismatch {

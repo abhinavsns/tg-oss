@@ -62,7 +62,8 @@ export default ({ name, dir }: { name: string; dir: string }) =>
         //   auto: true
         // }),
         dts({
-          exclude: ["**/*.test.ts", "**/*.spec.ts"],
+          include: ["src"],
+          exclude: ["**/*.test.*", "**/*.spec.*"],
           entryRoot: "src",
           tsconfigPath: joinPathFragments(dir, "tsconfig.json")
           // skipDiagnostics: true,
@@ -138,17 +139,15 @@ export default ({ name, dir }: { name: string; dir: string }) =>
           external:
             mode === "demo" || isUmd
               ? []
-              : [
-                  "react",
-                  "react-dom",
-                  "react/jsx-runtime",
-                  "redux",
-                  "react-redux",
-                  "redux-form",
-                  "@blueprintjs/core",
-                  "@blueprintjs/select",
-                  "@blueprintjs/datetime"
-                ]
+              : id =>
+                  /^(react|react-dom)(\/|$)/.test(id) ||
+                  [
+                    "redux",
+                    "react-redux",
+                    "@blueprintjs/core",
+                    "@blueprintjs/select",
+                    "@blueprintjs/datetime"
+                  ].includes(id)
         }
       },
       resolve: {

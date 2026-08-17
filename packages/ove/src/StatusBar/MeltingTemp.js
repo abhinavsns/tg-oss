@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Icon, Popover, RadioGroup } from "@blueprintjs/core";
+import { Button, Icon, PopoverNext, RadioGroup } from "@blueprintjs/core";
 
 import {
   calculateTm,
@@ -40,8 +40,8 @@ export default function MeltingTemp({
   const hasWarning = isString(tm) && tm.length > 7 && tm;
   return (
     <WrapperToUse dataTest="veStatusBar-selection-tm">
-      <Popover
-        modifiers={popoverOverflowModifiers}
+      <PopoverNext
+        middleware={popoverOverflowModifiers}
         content={
           <div style={{ maxWidth: 300, padding: 20 }}>
             Using Tm calculations based on these{" "}
@@ -90,7 +90,7 @@ export default function MeltingTemp({
             ></Icon>
           )}
         </React.Fragment>
-      </Popover>
+      </PopoverNext>
     </WrapperToUse>
   );
 }

@@ -11,6 +11,7 @@ import geneiousXmlToJson from "./geneiousXmlToJson";
 import jbeiXmlToJson from "./jbeiXmlToJson";
 import { unzipSync } from "fflate";
 import fastqToJson from "./fastqToJson";
+import { Buffer } from "buffer";
 /**
  * takes in file content string and its file name and determines what parser it needs to be sent to.
  * The file is parsed to our old JSON schema and after it goes through an intermediate step where we convert that json to our new schema
@@ -179,6 +180,7 @@ async function anyToJson(fileContentStringOrFileObj, options) {
 export default anyToJson;
 
 function getUtf8StringFromFile(file, { emulateBrowser } = {}) {
+  if (Buffer.isBuffer(file)) return file.toString("utf-8");
   if (!isBrowser && !emulateBrowser) {
     //emulate browser is only used for testing purposes
     //we're in a node context
@@ -201,6 +203,7 @@ function getUtf8StringFromFile(file, { emulateBrowser } = {}) {
   });
 }
 function getUint8ArrayFromFile(file, { emulateBrowser } = {}) {
+  if (Buffer.isBuffer(file)) return new Uint8Array(file);
   if (!isBrowser && !emulateBrowser) {
     //emulate browser is only used for testing purposes
     //we're in a node context

@@ -14,9 +14,9 @@ describe("AlignmentSearchBar", function () {
     cy.get('[data-tip="Search"]').click();
     cy.get(".tg-find-tool-input input").type("atg");
     cy.get(".tg-find-tool-input").contains(/^1\//);
-    cy.get(".tg-find-tool-input .bp3-icon-caret-right").click();
+    cy.get(".tg-find-tool-input .bp6-icon-caret-right").click();
     cy.get(".tg-find-tool-input").contains(/^2\//);
-    cy.get(".tg-find-tool-input .bp3-icon-caret-left").click();
+    cy.get(".tg-find-tool-input .bp6-icon-caret-left").click();
     cy.get(".tg-find-tool-input").contains(/^1\//);
   });
 
@@ -28,7 +28,7 @@ describe("AlignmentSearchBar", function () {
       .invoke("text")
       .then(text => {
         const total = parseInt(text.split("/")[1], 10);
-        cy.get(".tg-find-tool-input .bp3-icon-caret-left").click();
+        cy.get(".tg-find-tool-input .bp6-icon-caret-left").click();
         // After wrapping from match 1, index should equal total
         cy.get(".tg-find-tool-input").contains(`${total}/${total}`);
       });
@@ -37,10 +37,10 @@ describe("AlignmentSearchBar", function () {
   it("prev and next buttons are disabled when there are no matches", function () {
     cy.get('[data-tip="Search"]').click();
     cy.get(".tg-find-tool-input input").type("xxxxxzzzzzqqqqqq");
-    cy.get(".tg-find-tool-input .bp3-icon-caret-right")
+    cy.get(".tg-find-tool-input .bp6-icon-caret-right")
       .closest("button")
       .should("be.disabled");
-    cy.get(".tg-find-tool-input .bp3-icon-caret-left")
+    cy.get(".tg-find-tool-input .bp6-icon-caret-left")
       .closest("button")
       .should("be.disabled");
   });
@@ -48,7 +48,7 @@ describe("AlignmentSearchBar", function () {
   it("closes the search bar and restores the toggle button when × is clicked", function () {
     cy.get('[data-tip="Search"]').click();
     cy.get(".tg-find-tool-input").should("be.visible");
-    cy.get(".tg-find-tool-input .bp3-icon-small-cross").click();
+    cy.get(".tg-find-tool-input .bp6-icon-small-cross").click();
     cy.get(".tg-find-tool-input").should("not.exist");
     cy.get('[data-tip="Search"]').should("be.visible");
   });
@@ -57,7 +57,7 @@ describe("AlignmentSearchBar", function () {
     cy.get('[data-tip="Search"]').click();
     cy.get(".tg-find-tool-input input").type("atgcatcact");
     cy.get(".tg-find-tool-input").contains("0/0", { timeout: 200 });
-    cy.get(".tg-find-tool-input .bp3-icon-wrench").click();
+    cy.get(".tg-find-tool-input .bp6-icon-wrench").click();
     cy.get(".ve-find-options-popover .tg-mismatches-allowed-input input")
       .clear()
       .type("1");

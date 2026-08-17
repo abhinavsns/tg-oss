@@ -1,6 +1,6 @@
 import {
   Button,
-  Popover,
+  PopoverNext,
   Intent,
   Tag,
   Menu,
@@ -15,22 +15,21 @@ import { showDialog } from "../GlobalDialogUtils";
 
 export default pureNoFunc(function AlignmentVisibilityTool(props) {
   return (
-    <Popover
+    <PopoverNext
       minimal
       position="bottom"
       content={<VisibilityOptions {...props} />}
-      target={
-        <Button
-          className="tg-alignment-visibility-toggle"
-          small
-          data-tip="Visibility Options"
-          rightIcon="caret-down"
-          intent={Intent.PRIMARY}
-          minimal
-          icon="eye-open"
-        />
-      }
-    />
+    >
+      <Button
+        className="tg-alignment-visibility-toggle"
+        small
+        data-tip="Visibility Options"
+        rightIcon="caret-down"
+        intent={Intent.PRIMARY}
+        minimal
+        icon="eye-open"
+      />
+    </PopoverNext>
   );
 });
 

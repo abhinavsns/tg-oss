@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { noop } from "lodash-es";
-import { Button, Menu, Classes, Popover, Switch } from "@blueprintjs/core";
+import { Button, Menu, Classes, PopoverNext, Switch } from "@blueprintjs/core";
 import InfoHelper from "../InfoHelper";
 import DraggableColumnOptions from "./DraggableColumnOptions";
 import { dragNoticeEl } from "./dragNoticeEl";
@@ -42,7 +42,7 @@ const DisplayOptions = ({
   });
 
   return (
-    <Popover
+    <PopoverNext
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       content={
@@ -51,7 +51,7 @@ const DisplayOptions = ({
             <h5 style={{ marginBottom: 10, fontWeight: "bold" }}>
               Display Density:
             </h5>
-            <div className={Classes.SELECT + " tg-table-display-density"}>
+            <div className={Classes.HTML_SELECT + " tg-table-display-density"}>
               <select
                 onChange={changeTableDensity}
                 value={
@@ -128,7 +128,7 @@ const DisplayOptions = ({
         minimal
         icon="cog"
       />
-    </Popover>
+    </PopoverNext>
   );
 };
 

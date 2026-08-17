@@ -6,7 +6,7 @@ describe("bpLimit", function () {
   it(`bpLimit should prevent paste/insert from completing`, () => {
     cy.tgToggle("bpLimit");
 
-    cy.get(`.veVectorInteractionWrapper:first`).type("t");
+    cy.get(`.veVectorInteractionWrapper:first`).focus().type("t");
     //cypress paste:
     cy.get(".sequenceInputBubble input")
       .invoke(

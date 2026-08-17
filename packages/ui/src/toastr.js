@@ -1,25 +1,28 @@
-import { Position, Toaster, Intent, Classes } from "@blueprintjs/core";
+import { Position, OverlayToaster, Intent, Classes } from "@blueprintjs/core";
 import classNames from "classnames";
 
-const TopToaster = Toaster.create({
-  className: "top-toaster",
-  position: Position.TOP
-});
-
-const BottomToaster = Toaster.create({
-  className: "bottom-toaster",
-  position: Position.BOTTOM
-});
+let topToaster;
+let bottomToaster;
+const getToaster = bottom => {
+  const options = {
+    className: bottom ? "bottom-toaster" : "top-toaster",
+    position: bottom ? Position.BOTTOM : Position.TOP
+  };
+  if (bottom) {
+    return (bottomToaster ??= OverlayToaster.create(options));
+  }
+  return (topToaster ??= OverlayToaster.create(options));
+};
 
 window.__tgClearAllToasts = () => {
-  TopToaster.clear();
-  BottomToaster.clear();
+  topToaster?.then(toaster => toaster.clear());
+  bottomToaster?.then(toaster => toaster.clear());
 };
 
 let counter = 5000;
 const generateToast = intent => (message, options) => {
   options = options || {};
-  const toastToUse = options.bottom ? BottomToaster : TopToaster;
+  const toasterPromise = getToaster(options.bottom);
   let updatedTimeout;
   if (options.updateTimeout) {
     //generate a slightly different than default timeout to make the update stay on the page for a full 5 seconds
@@ -44,12 +47,12 @@ const generateToast = intent => (message, options) => {
       button.remove();
     });
     const activeToasts = document.querySelectorAll(
-      `.bp3-toast:not(.bp3-toast-exit)`
+      `.bp6-toast:not(.bp6-toast-exit)`
     );
     if (activeToasts.length > 1) {
       // add custom clear all button
 
-      const topToaster = document.querySelector(`.bp3-toast`);
+      const topToaster = document.querySelector(`.bp6-toast`);
       if (!topToaster) return;
       const closeButton = document.createElement("div");
       closeButton.classList.add(
@@ -67,41 +70,47 @@ const generateToast = intent => (message, options) => {
       topToaster.appendChild(closeButton);
     }
   };
-  const uniqKey = toastToUse.show(
-    {
-      intent,
-      message,
-      onDismiss: () => {
-        if (options.onDismiss) {
-          options.onDismiss();
-        }
-        setTimeout(() => {
-          maybeAddClearAll();
-        }, 0);
+  let uniqKey;
+  let dismissed = false;
+  toasterPromise.then(toaster => {
+    if (dismissed) return;
+    uniqKey = toaster.show(
+      {
+        intent,
+        message,
+        onDismiss: () => {
+          if (options.onDismiss) {
+            options.onDismiss();
+          }
+          setTimeout(() => {
+            maybeAddClearAll();
+          }, 0);
+        },
+        timeout:
+          options.timeout ||
+          updatedTimeout ||
+          (!window.Cypress &&
+          (intent === Intent.DANGER || intent === Intent.WARNING)
+            ? 60000
+            : undefined),
+        action: options.action,
+        icon: options.icon,
+        className: classNames("preserve-newline", options.className)
       },
-      timeout:
-        options.timeout ||
-        updatedTimeout ||
-        (!window.Cypress &&
-        (intent === Intent.DANGER || intent === Intent.WARNING)
-          ? 60000
-          : undefined),
-      action: options.action,
-      icon: options.icon,
-      className: classNames("preserve-newline", options.className)
-    },
-    options.key
-  );
+      options.key
+    );
+    clear.key = uniqKey;
+  });
   setTimeout(() => {
     maybeAddClearAll();
   }, 0);
   function clear() {
-    toastToUse.dismiss(uniqKey);
+    dismissed = true;
+    toasterPromise.then(toaster => uniqKey && toaster.dismiss(uniqKey));
     setTimeout(() => {
       maybeAddClearAll();
     }, 0);
   }
-  clear.key = uniqKey;
   return clear;
 };
 

@@ -176,9 +176,7 @@ export const PropertiesDialog = props => {
             selectedTabId={tabId}
             onChange={propertiesViewTabUpdate}
           >
-            <Tabs.Expander />
             {propertiesTabs}
-            <Tabs.Expander />
           </Tabs>
         ) : (
           <div style={{ margin: 20, fontSize: 20 }}>

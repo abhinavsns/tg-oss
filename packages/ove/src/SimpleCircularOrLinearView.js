@@ -19,7 +19,7 @@ import {
   ButtonGroup,
   Menu,
   MenuItem,
-  Popover,
+  PopoverNext,
   Tooltip
 } from "@blueprintjs/core";
 import getCommands from "./commands";
@@ -337,7 +337,7 @@ const VisibilityOptions = ({
 }) => {
   return (
     <Tooltip disabled={isPopoverOpen} content="Visibility Options">
-      <Popover
+      <PopoverNext
         minimal
         onInteraction={isOpen => {
           setPopoverOpen(isOpen);
@@ -375,7 +375,7 @@ const VisibilityOptions = ({
           intent="primary"
           icon="eye-open"
         ></Button>
-      </Popover>
+      </PopoverNext>
     </Tooltip>
   );
 };

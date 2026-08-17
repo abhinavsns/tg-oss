@@ -1,7 +1,7 @@
 describe("Amino Acid MSA", function () {
   beforeEach(() => {
     cy.visit("#/Alignment");
-    cy.get(".bp3-select select").select("Protein MSA");
+    cy.get(".bp6-html-select select").select("Protein MSA");
   });
 
   it("should display all amino acid MSA features and functionality", function () {

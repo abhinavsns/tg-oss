@@ -1,5 +1,5 @@
 import React from "react";
-import { Popover, Button, Tooltip, Icon } from "@blueprintjs/core";
+import { PopoverNext, Button, Tooltip, Icon } from "@blueprintjs/core";
 import classnames from "classnames";
 import "./style.css";
 import { popoverOverflowModifiers } from "..";
@@ -36,9 +36,9 @@ export default ({
     disabled:
       disabled ||
       (!isPopover && window.Cypress && !window.Cypress.allowInfoHelperTooltips),
-    popoverClassName: "tg-info-helper-popover bp3-tooltip",
+    popoverClassName: "tg-info-helper-popover bp6-tooltip",
     content: content || children,
-    modifiers: popoverOverflowModifiers,
+    middleware: popoverOverflowModifiers,
     ...popoverProps
   };
   if (displayToSide) {
@@ -51,9 +51,11 @@ export default ({
       </React.Fragment>
     );
   } else if (isPopover) {
-    toReturn = <Popover {...toolTipOrPopoverProps} target={IconInner} />;
+    toReturn = (
+      <PopoverNext {...toolTipOrPopoverProps}>{IconInner}</PopoverNext>
+    );
   } else {
-    toReturn = <Tooltip {...toolTipOrPopoverProps} target={IconInner} />;
+    toReturn = <Tooltip {...toolTipOrPopoverProps}>{IconInner}</Tooltip>;
   }
   const El = isInline ? "span" : "div";
   return (

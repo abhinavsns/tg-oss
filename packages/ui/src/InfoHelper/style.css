@@ -1,8 +1,8 @@
-.bp3-popover.tg-info-helper-popover .bp3-popover-content {
+.bp6-popover.tg-info-helper-popover .bp6-popover-content {
   max-width: 340px;
   white-space: pre-line;
 }
 
-.info-helper-clickable .bp3-popover-target {
+.info-helper-clickable .bp6-popover-target {
   cursor: pointer;
 }

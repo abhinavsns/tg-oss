@@ -1,7 +1,7 @@
 /* Copyright (C) 2018 TeselaGen Biotechnology, Inc. */
 
 import React from "react";
-import { Button, Popover, Position } from "@blueprintjs/core";
+import { Button, PopoverNext, Position } from "@blueprintjs/core";
 import classnames from "classnames";
 import popoverOverflowModifiers from "./utils/popoverOverflowModifiers";
 
@@ -14,9 +14,9 @@ function DropdownButton({
   ...rest
 }) {
   return (
-    <Popover
+    <PopoverNext
       minimal
-      modifiers={popoverOverflowModifiers}
+      middleware={popoverOverflowModifiers}
       disabled={disabled}
       autoFocus={false}
       content={menu}
@@ -29,7 +29,7 @@ function DropdownButton({
         rightIcon={noRightIcon ? undefined : "caret-down"}
         {...rest}
       />
-    </Popover>
+    </PopoverNext>
   );
 }
 

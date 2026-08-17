@@ -48,16 +48,7 @@ function PartToolDropdown({
           isTagSelect
           multi
           popoverProps={{
-            usePortal: false,
-            modifiers: {
-              preventOverflow: { enabled: false },
-              hide: {
-                enabled: false
-              },
-              flip: {
-                boundariesElement: "viewport"
-              }
-            }
+            usePortal: false
           }}
           options={tags}
           autoOpen={!dontAutoOpen}
